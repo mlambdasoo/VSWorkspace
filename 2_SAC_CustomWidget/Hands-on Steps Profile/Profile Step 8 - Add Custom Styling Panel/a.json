@@ -1,0 +1,143 @@
+{
+  "data": [
+    {
+      "dimensions_0": {
+        "id": "0HIER_NODE!ROOT_TEXTNODE",
+        "label": "Root - Text Node",
+        "isNode": true,
+        "isCollapsed": false
+      },
+      "measures_0": { "raw": 4899, "formatted": "4.899" }
+    },
+    {
+      "dimensions_0": {
+        "id": "ZPLANETYP!A320-200",
+        "label": "A320-200",
+        "parentId": "0HIER_NODE!ROOT_TEXTNODE",
+        "isNode": true,
+        "isCollapsed": false
+      },
+      "measures_0": { "raw": 845, "formatted": "845" }
+    },
+    {
+      "dimensions_0": {
+        "id": "ZPLANETYP!A321-200",
+        "label": "A321-200",
+        "parentId": "ZPLANETYP!A320-200",
+        "isNode": true,
+        "isCollapsed": false
+      },
+      "measures_0": { "raw": 315, "formatted": "315" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!DL",
+        "label": "DL",
+        "parentId": "ZPLANETYP!A321-200"
+      },
+      "measures_0": { "raw": 315, "formatted": "315" }
+    },
+    {
+      "dimensions_0": {
+        "id": "ZPLANETYP!747-400",
+        "label": "747-400",
+        "parentId": "ZPLANETYP!A320-200",
+        "isNode": true,
+        "isCollapsed": false
+      },
+      "measures_0": { "raw": 530, "formatted": "530" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!AZ",
+        "label": "AZ",
+        "parentId": "ZPLANETYP!747-400"
+      },
+      "measures_0": { "raw": 530, "formatted": "530" }
+    },
+    {
+      "dimensions_0": {
+        "id": "ZPLANETYP!A340-600",
+        "label": "A340-600",
+        "parentId": "0HIER_NODE!ROOT_TEXTNODE",
+        "isNode": true,
+        "isCollapsed": false
+      },
+      "measures_0": { "raw": 318, "formatted": "318" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!AA",
+        "label": "AA",
+        "parentId": "ZPLANETYP!A340-600"
+      },
+      "measures_0": { "raw": 318, "formatted": "318" }
+    },
+    {
+      "dimensions_0": {
+        "id": "ZPLANETYP!A380-800",
+        "label": "A380-800",
+        "parentId": "0HIER_NODE!ROOT_TEXTNODE",
+        "isNode": true,
+        "isCollapsed": false
+      },
+      "measures_0": { "raw": 1718, "formatted": "1.718" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!JL",
+        "label": "JL",
+        "parentId": "ZPLANETYP!A380-800"
+      },
+      "measures_0": { "raw": 212, "formatted": "212" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!LH",
+        "label": "LH",
+        "parentId": "ZPLANETYP!A380-800"
+      },
+      "measures_0": { "raw": 1294, "formatted": "1.294" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!QF",
+        "label": "QF",
+        "parentId": "ZPLANETYP!A380-800"
+      },
+      "measures_0": { "raw": 212, "formatted": "212" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!SQ",
+        "label": "SQ",
+        "parentId": "0HIER_NODE!ROOT_TEXTNODE"
+      },
+      "measures_0": { "raw": 1480, "formatted": "1.480" }
+    },
+    {
+      "dimensions_0": {
+        "id": "!UA",
+        "label": "UA",
+        "parentId": "0HIER_NODE!ROOT_TEXTNODE"
+      },
+      "measures_0": { "raw": 538, "formatted": "538" }
+    }
+  ],
+  "metadata": {
+    "feeds": {
+      "dimensions": { "values": ["dimensions_0"], "type": "dimension" },
+      "measures": { "values": ["measures_0"], "type": "mainStructureMember" }
+    },
+    "dimensions": {
+      "dimensions_0": { "id": "ZSCARR", "description": "Airline Code" }
+    },
+    "mainStructureMembers": {
+      "measures_0": {
+        "id": "68KENRVOL09T2SIG0DCY9URZ7",
+        "label": "Number of Records"
+      }
+    }
+  },
+  "state": "success"
+}

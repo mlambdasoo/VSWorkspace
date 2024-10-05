@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked Bar Chart with Optimized Bottom Dataset Handling</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+        const stackedBarCustomPlugin = {
+            id: 'stackedBarCustomPlugin',
+            afterDatasetsDraw: (chart, args, options) => {
+                const { ctx, data, scales: { x, y }, chartArea } = chart;
+
+                const calculateIntersection = (startX, startY, endX, endY, midX) => {
+                    return startY + (endY - startY) * ((midX - startX) / (endX - startX));
+                };
+
+                const datasetMetas = data.datasets.map((dataset, index) => chart.getDatasetMeta(index));
+
+                datasetMetas.forEach((meta, datasetIndex) => {
+                    ctx.save();
+                    ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+                    ctx.setLineDash([5, 5]);
+                    ctx.beginPath();
+
+                    const intersectionPoints = [];
+
+                    meta.data.forEach((bar, index) => {
+                        if (index < meta.data.length - 1) {
+                            const nextBar = meta.data[index + 1];
+                            
+                            const startX = bar.x + bar.width / 2;
+                            const startY = bar.y;
+                            const endX = nextBar.x - nextBar.width / 2;
+                            const endY = nextBar.y;
+
+                            ctx.moveTo(startX, startY);
+                            ctx.lineTo(endX, endY);
+
+                            const midX = (startX + endX) / 2;
+                            const upperY = calculateIntersection(startX, startY, endX, endY, midX);
+
+                            let lowerY, textY;
+                            if (datasetIndex < datasetMetas.length - 1) {
+                                const lowerBar = datasetMetas[datasetIndex + 1].data[index];
+                                const lowerNextBar = datasetMetas[datasetIndex + 1].data[index + 1];
+                                lowerY = calculateIntersection(
+                                    lowerBar.x + lowerBar.width / 2,
+                                    lowerBar.y,
+                                    lowerNextBar.x - lowerNextBar.width / 2,
+                                    lowerNextBar.y,
+                                    midX
+                                );
+                                textY = (upperY + lowerY) / 2;
+                            } else {
+                                // 가장 아래 데이터셋 처리
+                             
+                                // 텍스트 위치를 바의 중간으로 조정
+                                textY = (upperY + bar.base) / 2;
+                            }
+
+                            intersectionPoints.push({
+                                x: midX,
+                                y: textY,
+                                value: data.datasets[datasetIndex].data[index]
+                            });
+                        }
+                    });
+
+                    ctx.stroke();
+                    ctx.restore();
+
+                    // 값 표시
+                    intersectionPoints.forEach(point => {
+                        ctx.save();
+                        ctx.fillStyle = 'black';
+                        ctx.font = 'bold 12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(point.value.toString(), point.x, point.y);
+                        ctx.restore();
+                    });
+                });
+            }
+        };
+
+        // 샘플 데이터
+        const data = {
+            labels: ['1월', '2월', '3월', '4월', '5월'],
+            datasets: [
+                {
+                    label: '제품 A',
+                    data: [12, 19, 3, 5, 2],
+                    backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                },
+                {
+                    label: '제품 B',
+                    data: [2, 3, 20, 5, 1],
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                },
+                {
+                    label: '제품 C',
+                    data: [3, 10, 13, 15, 22],
+                    backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                }
+            ]
+        };
+
+        // 차트 설정
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: '월별 제품 판매량 (최적화된 값 표시)'
+                    },
+                    stackedBarCustomPlugin: {}
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            },
+            plugins: [stackedBarCustomPlugin]
+        };
+
+        // 차트 생성
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>
