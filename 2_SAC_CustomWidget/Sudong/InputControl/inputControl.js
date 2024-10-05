@@ -109,9 +109,6 @@ var transformData = (inputData) => {
         { id: "Oneworld", parent: "root5", text: "Oneworld" },
         { id: "SkyTeam", parent: "root5", text: "SkyTeam" },
       ];
-      getScriptPromisify(
-        "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
-      );
     }
 
     onCustomWidgetResize(width, height) {
@@ -161,6 +158,9 @@ var transformData = (inputData) => {
 
     async render() {
       const treedata = this.databinding();
+      await getScriptPromisify(
+        "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
+      );
 
       if ($(this._list).jstree(true)) {
         $(this._list).jstree("destroy").empty(); // 트리를 제거하고 초기화
