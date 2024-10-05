@@ -22,6 +22,7 @@
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log("onCustomWidgetAfterUpdate");
       this.render();
     }
 
