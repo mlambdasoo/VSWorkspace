@@ -12,7 +12,7 @@
     {
       "kind": "main",
       "tag": "com-sap-sac-exercise-lsd3-main",
-      "url": "http://127.0.0.1:5500/2_SAC_CustomWidget/Hands-on%20Steps%20Profile/Profile%20Step%203%20-%20Adding%20Data%20Binding/main.js",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Hands-on%20Steps%20Profile/Profile%20Step%203%20-%20Adding%20Data%20Binding/main.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
@@ -27,8 +27,8 @@
       "default": 420
     }
   },
-  "methods":{},
-  "events":{},
+  "methods": {},
+  "events": {},
   "dataBindings": {
     "dataBinding": {
       "feeds": [

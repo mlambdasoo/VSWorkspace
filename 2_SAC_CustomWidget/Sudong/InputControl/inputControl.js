@@ -99,9 +99,6 @@ var parseMetadata = (metadata) => {
         { id: "SkyTeam", parent: "root5", text: "SkyTeam" },
       ];
     }
-    onCustomWidgetBeforeUpdate() {
-      this.databinding();
-    }
 
     onCustomWidgetResize(width, height) {
       this.adjustRootHeight();
@@ -109,6 +106,7 @@ var parseMetadata = (metadata) => {
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      this.databinding();
       this.render();
     }
 
