@@ -89,16 +89,32 @@ var transformData = (inputData) => {
     }
 
     onCustomWidgetResize(width, height) {
+      console.log("onCustomWidgetResize");
       this.adjustRootHeight();
       this.render();
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log("onCustomWidgetAfterUpdate");
       this.adjustRootHeight();
       this.render();
     }
 
-    connectedCallback() {
+    onCustomWidgetDestroy() {}
+
+    databinding() {
+      const dataBinding = this.dataBinding;
+      if (!dataBinding || dataBinding.state !== "success") {
+        return;
+      }
+      const { feed, data, metadata } = dataBinding;
+      const { dimensions, measures } = parseMetadata(metadata);
+      const treedata = transformData(data);
+      return treedata;
+    }
+
+    async render() {
+      console.log("render");
       this._widgetContainer.addEventListener("click", (e) => {
         e.stopPropagation();
         this.toggleTree();
@@ -112,27 +128,6 @@ var transformData = (inputData) => {
           this.hideTree();
         }
       });
-
-      // 초기 높이 계산
-      // this.adjustRootHeight();
-      // window.addEventListener("resize", this.adjustRootHeight.bind(this)); // 윈도우 리사이즈 시에도 반응
-    }
-
-    onCustomWidgetDestroy() {}
-
-    databinding() {
-      const dataBinding = this.dataBinding;
-      if (!dataBinding || dataBinding.state !== "success") {
-        return;
-      }
-      const { feed, data, metadata } = dataBinding;
-      const { dimensions, measures } = parseMetadata(metadata);
-      const treedata = transformData(data);
-      console.log(treedata);
-      return treedata;
-    }
-
-    async render() {
       const treedata = this.databinding();
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
