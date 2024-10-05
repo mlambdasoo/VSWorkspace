@@ -127,6 +127,7 @@ var transformData = (inputData) => {
           this.hideTree();
         }
       });
+      const treedata = this.databinding();
     }
 
     adjustRootHeight() {
