@@ -125,8 +125,6 @@ var transformData = (inputData) => {
         e.stopPropagation();
         this.toggleTree();
       });
-      this.render();
-
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
         if (
