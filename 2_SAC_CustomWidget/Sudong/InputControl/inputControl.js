@@ -158,6 +158,9 @@ var transformData = (inputData) => {
 
     async render() {
       const treedata = this.databinding();
+      if ($(this._list).jstree(true)) {
+        $(this._list).jstree("destroy").empty(); // 트리를 제거하고 초기화
+      }
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
