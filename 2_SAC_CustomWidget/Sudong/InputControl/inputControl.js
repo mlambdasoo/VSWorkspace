@@ -3,6 +3,23 @@ var getScriptPromisify = (src) => {
     $.getScript(src, resolve);
   });
 };
+
+var parseMetadata = (metadata) => {
+  const { dimensions: dimensionsMap, mainStructureMembers: measuresMap } =
+    metadata;
+  const dimensions = [];
+  for (const key in dimensionsMap) {
+    const dimension = dimensionsMap[key];
+    dimensions.push({ key, ...dimension });
+  }
+  const measures = [];
+  for (const key in measuresMap) {
+    const measure = measuresMap[key];
+    measures.push({ key, ...measure });
+  }
+  return { dimensions, measures, dimensionsMap, measuresMap };
+};
+
 (function () {
   const template = document.createElement("template");
   template.innerHTML = `
@@ -29,7 +46,7 @@ var getScriptPromisify = (src) => {
         font-weight: bold;
         flex-grow: 1;
       }
-      #root {
+      #list {
         display: none;
         background-color: white;
         border: 1px solid #ccc;
@@ -43,7 +60,7 @@ var getScriptPromisify = (src) => {
       <div id="widget-title">Airline Code</div>
       <div id="widget-toggle">▼</div>
     </div>
-    <div id="root"></div>
+    <div id="list"></div>
   `;
 
   class Main extends HTMLElement {
@@ -51,7 +68,7 @@ var getScriptPromisify = (src) => {
       super();
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
-      this._root = this._shadowRoot.getElementById("root");
+      this._list = this._shadowRoot.getElementById("list");
       this._widgetContainer =
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
@@ -82,6 +99,10 @@ var getScriptPromisify = (src) => {
         { id: "SkyTeam", parent: "root5", text: "SkyTeam" },
       ];
     }
+    onCustomWidgetBeforeUpdate() {
+      this.databinding();
+    }
+
     onCustomWidgetResize(width, height) {
       this.adjustRootHeight();
       this.render();
@@ -102,7 +123,7 @@ var getScriptPromisify = (src) => {
       document.addEventListener("click", (event) => {
         if (
           !this.contains(event.target) &&
-          !this._root.contains(event.target)
+          !this._list.contains(event.target)
         ) {
           this.hideTree();
         }
@@ -115,12 +136,24 @@ var getScriptPromisify = (src) => {
 
     onCustomWidgetDestroy() {}
 
+    databinding() {
+      const dataBinding = this.dataBinding;
+      if (!dataBinding || dataBinding.state !== "success") {
+        return;
+      }
+      const { data, metadata } = dataBinding;
+      const { dimensions, measures } = parseMetadata(metadata);
+      console.log(data);
+      console.log(dimensions);
+      console.log(measures);
+    }
+
     async render() {
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
 
-      $(this._root).jstree({
+      $(this._list).jstree({
         core: {
           data: this._treeData,
           themes: {
@@ -135,8 +168,8 @@ var getScriptPromisify = (src) => {
         },
       });
 
-      $(this._root).on("check_node.jstree uncheck_node.jstree", (e, data) => {
-        const tree = $(this._root).jstree(true);
+      $(this._list).on("check_node.jstree uncheck_node.jstree", (e, data) => {
+        const tree = $(this._list).jstree(true);
         const node = data.node;
 
         // 상위 노드 처리
@@ -176,7 +209,7 @@ var getScriptPromisify = (src) => {
 
       // root의 높이를 webcomponent 높이에서 컨테이너 높이를 뺀 값으로 설정
       const rootHeight = componentHeight - containerHeight - 20; // 약간의 여백
-      this._root.style.height = `${rootHeight}px`;
+      this._list.style.height = `${rootHeight}px`;
     }
 
     toggleTree() {
@@ -189,20 +222,20 @@ var getScriptPromisify = (src) => {
     }
 
     showTree() {
-      this._root.style.display = "block";
+      this._list.style.display = "block";
       this._widgetToggle.textContent = "▲";
       this._widgetToggle.classList.add("collapsed");
     }
 
     hideTree() {
       this._isTreeVisible = false;
-      this._root.style.display = "none";
+      this._list.style.display = "none";
       this._widgetToggle.textContent = "▼";
       this._widgetToggle.classList.remove("collapsed");
     }
 
     updateSharedValue() {
-      const tree = $(this._root).jstree(true);
+      const tree = $(this._list).jstree(true);
       const allChecked = tree.get_checked(true);
 
       // 선택된 노드 중 자식이 없는 노드(리프 노드)만 필터링
