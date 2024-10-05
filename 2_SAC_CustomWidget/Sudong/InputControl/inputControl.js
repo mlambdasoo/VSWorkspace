@@ -157,7 +157,7 @@ var transformData = (inputData) => {
     }
 
     async render() {
-      const treedata = databinding();
+      const treedata = this.databinding();
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
