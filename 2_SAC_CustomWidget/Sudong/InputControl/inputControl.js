@@ -117,6 +117,7 @@ var transformData = (inputData) => {
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      this.adjustRootHeight();
       this.render();
     }
 

@@ -27,7 +27,15 @@
       "default": 420
     }
   },
-  "methods": {},
+  "methods": {
+    "getSelectedKeys": {
+      "description": "Get Selected Keys",
+      "parameters": [
+        
+      ]
+      "returnType": ""
+    }
+  },
   "events": {},
   "dataBindings": {
     "dataBinding": {
