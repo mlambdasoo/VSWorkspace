@@ -114,59 +114,24 @@ var transformData = (inputData) => {
     }
 
     async render() {
+      console.log("render");
+      this._widgetContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.toggleTree();
+      });
+      // 컴포넌트 외부 클릭 시 트리 닫기
+      document.addEventListener("click", (event) => {
+        if (
+          !this.contains(event.target) &&
+          !this._list.contains(event.target)
+        ) {
+          this.hideTree();
+        }
+      });
       const treedata = this.databinding();
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
-
-      if ($(this._list).jstree(true)) {
-        $(this._list).jstree("destroy").empty(); // 트리를 제거하고 초기화
-      }
-
-      $(this._list).jstree({
-        core: {
-          data: treedata,
-          themes: {
-            icons: false,
-          },
-        },
-        plugins: ["checkbox"],
-        checkbox: {
-          three_state: true,
-          whole_node: false,
-          tie_selection: false,
-        },
-      });
-
-      $(this._list).on("check_node.jstree uncheck_node.jstree", (e, data) => {
-        const tree = $(this._list).jstree(true);
-        const node = data.node;
-
-        // 상위 노드 처리
-        let parent = tree.get_node(node.parent);
-        while (parent && parent.id !== "#") {
-          const siblings = tree.get_children_dom(parent);
-          const allChecked =
-            siblings.length ===
-            siblings.filter(function () {
-              return tree.is_checked(this);
-            }).length;
-
-          if (allChecked) {
-            tree.check_node(parent, true);
-          } else {
-            tree.uncheck_node(parent, true);
-          }
-          parent = tree.get_node(parent.parent);
-        }
-
-        // 하위 노드 처리
-        if (data.node.state.checked) {
-          tree.check_node(tree.get_node(data.node).children_d);
-        } else {
-          tree.uncheck_node(tree.get_node(data.node).children_d);
-        }
-      });
     }
 
     adjustRootHeight() {
