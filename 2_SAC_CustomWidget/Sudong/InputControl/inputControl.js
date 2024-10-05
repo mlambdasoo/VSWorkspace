@@ -84,6 +84,8 @@ var transformData = (inputData) => {
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
       this._isTreeVisible = false;
+      this.selectedKey = [];
+      this.selectedText = [];
     }
 
     onCustomWidgetResize(width, height) {
