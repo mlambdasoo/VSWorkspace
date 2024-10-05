@@ -20,6 +20,17 @@ var parseMetadata = (metadata) => {
   return { dimensions, measures, dimensionsMap, measuresMap };
 };
 
+var transformData = (inputData) => {
+  return inputData.map((item) => {
+    const dim = item.dimensions_0;
+    return {
+      id: dim.id,
+      parent: dim.parentId || "#",
+      text: dim.label,
+    };
+  });
+};
+
 (function () {
   const template = document.createElement("template");
   template.innerHTML = `
@@ -139,11 +150,12 @@ var parseMetadata = (metadata) => {
       if (!dataBinding || dataBinding.state !== "success") {
         return;
       }
-      const { data, metadata } = dataBinding;
+      const { feed, data, metadata } = dataBinding;
       const { dimensions, measures } = parseMetadata(metadata);
+      const treedata = transformData(data);
+      console.log(feed);
       console.log(data);
-      console.log(dimensions);
-      console.log(measures);
+      console.log(treedata);
     }
 
     async render() {
@@ -153,7 +165,7 @@ var parseMetadata = (metadata) => {
 
       $(this._list).jstree({
         core: {
-          data: this._treeData,
+          data: this.treedata,
           themes: {
             icons: false,
           },
