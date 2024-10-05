@@ -165,6 +165,7 @@ var transformData = (inputData) => {
       if ($(this._list).jstree(true)) {
         $(this._list).jstree("destroy").empty(); // 트리를 제거하고 초기화
       }
+
       $(this._list).jstree({
         core: {
           data: treedata,
@@ -208,16 +209,12 @@ var transformData = (inputData) => {
         } else {
           tree.uncheck_node(tree.get_node(data.node).children_d);
         }
-
-        this.getSelectedKeys();
       });
     }
 
     adjustRootHeight() {
       const containerHeight = this._widgetContainer.clientHeight;
-      console.log(containerHeight);
       const componentHeight = this.clientHeight;
-      console.log(componentHeight);
 
       // root의 높이를 webcomponent 높이에서 컨테이너 높이를 뺀 값으로 설정
       const rootHeight = componentHeight - containerHeight - 20; // 약간의 여백
