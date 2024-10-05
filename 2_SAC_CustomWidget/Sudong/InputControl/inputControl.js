@@ -83,7 +83,6 @@ var transformData = (inputData) => {
       this._widgetContainer =
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
-      this.sharedValue = [];
       this._isTreeVisible = false;
       this._treeData = [
         { id: "root1", parent: "#", text: "Aircraft" },
@@ -210,7 +209,7 @@ var transformData = (inputData) => {
           tree.uncheck_node(tree.get_node(data.node).children_d);
         }
 
-        this.updateSharedValue();
+        this.getSelectedKeys();
       });
     }
 
@@ -247,20 +246,16 @@ var transformData = (inputData) => {
       this._widgetToggle.classList.remove("collapsed");
     }
 
-    updateSharedValue() {
+    getSelectedKeys() {
       const tree = $(this._list).jstree(true);
       const allChecked = tree.get_checked(true);
 
       // 선택된 노드 중 자식이 없는 노드(리프 노드)만 필터링
-      this.sharedValue = allChecked
+      this.selectedKeys = allChecked
         .filter((node) => tree.is_leaf(node))
         .map((node) => node.text);
-
-      this.printValue();
-    }
-
-    printValue() {
-      console.log(`Selected leaf nodes: ${JSON.stringify(this.sharedValue)}`);
+      console.log(this.selectedKeys);
+      return this.selectedKeys;
     }
   }
 

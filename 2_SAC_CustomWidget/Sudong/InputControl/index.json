@@ -25,15 +25,16 @@
     "height": {
       "type": "integer",
       "default": 420
+    },
+    "selectedKeys": {
+      "type": "string[]",
+      "description": "Selected Keys"
     }
   },
   "methods": {
     "getSelectedKeys": {
-      "description": "Get Selected Keys",
-      "parameters": [
-        
-      ]
-      "returnType": ""
+      "description": "Get Selected Keys (If hierarchy is set, only leaf nodes are retrieved",
+      "returnType": "string[]"
     }
   },
   "events": {},
