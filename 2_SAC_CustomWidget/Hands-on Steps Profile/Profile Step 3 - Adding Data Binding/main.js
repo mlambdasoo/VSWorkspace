@@ -29,6 +29,7 @@
     onCustomWidgetDestroy() {}
 
     async render() {
+      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return (this._root.textContent =
