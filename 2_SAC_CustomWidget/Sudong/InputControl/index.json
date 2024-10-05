@@ -26,14 +26,22 @@
       "type": "integer",
       "default": 420
     },
-    "selectedKeys": {
+    "selectedKey": {
       "type": "string[]",
-      "description": "Selected Keys"
+      "description": "Selected Key"
+    },
+    "selectedText": {
+      "type": "string[]",
+      "description": "Selected Text"
     }
   },
   "methods": {
-    "getSelectedKeys": {
-      "description": "Get Selected Keys (If hierarchy is set, only leaf nodes are retrieved",
+    "getSelectedKey": {
+      "description": "Get Selected Key (If hierarchy is set, only leaf nodes are retrieved",
+      "returnType": "string[]"
+    },
+    "getSelectedText": {
+      "description": "Get Selected Text (If hierarchy is set, only leaf nodes are retrieved",
       "returnType": "string[]"
     }
   },

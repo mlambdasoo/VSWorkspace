@@ -84,30 +84,6 @@ var transformData = (inputData) => {
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
       this._isTreeVisible = false;
-      this._treeData = [
-        { id: "root1", parent: "#", text: "Aircraft" },
-        { id: "root2", parent: "#", text: "Airlines" },
-        { id: "root3", parent: "#", text: "Airports" },
-        { id: "root4", parent: "#", text: "Routes" },
-        { id: "root5", parent: "#", text: "Alliances" },
-        { id: "A320", parent: "root1", text: "A320 Family" },
-        { id: "A320-200", parent: "A320", text: "A320-200" },
-        { id: "A321", parent: "A320", text: "A321" },
-        { id: "B737", parent: "root1", text: "Boeing 737 Family" },
-        { id: "B737-800", parent: "B737", text: "737-800" },
-        { id: "B737-MAX", parent: "B737", text: "737 MAX" },
-        { id: "SQ", parent: "root2", text: "Singapore Airlines" },
-        { id: "UA", parent: "root2", text: "United Airlines" },
-        { id: "LH", parent: "root2", text: "Lufthansa" },
-        { id: "SIN", parent: "root3", text: "Singapore Changi" },
-        { id: "LAX", parent: "root3", text: "Los Angeles International" },
-        { id: "FRA", parent: "root3", text: "Frankfurt Airport" },
-        { id: "SIN-LAX", parent: "root4", text: "Singapore - Los Angeles" },
-        { id: "FRA-SIN", parent: "root4", text: "Frankfurt - Singapore" },
-        { id: "Star", parent: "root5", text: "Star Alliance" },
-        { id: "Oneworld", parent: "root5", text: "Oneworld" },
-        { id: "SkyTeam", parent: "root5", text: "SkyTeam" },
-      ];
     }
 
     onCustomWidgetResize(width, height) {
@@ -241,16 +217,22 @@ var transformData = (inputData) => {
       this._widgetToggle.classList.remove("collapsed");
     }
 
-    getSelectedKeys() {
+    getSelectedList() {
       const tree = $(this._list).jstree(true);
       const allChecked = tree.get_checked(true);
 
       // 선택된 노드 중 자식이 없는 노드(리프 노드)만 필터링
-      this.selectedKeys = allChecked
-        .filter((node) => tree.is_leaf(node))
-        .map((node) => node.text);
-      console.log(this.selectedKeys);
-      return this.selectedKeys;
+      return allChecked.filter((node) => tree.is_leaf(node));
+    }
+
+    getSelectedKey() {
+      this.selectedKey = this.getSelectedList().map((node) => node.id);
+      return this.selectedKey;
+    }
+
+    getSelectedText() {
+      this.selectedText = this.getSelectedList().map((node) => node.text);
+      return this.selectedText;
     }
   }
 
