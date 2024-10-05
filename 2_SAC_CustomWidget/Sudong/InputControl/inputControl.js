@@ -114,7 +114,6 @@ var transformData = (inputData) => {
     }
 
     async render() {
-      console.log("render");
       this._widgetContainer.addEventListener("click", (e) => {
         e.stopPropagation();
         this.toggleTree();
@@ -128,10 +127,6 @@ var transformData = (inputData) => {
           this.hideTree();
         }
       });
-      const treedata = this.databinding();
-      await getScriptPromisify(
-        "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
-      );
     }
 
     adjustRootHeight() {
