@@ -117,7 +117,6 @@ var transformData = (inputData) => {
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
-      this.databinding();
       this.render();
     }
 
@@ -153,19 +152,19 @@ var transformData = (inputData) => {
       const { feed, data, metadata } = dataBinding;
       const { dimensions, measures } = parseMetadata(metadata);
       const treedata = transformData(data);
-      console.log(feed);
-      console.log(data);
       console.log(treedata);
+      return treedata;
     }
 
     async render() {
+      const treedata = databinding();
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
 
       $(this._list).jstree({
         core: {
-          data: this.treedata,
+          data: treedata,
           themes: {
             icons: false,
           },
