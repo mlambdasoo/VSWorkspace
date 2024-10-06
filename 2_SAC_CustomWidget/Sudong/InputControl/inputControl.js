@@ -73,22 +73,32 @@ var transformData = (inputData) => {
       super();
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
+      this.addEventListener("click", (event) => {
+        var event = new Event("onClick");
+        this.dispatchEvent(event);
+      });
+      this._props = {};
+
       this._list = this._shadowRoot.getElementById("list");
       this._widgetContainer =
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
       this._isTreeVisible = false;
-      console.log(this.selectedKey);
-      console.log(this.height);
-      console.log(this.width);
     }
 
     onCustomWidgetResize(width, height) {
+      console.log(width);
+      console.log(height);
       this.adjustRootHeight();
       this.render();
     }
+    onCustomWidgetBeforeUpdate(changedProps) {
+      console.log(["onCustomWidgetBeforeUpdate", changedProps]);
+      this._props = { ...this._props, ...changedProps };
+    }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log(["onCustomWidgetAfterUpdate", changedProps]);
       this.adjustRootHeight();
       this.render();
     }
@@ -118,8 +128,6 @@ var transformData = (inputData) => {
           !this._list.contains(event.target)
         ) {
           this.hideTree();
-          console.log(this.height);
-          console.log(this.width);
         }
       });
       const treedata = this.databinding();
