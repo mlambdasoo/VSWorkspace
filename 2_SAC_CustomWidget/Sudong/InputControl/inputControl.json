@@ -25,6 +25,13 @@
     "height": {
       "type": "integer",
       "default": 420
+    },
+    "selectedKey": {
+      "type": "string[]",
+      "default": ["test"]
+    },
+    "selectedText": {
+      "type": "string[]"
     }
   },
   "methods": {
@@ -37,7 +44,11 @@
       "returnType": "string[]"
     }
   },
-  "events": {},
+  "events": {
+    "onClick": {
+      "description": "Called when the user clicks the Input Control."
+    }
+  },
   "dataBindings": {
     "dataBinding": {
       "feeds": [

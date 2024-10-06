@@ -36,12 +36,6 @@ var transformData = (inputData) => {
   template.innerHTML = `
     <style>
       @import "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/themes/default/style.min.css";
-      :host {
-        display: block;
-        width: 100%;
-        height: 100%;
-        box-sizing: border-box;
-      }
       #widget-container {
         font-family: Arial, sans-serif;
         border: 1px solid #ccc;
@@ -84,8 +78,9 @@ var transformData = (inputData) => {
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
       this._isTreeVisible = false;
-      this.selectedKey = [];
-      this.selectedText = [];
+      console.log(this.selectedKey);
+      console.log(this.height);
+      console.log(this.width);
     }
 
     onCustomWidgetResize(width, height) {
