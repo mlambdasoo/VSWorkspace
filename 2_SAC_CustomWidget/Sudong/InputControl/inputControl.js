@@ -95,10 +95,13 @@ var transformData = (inputData) => {
       this.render();
     }
 
-    onCustomWidgetResize(width, height) {
-      this.adjustRootHeight();
-      this.render();
-    }
+    // onCustomWidgetResize(width, height) {
+    //   console.log(changedProps)
+    //    if (this.designMode == true) {
+    //      this.adjustRootHeight();
+    //      this.render();
+    //    }
+    // }
 
     onCustomWidgetDestroy() {}
 
