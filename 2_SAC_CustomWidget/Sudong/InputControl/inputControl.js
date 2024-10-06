@@ -62,7 +62,7 @@ var transformData = (inputData) => {
       }
     </style>
     <div id="widget-container">
-      <div id="widget-title">Airline Code</div>
+      <div id="widget-title"></div>
       <div id="widget-toggle">▼</div>
     </div>
     <div id="list"></div>
@@ -79,10 +79,10 @@ var transformData = (inputData) => {
       this._widgetContainer =
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
+      this._widgetTitle = this._shadowRoot.getElementById("widget-title");
       this._isTreeVisible = false;
       this.selectedKey = [];
       this.selectedText = [];
-      console.log("constructor");
     }
 
     onCustomWidgetBeforeUpdate(changedProps) {
@@ -107,7 +107,6 @@ var transformData = (inputData) => {
     onCustomWidgetDestroy() {}
 
     async render() {
-      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
@@ -115,7 +114,10 @@ var transformData = (inputData) => {
       const { feed, data, metadata } = dataBinding;
       const { dimensions, measures } = parseMetadata(metadata);
       const treedata = transformData(data);
-
+      console.log(data);
+      console.log(dimensions);
+      console.log(measures);
+      this._widgetTitle.textContent = "dd";
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
