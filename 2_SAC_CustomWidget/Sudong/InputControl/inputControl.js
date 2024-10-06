@@ -221,7 +221,7 @@ var transformData = (inputData) => {
       this._widgetToggle.classList.remove("collapsed");
 
       // treeCollapsed 이벤트 디스패치
-      this.dispatchEvent(new Event("treeCollapsed"));
+      this.dispatchEvent(new CustomEvent("treeCollapsed"));
     }
 
     getSelectedList() {
