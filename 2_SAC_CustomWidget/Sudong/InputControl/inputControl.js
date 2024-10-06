@@ -73,10 +73,6 @@ var transformData = (inputData) => {
       super();
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
-      this.addEventListener("click", (event) => {
-        var event = new Event("onClick");
-        this.dispatchEvent(event);
-      });
       this._props = {};
 
       this._list = this._shadowRoot.getElementById("list");
@@ -118,9 +114,15 @@ var transformData = (inputData) => {
     }
 
     async render() {
+      // 이벤트 디스패치
       this._widgetContainer.addEventListener("click", (e) => {
-        e.stopPropagation();
-        this.toggleTree();
+        this.dispatchEvent(new Event("onClick")); // 커스텀 이벤트 디스패치
+      });
+
+      // 이벤트 리스너 등록
+      this.addEventListener("onClick", (e) => {
+        e.stopPropagation(); // 클릭 이벤트의 전파를 막음
+        this.toggleTree(); // 트리 토글 동작
       });
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
@@ -233,6 +235,13 @@ var transformData = (inputData) => {
     getSelectedText() {
       this.selectedText = this.getSelectedList().map((node) => node.text);
       return this.selectedText;
+    }
+
+    isCollapsed() {
+      return !this._isTreeVisible; // true면 트리가 접혀 있음, false면 열려 있음
+    }
+    getICHeight() {
+      return this._widgetContainer.clientHeight;
     }
   }
 
