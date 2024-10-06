@@ -140,7 +140,8 @@ var transformData = (inputData) => {
       document.addEventListener("click", (event) => {
         if (
           !this.contains(event.target) &&
-          !this._list.contains(event.target)
+          !this._list.contains(event.target) &&
+          this._isTreeVisible
         ) {
           this.hideTree();
         }
