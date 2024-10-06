@@ -84,21 +84,18 @@ var transformData = (inputData) => {
         this._shadowRoot.getElementById("widget-container");
       this._widgetToggle = this._shadowRoot.getElementById("widget-toggle");
       this._isTreeVisible = false;
+      console.log(this.selectedKey);
     }
 
     onCustomWidgetResize(width, height) {
-      console.log(width);
-      console.log(height);
       this.adjustRootHeight();
       this.render();
     }
     onCustomWidgetBeforeUpdate(changedProps) {
-      console.log(["onCustomWidgetBeforeUpdate", changedProps]);
       this._props = { ...this._props, ...changedProps };
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
-      console.log(["onCustomWidgetAfterUpdate", changedProps]);
       this.adjustRootHeight();
       this.render();
     }
