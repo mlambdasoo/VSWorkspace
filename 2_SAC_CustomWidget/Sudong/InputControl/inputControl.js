@@ -102,7 +102,7 @@ var transformData = (inputData) => {
 
     onCustomWidgetDestroy() {}
 
-    databinding() {
+    async render() {
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
@@ -110,10 +110,10 @@ var transformData = (inputData) => {
       const { feed, data, metadata } = dataBinding;
       const { dimensions, measures } = parseMetadata(metadata);
       const treedata = transformData(data);
-      return treedata;
-    }
 
-    async render() {
+      await getScriptPromisify(
+        "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
+      );
       // 이벤트 디스패치
       this._widgetContainer.addEventListener("click", () => {
         this.dispatchEvent(new Event("onClick")); // 커스텀 이벤트 디스패치
@@ -124,13 +124,9 @@ var transformData = (inputData) => {
         e.stopPropagation(); // 클릭 이벤트의 전파를 막음
         this.toggleTree(); // 트리 토글 동작
       });
-      this.addEventListener("treeExpanded", (event) => {
-        console.log("Tree is expanded!", event.detail.isVisible);
-      });
+      this.addEventListener("treeExpanded", (event) => {});
 
-      this.addEventListener("treeCollapsed", (event) => {
-        console.log("Tree is collapsed!", event.detail.isVisible);
-      });
+      this.addEventListener("treeCollapsed", (event) => {});
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
         if (
@@ -140,10 +136,6 @@ var transformData = (inputData) => {
           this.hideTree();
         }
       });
-      const treedata = this.databinding();
-      await getScriptPromisify(
-        "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
-      );
 
       if ($(this._list).jstree(true)) {
         $(this._list).jstree("destroy").empty(); // 트리를 제거하고 초기화
