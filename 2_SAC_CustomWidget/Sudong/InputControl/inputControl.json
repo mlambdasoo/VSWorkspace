@@ -48,6 +48,12 @@
   "events": {
     "onClick": {
       "description": "Called when the user clicks the Input Control."
+    },
+    "treeExpanded": {
+      "description": "Called when the list is expaned"
+    },
+    "treeCollapsed": {
+      "description": "Called when the list is collapsed."
     }
   },
   "dataBindings": {
