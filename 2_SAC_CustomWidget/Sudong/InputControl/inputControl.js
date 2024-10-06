@@ -89,13 +89,11 @@ var transformData = (inputData) => {
     }
 
     onCustomWidgetResize(width, height) {
-      console.log("onCustomWidgetResize");
       this.adjustRootHeight();
       this.render();
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
-      console.log("onCustomWidgetAfterUpdate");
       this.adjustRootHeight();
       this.render();
     }
@@ -114,7 +112,6 @@ var transformData = (inputData) => {
     }
 
     async render() {
-      console.log("render");
       this._widgetContainer.addEventListener("click", (e) => {
         e.stopPropagation();
         this.toggleTree();
@@ -126,6 +123,8 @@ var transformData = (inputData) => {
           !this._list.contains(event.target)
         ) {
           this.hideTree();
+          console.log(this.height);
+          console.log(this.width);
         }
       });
       const treedata = this.databinding();
