@@ -78,8 +78,6 @@ var transformData = (inputData) => {
         this.dispatchEvent(event);
       });
       this._props = {};
-      console.log(this.clientHeight);
-      this.style.height = "600px";
 
       this._list = this._shadowRoot.getElementById("list");
       this._widgetContainer =
@@ -91,10 +89,12 @@ var transformData = (inputData) => {
     }
 
     onCustomWidgetBeforeUpdate(changedProps) {
+      console.log(changedProps);
       this._props = { ...this._props, ...changedProps };
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log(changedProps);
       this.adjustRootHeight();
       this.render();
     }
@@ -187,14 +187,12 @@ var transformData = (inputData) => {
     }
 
     adjustRootHeight() {
-      // const containerHeight = this._widgetContainer.clientHeight;
-      // const componentHeight = this.clientHeight;
+      const containerHeight = this._widgetContainer.clientHeight;
+      const componentHeight = this.clientHeight;
 
-      // // root의 높이를 webcomponent 높이에서 컨테이너 높이를 뺀 값으로 설정
-      // const rootHeight = componentHeight - containerHeight - 20; // 약간의 여백
-      // this._list.style.height = `${rootHeight}px`;
-      console.log(this.clientHeight);
-      this.clientHeight = "600px";
+      // root의 높이를 webcomponent 높이에서 컨테이너 높이를 뺀 값으로 설정
+      const rootHeight = componentHeight - containerHeight - 20; // 약간의 여백
+      this._list.style.height = `${rootHeight}px`;
     }
 
     toggleTree() {
