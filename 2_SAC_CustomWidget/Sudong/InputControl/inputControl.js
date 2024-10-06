@@ -82,6 +82,7 @@ var transformData = (inputData) => {
       this._isTreeVisible = false;
       this.selectedKey = [];
       this.selectedText = [];
+      console.log("constructor");
     }
 
     onCustomWidgetBeforeUpdate(changedProps) {
@@ -106,6 +107,7 @@ var transformData = (inputData) => {
     onCustomWidgetDestroy() {}
 
     async render() {
+      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
