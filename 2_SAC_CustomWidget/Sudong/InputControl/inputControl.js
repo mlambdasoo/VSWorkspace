@@ -129,8 +129,12 @@ var transformData = (inputData) => {
         e.stopPropagation(); // 클릭 이벤트의 전파를 막음
         this.toggleTree(); // 트리 토글 동작
       });
-      this.addEventListener("treeExpanded", (event) => {});
-      this.addEventListener("treeCollapsed", (event) => {});
+      this.addEventListener("treeExpanded", (e) => {
+        e.stopPropagation();
+      });
+      this.addEventListener("treeCollapsed", (e) => {
+        e.stopPropagation();
+      });
 
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
