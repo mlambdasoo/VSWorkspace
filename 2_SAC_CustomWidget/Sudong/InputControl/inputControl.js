@@ -129,10 +129,10 @@ var transformData = (inputData) => {
         e.stopPropagation(); // 클릭 이벤트의 전파를 막음
         this.toggleTree(); // 트리 토글 동작
       });
-      this.addEventListener("treeExpanded", (e) => {
+      this._list.addEventListener("treeExpanded", (e) => {
         e.stopPropagation();
       });
-      this.addEventListener("treeCollapsed", (e) => {
+      this._list.addEventListener("treeCollapsed", (e) => {
         e.stopPropagation();
       });
 
