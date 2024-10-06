@@ -15,27 +15,13 @@
       "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Hands-on%20Steps%20Profile/Profile%20Step%20Zero%20-%20Colored%20Box/coloredBox.js",
       "integrity": "",
       "ignoreIntegrity": true
-    },
-    {
-      "kind": "styling",
-      "tag": "com-sap-sample-coloredbox-styling",
-      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Hands-on%20Steps%20Profile/Profile%20Step%20Zero%20-%20Colored%20Box/coloredBoxStyling.js",
-      "integrity": "",
-      "ignoreIntegrity": true
-    },
-    {
-      "kind": "builder",
-      "tag": "com-sap-sample-coloredbox-builder",
-      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Hands-on%20Steps%20Profile/Profile%20Step%20Zero%20-%20Colored%20Box/coloredBoxBuilder.js",
-      "integrity": "",
-      "ignoreIntegrity": true
     }
   ],
   "properties": {
     "color": {
       "type": "string",
       "description": "Background color",
-      "default": "red"
+      "default": "black"
     },
     "opacity": {
       "type": "number",
