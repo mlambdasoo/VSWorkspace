@@ -66,7 +66,7 @@
     "getColor": {
       "returnType": "string",
       "description": "Returns the background color.",
-      "body": "return this.color;"
+      "body": "return this.color1;"
     }
   },
   "events": {

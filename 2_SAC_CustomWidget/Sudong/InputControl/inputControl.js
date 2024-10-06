@@ -96,6 +96,7 @@ var transformData = (inputData) => {
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log(changedProps);
       this.adjustRootHeight();
       this.render();
     }
