@@ -55,7 +55,7 @@ var transformData = (inputData) => {
         display: none;
         background-color: white;
         border: 1px solid #ccc;
-        overflow-y: auto;
+        overflow-y: auto; /* 스크롤 추가 */
         margin-top: 10px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         box-sizing: border-box;
@@ -86,35 +86,22 @@ var transformData = (inputData) => {
       this._isTreeVisible = false;
       this.selectedKey = [];
       this.selectedText = [];
-      this._originalHeight = null;
     }
 
     onCustomWidgetBeforeUpdate(changedProps) {
+      console.log(changedProps);
       this._props = { ...this._props, ...changedProps };
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
-      this._originalHeight = this.style.height;
-      this.adjustComponentHeight();
+      console.log(changedProps);
+      this.adjustRootHeight();
       this.render();
-
-      this._widgetContainer.addEventListener("click", (e) => {
-        e.stopPropagation();
-        this.toggleTree();
-      });
-
-      document.addEventListener("click", (event) => {
-        if (
-          !this.contains(event.target) &&
-          !this._list.contains(event.target)
-        ) {
-          this.hideTree();
-        }
-      });
     }
 
     onCustomWidgetResize(width, height) {
-      // 내용 삭제
+      this.adjustRootHeight();
+      this.render();
     }
 
     onCustomWidgetDestroy() {}
@@ -131,13 +118,26 @@ var transformData = (inputData) => {
     }
 
     async render() {
+      this._widgetContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.toggleTree();
+      });
+      // 컴포넌트 외부 클릭 시 트리 닫기
+      document.addEventListener("click", (event) => {
+        if (
+          !this.contains(event.target) &&
+          !this._list.contains(event.target)
+        ) {
+          this.hideTree();
+        }
+      });
       const treedata = this.databinding();
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
 
       if ($(this._list).jstree(true)) {
-        $(this._list).jstree("destroy").empty();
+        $(this._list).jstree("destroy").empty(); // 트리를 제거하고 초기화
       }
 
       $(this._list).jstree({
@@ -159,6 +159,7 @@ var transformData = (inputData) => {
         const tree = $(this._list).jstree(true);
         const node = data.node;
 
+        // 상위 노드 처리
         let parent = tree.get_node(node.parent);
         while (parent && parent.id !== "#") {
           const siblings = tree.get_children_dom(parent);
@@ -176,6 +177,7 @@ var transformData = (inputData) => {
           parent = tree.get_node(parent.parent);
         }
 
+        // 하위 노드 처리
         if (data.node.state.checked) {
           tree.check_node(tree.get_node(data.node).children_d);
         } else {
@@ -184,24 +186,14 @@ var transformData = (inputData) => {
       });
     }
 
-    adjustComponentHeight() {
-      if (!this._originalHeight) {
-        this._originalHeight = this.style.height;
-      }
+    adjustRootHeight() {
+      // const containerHeight = this._widgetContainer.clientHeight;
+      // const componentHeight = this.clientHeight;
 
-      if (this._isTreeVisible) {
-        this.style.height = this._originalHeight;
-      } else {
-        const containerHeight = this._widgetContainer.offsetHeight;
-        this.style.height = `${containerHeight}px`;
-      }
-
-      if (this._isTreeVisible) {
-        const componentHeight = this.offsetHeight;
-        const containerHeight = this._widgetContainer.offsetHeight;
-        const listHeight = componentHeight - containerHeight - 20;
-        this._list.style.height = `${listHeight}px`;
-      }
+      // // root의 높이를 webcomponent 높이에서 컨테이너 높이를 뺀 값으로 설정
+      // const rootHeight = componentHeight - containerHeight - 20; // 약간의 여백
+      // this._list.style.height = `${rootHeight}px`;
+      this.clientHeight = "600px";
     }
 
     toggleTree() {
@@ -211,14 +203,12 @@ var transformData = (inputData) => {
       } else {
         this.hideTree();
       }
-      this.adjustComponentHeight();
     }
 
     showTree() {
       this._list.style.display = "block";
       this._widgetToggle.textContent = "▲";
       this._widgetToggle.classList.add("collapsed");
-      this.style.height = this._originalHeight;
     }
 
     hideTree() {
@@ -226,12 +216,13 @@ var transformData = (inputData) => {
       this._list.style.display = "none";
       this._widgetToggle.textContent = "▼";
       this._widgetToggle.classList.remove("collapsed");
-      this.adjustComponentHeight();
     }
 
     getSelectedList() {
       const tree = $(this._list).jstree(true);
       const allChecked = tree.get_checked(true);
+
+      // 선택된 노드 중 자식이 없는 노드(리프 노드)만 필터링
       return allChecked.filter((node) => tree.is_leaf(node));
     }
 
