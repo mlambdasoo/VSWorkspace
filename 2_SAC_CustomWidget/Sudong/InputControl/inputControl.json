@@ -25,13 +25,6 @@
     "height": {
       "type": "integer",
       "default": 420
-    },
-    "selectedKey": {
-      "type": "string[]",
-      "default": ["test", "test2"]
-    },
-    "selectedText": {
-      "type": "string[]"
     }
   },
   "methods": {
