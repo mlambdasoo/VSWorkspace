@@ -55,10 +55,11 @@ var transformData = (inputData) => {
         display: none;
         background-color: white;
         border: 1px solid #ccc;
-        overflow-y: auto; /* 스크롤 추가 */
+        overflow-y: auto;
         margin-top: 10px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         box-sizing: border-box;
+        font-size: 16px;
       }
     </style>
     <div id="widget-container">
@@ -117,7 +118,7 @@ var transformData = (inputData) => {
       console.log(data);
       console.log(dimensions);
       console.log(measures);
-      this._widgetTitle.textContent = "dd";
+      this._widgetTitle.textContent = dimensions[0].description;
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
