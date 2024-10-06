@@ -125,8 +125,8 @@ var transformData = (inputData) => {
         this.toggleTree(); // 트리 토글 동작
       });
       this.addEventListener("treeExpanded", (event) => {});
-
       this.addEventListener("treeCollapsed", (event) => {});
+
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
         if (
@@ -201,20 +201,8 @@ var transformData = (inputData) => {
 
       if (this._isTreeVisible) {
         this.showTree();
-        // 트리가 열릴 때 커스텀 이벤트 "treeExpanded" 디스패치
-        this.dispatchEvent(
-          new CustomEvent("treeExpanded", {
-            detail: { isVisible: this._isTreeVisible },
-          })
-        );
       } else {
         this.hideTree();
-        // 트리가 접힐 때 커스텀 이벤트 "treeCollapsed" 디스패치
-        this.dispatchEvent(
-          new CustomEvent("treeCollapsed", {
-            detail: { isVisible: this._isTreeVisible },
-          })
-        );
       }
     }
 
@@ -222,13 +210,18 @@ var transformData = (inputData) => {
       this._list.style.display = "block";
       this._widgetToggle.textContent = "▲";
       this._widgetToggle.classList.add("collapsed");
+      this.dispatchEvent(new CustomEvent("treeExpanded"));
     }
 
+    // hideTree 메소드 수정
     hideTree() {
       this._isTreeVisible = false;
       this._list.style.display = "none";
       this._widgetToggle.textContent = "▼";
       this._widgetToggle.classList.remove("collapsed");
+
+      // treeCollapsed 이벤트 디스패치
+      this.dispatchEvent(new Event("treeCollapsed"));
     }
 
     getSelectedList() {
