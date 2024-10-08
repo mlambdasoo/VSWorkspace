@@ -103,6 +103,17 @@ var transformData = (inputData) => {
 
     connectedCallback() {
       console.log("connectedCallback");
+      this._widgetContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.toggleTree();
+      });
+
+      this._list.addEventListener("treeExpanded", (e) => {
+        e.stopPropagation();
+      });
+      this._list.addEventListener("treeCollapsed", (e) => {
+        e.stopPropagation();
+      });
     }
 
     onCustomWidgetResize(width, height) {
@@ -128,18 +139,6 @@ var transformData = (inputData) => {
       // 이벤트 디스패치
 
       // 이벤트 리스너 등록
-
-      this._widgetContainer.addEventListener("click", (e) => {
-        e.stopPropagation();
-        this.toggleTree();
-      });
-
-      this._list.addEventListener("treeExpanded", (e) => {
-        e.stopPropagation();
-      });
-      this._list.addEventListener("treeCollapsed", (e) => {
-        e.stopPropagation();
-      });
 
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
