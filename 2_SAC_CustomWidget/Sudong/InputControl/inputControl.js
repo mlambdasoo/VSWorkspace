@@ -59,7 +59,7 @@ var transformData = (inputData) => {
         margin-top: 10px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         box-sizing: border-box;
-        font-size: 16px;
+        font-size: 17px;
       }
     </style>
     <div id="widget-container">
@@ -84,30 +84,34 @@ var transformData = (inputData) => {
       this._isTreeVisible = false;
       this.selectedKey = [];
       this.selectedText = [];
+      console.log("constructor");
     }
 
     onCustomWidgetBeforeUpdate(changedProps) {
+      console.log("onCustomWidgetBeforeUpdate");
       console.log(changedProps);
       this._props = { ...this._props, ...changedProps };
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log("onCustomWidgetAfterUpdate");
       console.log(changedProps);
       this.adjustRootHeight();
       this.render();
     }
 
-    // onCustomWidgetResize(width, height) {
-    //   console.log(changedProps)
-    //    if (this.designMode == true) {
-    //      this.adjustRootHeight();
-    //      this.render();
-    //    }
-    // }
+    connectedCallback() {
+      console.log("connectedCallback");
+    }
+
+    onCustomWidgetResize(width, height) {
+      console.log("onCustomWidgetResize");
+    }
 
     onCustomWidgetDestroy() {}
 
     async render() {
+      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
@@ -116,8 +120,6 @@ var transformData = (inputData) => {
       const { dimensions, measures } = parseMetadata(metadata);
       const treedata = transformData(data);
       console.log(data);
-      console.log(dimensions);
-      console.log(measures);
       this._widgetTitle.textContent = dimensions[0].description;
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>SAPUI5 Web Component 예제</title>
+    <script
+      src="https://sapui5.hana.ondemand.com/1.120.0/resources/sap-ui-core.js"
+      id="sap-ui-bootstrap"
+      data-sap-ui-theme="sap_fiori_3"
+      data-sap-ui-libs="sap.m"
+      data-sap-ui-compatVersion="edge"
+      data-sap-ui-async="true"
+      data-sap-ui-resourceroots='{
+                "my.app": "./"
+            }'
+    ></script>
+    <script>
+      sap.ui.getCore().attachInit(function () {
+        sap.ui.require(
+          ["sap/ui/core/mvc/XMLView", "sap/m/MessageToast"],
+          function (XMLView, MessageToast) {
+            "use strict";
+
+            // Web Component 정의
+            class UI5MessageButton extends HTMLElement {
+              constructor() {
+                super();
+                this.attachShadow({ mode: "open" });
+              }
+
+              connectedCallback() {
+                this.render();
+              }
+
+              render() {
+                this.shadowRoot.innerHTML = `
+                            <style>
+                                :host {
+                                    display: inline-block;
+                                    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+                                }
+                                button {
+                                    background-color: #0854a0;
+                                    color: white;
+                                    border: none;
+                                    padding: 8px 16px;
+                                    cursor: pointer;
+                                    font-size: 14px;
+                                }
+                                button:hover {
+                                    background-color: #0a6ed1;
+                                }
+                            </style>
+                            <button id="messageButton">메시지 표시</button>
+                        `;
+
+                this.shadowRoot
+                  .getElementById("messageButton")
+                  .addEventListener("click", () => this.showMessage());
+              }
+
+              showMessage() {
+                MessageToast.show(
+                  "안녕하세요! 이것은 Web Component에서 표시된 메시지입니다."
+                );
+              }
+            }
+
+            // Web Component 등록
+            customElements.define("ui5-message-button", UI5MessageButton);
+
+            // SAPUI5 뷰 생성
+            XMLView.create({
+              definition: `
+                        <mvc:View
+                            xmlns:mvc="sap.ui.core.mvc"
+                            xmlns="sap.m">
+                            <Page title="SAPUI5 Web Component 예제">
+                                <content>
+                                    <Title text="메시지 버튼 컴포넌트" />
+                                    <ui5-message-button></ui5-message-button>
+                                </content>
+                            </Page>
+                        </mvc:View>
+                    `,
+            }).then(function (oView) {
+              oView.placeAt("content");
+            });
+          }
+        );
+      });
+    </script>
+  </head>
+  <body class="sapUiBody" id="content"></body>
+</html>
