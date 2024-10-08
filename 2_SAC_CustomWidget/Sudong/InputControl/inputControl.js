@@ -128,13 +128,12 @@ var transformData = (inputData) => {
       // 이벤트 디스패치
 
       // 이벤트 리스너 등록
-      if (!this._clickListenerAdded) {
-        this.addEventListener("click", (e) => {
-          e.stopPropagation();
-          this.toggleTree();
-        });
-        this._clickListenerAdded = true; // 중복 등록 방지 플래그
-      }
+
+      this._widgetContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.toggleTree();
+      });
+
       this._list.addEventListener("treeExpanded", (e) => {
         e.stopPropagation();
       });
