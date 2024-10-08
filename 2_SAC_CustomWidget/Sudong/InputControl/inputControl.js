@@ -125,13 +125,11 @@ var transformData = (inputData) => {
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
       // 이벤트 디스패치
-      this._widgetContainer.addEventListener("click", () => {
-        this.dispatchEvent(new Event("onClick")); // 커스텀 이벤트 디스패치
-      });
 
       // 이벤트 리스너 등록
-      this.addEventListener("onClick", (e) => {
+      this.addEventListener("click", (e) => {
         e.stopPropagation(); // 클릭 이벤트의 전파를 막음
+        console.log("click");
         this.toggleTree(); // 트리 토글 동작
       });
       this._list.addEventListener("treeExpanded", (e) => {
