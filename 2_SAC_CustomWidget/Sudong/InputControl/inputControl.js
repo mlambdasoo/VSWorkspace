@@ -84,6 +84,7 @@ var transformData = (inputData) => {
       this._isTreeVisible = false;
       this.selectedKey = [];
       this.selectedText = [];
+      this._clickListenerAdded = false;
       console.log("constructor");
     }
 
@@ -127,11 +128,13 @@ var transformData = (inputData) => {
       // 이벤트 디스패치
 
       // 이벤트 리스너 등록
-      this.addEventListener("click", (e) => {
-        e.stopPropagation(); // 클릭 이벤트의 전파를 막음
-        console.log("click");
-        this.toggleTree(); // 트리 토글 동작
-      });
+      if (!this._clickListenerAdded) {
+        this.addEventListener("click", (e) => {
+          e.stopPropagation();
+          this.toggleTree();
+        });
+        this._clickListenerAdded = true; // 중복 등록 방지 플래그
+      }
       this._list.addEventListener("treeExpanded", (e) => {
         e.stopPropagation();
       });
