@@ -105,14 +105,17 @@ var transformData = (inputData) => {
       console.log("connectedCallback");
       this._widgetContainer.addEventListener("click", (e) => {
         e.stopPropagation();
+        console.log("click");
         this.toggleTree();
       });
 
       this._list.addEventListener("treeExpanded", (e) => {
         e.stopPropagation();
+        console.log("treeExpanded");
       });
       this._list.addEventListener("treeCollapsed", (e) => {
         e.stopPropagation();
+        console.log("treeCollapsed");
       });
     }
 
