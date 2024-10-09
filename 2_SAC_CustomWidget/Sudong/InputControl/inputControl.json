@@ -36,19 +36,12 @@
       "description": "Get Selected Text (If hierarchy is set, only leaf nodes are retrieved",
       "returnType": "string[]"
     },
-    "isCollapsed": {
-      "description": "Check if it is collpased or not",
-      "returnType": "boolean"
-    },
     "getICHeight": {
       "description": "Get Input Control Height",
       "returnType": "integer"
     }
   },
   "events": {
-    "onClick": {
-      "description": "Called when the user clicks the Input Control."
-    },
     "treeExpanded": {
       "description": "Called when the list is expaned"
     },
