@@ -16,7 +16,6 @@
     init() {
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(temp.content.cloneNode(true));
-      this._id = createGuid();
       var ctor = sap.m.DatePicker;
     }
 
