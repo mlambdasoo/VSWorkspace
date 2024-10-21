@@ -57,4 +57,4 @@ class VizPlotareaBuilderPanel extends HTMLElement {
   }
 }
 
-customElements.define("viz-plotarea-build-en", VizPlotareaBuilderPanel);
+customElements.define("viz-plotarea-build", VizPlotareaBuilderPanel);
