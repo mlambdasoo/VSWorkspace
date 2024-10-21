@@ -89,9 +89,8 @@
       const barColumnContainer = dataElement.querySelector(
         ".series-data-marker-container"
       );
-
+      const shape = ``;
       const color = dataInfo.color || options.color;
-      const shape = "";
       switch (this._dataMarkerShape) {
         case "circle":
           shape = `border-radius: 50%;`;
