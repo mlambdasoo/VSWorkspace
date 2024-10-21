@@ -20,6 +20,8 @@
       console.log(extensionData);
       const { chartSize, chartType, primaryRows, secondaryRows } =
         extensionData;
+      console.log(primaryRows);
+      console.log(secondaryRows);
       this._size = chartSize;
       this._chartType = chartType;
       this._primaryRows = primaryRows;
