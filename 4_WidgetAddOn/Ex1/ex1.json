@@ -1,0 +1,25 @@
+{
+  "id": "com.sudong.addon.ex1",
+  "version": "1.0.0",
+  "name": "Sudong Widget add-on ex1",
+  "description": "A widget customization add-on basic",
+  "icon": "undefined",
+  "vendor": "SAP",
+  "eula": "EULA",
+  "license": "1.0",
+  "extensions": [
+    {
+      "extensionPoint": "sap.addOn.viz.plotarea.general",
+      "webcomponents": [
+        {
+          "kind": "main",
+          "tag": "viz-plotarea",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Ex1/ex1.js",
+          "integrity": "",
+          "ignoreIntegrity": true
+        }
+      ],
+      "properties": {}
+    }
+  ]
+}
