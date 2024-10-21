@@ -55,6 +55,7 @@
       // Render y-axys stacked labels
       this.renderAxisStackLabels(this._yAxisStackLabels);
     }
+
     renderASeries(singleSeries, options) {
       singleSeries.dataPoints.forEach((dataPoint) => {
         const { dataInfo, labelInfo } = dataPoint;
@@ -69,7 +70,33 @@
         this.renderLabel(labelInfo, options);
       });
     }
-    renderData(dataInfo, options) {}
+    renderData(dataInfo, options) {
+      if (!dataInfo || dataInfo.hidden || dataInfo.outOfViewport) {
+        // Don't render the data marker if it's hidden or out of current viewing range
+        return;
+      }
+      let { x, y, width, height } = dataInfo;
+
+      const originalWidth = width;
+      const originalHeight = height;
+
+      // Clone the data marker template
+      const dataElement = DataMarkerTemplate.content.cloneNode(true);
+      const barColumnContainer = dataElement.querySelector(
+        ".series-data-marker-container"
+      );
+
+      const color = dataInfo.color || options.color;
+
+      barColumnContainer.setAttribute(
+        "style",
+        `background-color: ${color}; position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;${
+          dataInfo.opacity !== undefined ? `opacity: ${dataInfo.opacity};` : ""
+        }`
+      );
+
+      this._containerElement.appendChild(dataElement);
+    }
     renderLabel(labelInfo, options) {}
     renderAxisLabels(axisLabels) {}
     renderAxisStackLabels(axisStackLabels) {}
