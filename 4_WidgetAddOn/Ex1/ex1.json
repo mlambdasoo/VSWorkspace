@@ -19,7 +19,32 @@
           "ignoreIntegrity": true
         }
       ],
-      "properties": {}
+      "properties": {
+        "sapHideOriginalDataPointMarks": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalDataPointLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalXAxisLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalYAxisLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalXAxisStackLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalYAxisStackLabels": {
+          "type": "boolean",
+          "default": false
+        }
+      }
     }
   ]
 }
