@@ -135,8 +135,6 @@
       this._isHorizontal = isHorizontal;
       this.render();
     }
-
-    render() {}
   }
   customElements.define("viz-plotarea", Main);
 })();
