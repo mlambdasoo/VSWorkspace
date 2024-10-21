@@ -90,10 +90,15 @@
       );
 
       const color = dataInfo.color || options.color;
+      const circle = `border-radius: 50%;`;
+      const rectangle = ``;
+      const triangle = `clip-path: polygon(50% 0%, 100% 100%, 0% 100%);`;
+      const xshape = `clip-path: polygon(0% 0%, 100% 100%, 0% 100%, 100% 0%);`;
+      const shape = circle;
 
       barColumnContainer.setAttribute(
         "style",
-        `background-color: ${color}; position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;${
+        `${shape} background-color: ${color}; position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;${
           dataInfo.opacity !== undefined ? `opacity: ${dataInfo.opacity};` : ""
         }`
       );
