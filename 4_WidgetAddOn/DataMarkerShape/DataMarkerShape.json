@@ -1,0 +1,62 @@
+{
+  "id": "com.sudong.addon.ex1",
+  "version": "1.0.0",
+  "name": "Sudong Widget add-on ex1",
+  "description": "A widget customization add-on basic",
+  "icon": "undefined",
+  "vendor": "SAP",
+  "eula": "EULA",
+  "license": "1.0",
+  "extensions": [
+    {
+      "extensionPoint": "sap.addOn.viz.plotarea.general",
+      "webcomponents": [
+        {
+          "kind": "main",
+          "tag": "viz-plotarea",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/DataMarkerShape/DataMarkerShape.js",
+          "integrity": "",
+          "ignoreIntegrity": true
+        },
+        {
+          "kind": "builder",
+          "tag": "viz-plotarea-build",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/DataMarkerShape/DataMarkerShape-builder-panel.js",
+          "integrity": "",
+          "ignoreIntegrity": true
+        }
+      ],
+      "properties": {
+        "sapHideOriginalDataPointMarks": {
+          "type": "boolean",
+          "default": true
+        },
+        "sapHideOriginalDataPointLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalXAxisLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalYAxisLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalXAxisStackLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalYAxisStackLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "dataMarkerShape": {
+          "type": "string",
+          "description": "Shape of Data Marker",
+          "default": "circle"
+        }
+      }
+    }
+  ]
+}
