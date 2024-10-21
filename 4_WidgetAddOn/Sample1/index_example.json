@@ -1,0 +1,221 @@
+{
+    "id": "com.UserXX.en.demo.localVizAddOns",
+    "version": "1.0.0",
+    "name": "UserXX English Widget Customization Local Add-on",
+    "description": "A widget customization add-on demo for BTP Partners Workshop",
+    "icon": "undefined",
+    "vendor": "SAP",
+    "eula": "EULA",
+    "license": "1.0",
+    "extensions": [
+        {
+            "extensionPoint": "sap.addOn.viz.plotarea.general",
+            "webcomponents": [
+                {
+                    "kind": "main",
+                    "tag": "viz-plotarea-en",
+                    "url": "https://workzone-core.one.int.sap/profile/tejRWeFEDNgqRIVZnYjraE/documents/mbUf9KxW4fDbPvUbK7V9Ox/versions/zlEg8Gkj7o5XgGRsbkfdDJ",
+                    "integrity": "",
+                    "ignoreIntegrity": true
+                },
+                {
+                    "kind": "builder",
+                    "tag": "viz-plotarea-build-en",
+                    "url": "https://workzone-core.one.int.sap/profile/tejRWeFEDNgqRIVZnYjraE/documents/z1fbp81o5WU3faLqJsiQYd/versions/ypMoLTMUxKYMFrdJNvJUZm",
+                    "integrity": "",
+                    "ignoreIntegrity": true
+                }
+            ],
+            "properties": {
+                "sapHideOriginalDataPointMarks": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalDataPointLabels": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalXAxisLabels": {
+                    "type": "boolean",
+                    "default": false
+                },
+                "sapHideOriginalYAxisLabels": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalXAxisStackLabels": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalYAxisStackLabels": {
+                    "type": "boolean",
+                    "default": true
+                },
+
+                
+
+                
+                "donutDataLabel": {
+                    "type": "boolean",
+                    "description": "Should display data label as donut",
+                    "default": false
+                },
+                "donutDataLabelSize": {
+                    "type": "number",
+                    "description": "The percentage of donut data label size",
+                    "default": 100
+                },
+                "dataMarkerSize": {
+                    "type": "number",
+                    "description": "The percentage of data marker size",
+                    "default": 100
+                },
+                "axisLabelColor": {
+                    "type": "string",
+                    "description": "The chart axis label color",
+                    "default": "#333"
+                },
+                "inclined": {
+                    "type": "boolean",
+                    "description": "Should display data label inclined for line chart",
+                    "default": true
+                },
+
+                
+                "imgFill": {
+                    "type": "boolean",
+                    "description": "Should fill data marker with img",
+                    "default": false
+                },
+                "img": {
+                    "type": "String",
+                    "description": "base64 img for data marker",
+                    "default": ""
+                },
+                "axisLabelIcon": {
+                    "type": "boolean",
+                    "description": "Should display axis label icon",
+                    "default": false
+                },
+                "absolute": {
+                    "type": "boolean",
+                    "description": "Should display label in absolute value",
+                    "default": false
+                }
+            }
+        },
+        {
+            "extensionPoint": "sap.addOn.viz.plotarea.numericPoint",
+            "webcomponents": [
+                {
+                    "kind": "main",
+                    "tag": "viz-metric-plotarea-en",
+                    "url": "https://workzone-core.one.int.sap/profile/tejRWeFEDNgqRIVZnYjraE/documents/zoWxghWx0fbobbc1HTGDZ2/versions/I6Qvvy5qNvkeL6e2a2dlxl",
+                    "integrity": "",
+                    "ignoreIntegrity": true
+                },
+                {
+                    "kind": "builder",
+                    "tag": "viz-metric-plotarea-build-en",
+                    "url": "https://workzone-core.one.int.sap/profile/tejRWeFEDNgqRIVZnYjraE/documents/G6ZwAdAGNyOlSaNxDbQOZ5/versions/OcGxph6AMWthRH9ReiBCak",
+                    "integrity": "",
+                    "ignoreIntegrity": true
+                }
+            ],
+            "properties": {
+                "sapHideOriginalPrimaryNumber": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalPrimaryLabel": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalSecondaryNumber": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "sapHideOriginalSecondaryLabel": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "labelColor": {
+                    "type": "string",
+                    "description": "The row label color",
+                    "default": "#666"
+                },
+                "numberBarColor": {
+                    "type": "string",
+                    "description": "The bar color of completion progress",
+                    "default": "#488ccc"
+                },
+                "numberTrackColor": {
+                    "type": "string",
+                    "description": "The track color of completion progress",
+                    "default": "#ddd"
+                },
+                "max": {
+                    "type": "number",
+                    "description": "The target value of completion progress",
+                    "default": "100"
+                },
+                "customUnit": {
+                    "type": "boolean",
+                    "description": "Should display data label using custom unit",
+                    "default": true
+                },
+                "customUnitNum": {
+                    "type": "number",
+                    "description": "The scale of custom unit",
+                    "default": 10000
+                },
+                "customUnitName": {
+                    "type": "string",
+                    "description": "The name of custom unit",
+                    "default": "万"
+                },
+                "labelIcon": {
+                    "type": "boolean",
+                    "description": "Should display label icon",
+                    "default": false
+                },
+                "format": {
+                    "type": "String",
+                    "description": "number formatting for custom unit",
+                    "default": "typeA"
+                }
+            }
+        },
+        {
+            "extensionPoint": "sap.addOn.viz.tooltip",
+            "webcomponents": [
+                {
+                    "kind": "main",
+                    "tag": "viz-tooltip",
+                    "url": "https://workzone-core.one.int.sap/profile/tejRWeFEDNgqRIVZnYjraE/documents/e6METdYKoUbZvvxdSeYbiR/versions/IltXmvX6AoZ0IHpmVZLdGf",
+                    "integrity": "",
+                    "ignoreIntegrity": true
+                },
+                {
+                    "kind": "builder",
+                    "tag": "viz-tooltip-build",
+                    "url": "https://workzone-core.one.int.sap/profile/tejRWeFEDNgqRIVZnYjraE/documents/Em31emvRtlCRInuMhRZCQu/versions/o2cUkhYjSJDQi03vxcxY6y",
+                    "integrity": "",
+                    "ignoreIntegrity": true
+                }
+            ],
+            "properties": {
+                "max": {
+                    "type": "number",
+                    "description": "The max of range value",
+                    "default": "100"
+                },
+                "color": {
+                    "type": "string",
+                    "description": "Text Color info",
+                    "default": "lightblue"
+                }
+            }
+        }
+    ]
+}
