@@ -73,120 +73,141 @@ plotareaFormTemplate.innerHTML = `
 `;
 
 class VizPlotareaBuilderPanel extends HTMLElement {
-    constructor() {
-        super();
-        this._shadowRoot = this.attachShadow({mode: "open"});
-        this._shadowRoot.appendChild(plotareaFormTemplate.content.cloneNode(true));
-        this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
-        // Rounded에 대한 EventListener 추가
-        this._shadowRoot.getElementById('bps_donutDataLabel').addEventListener('change', this._submit.bind(this));
-        this._shadowRoot.getElementById('bps_donutDataLabelSize').addEventListener('change', this._submit.bind(this));
-        this._shadowRoot.getElementById('bps_dataMarkerSize').addEventListener('change', this._submit.bind(this));
-        this._shadowRoot.getElementById('bps_axis_label_color').addEventListener('change', this._submit.bind(this));
-        this._shadowRoot.getElementById('bps_inclined').addEventListener('change', this._submit.bind(this));
-        // Custom scale에 대한 EventListener 추가
-        this._shadowRoot.getElementById('bps_imgFill').addEventListener('change', this._submit.bind(this));
-        this._shadowRoot.getElementById('bps_imgSelect').addEventListener('change', this.showImg.bind(this));
-        this.img = '';
-        this._shadowRoot.getElementById('bps_axisLabelIcon').addEventListener('change', this._submit.bind(this));
-        this._shadowRoot.getElementById('bps_absolute').addEventListener('change', this._submit.bind(this));
-    }
+  constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: "open" });
+    this._shadowRoot.appendChild(plotareaFormTemplate.content.cloneNode(true));
+    this._shadowRoot
+      .getElementById("form")
+      .addEventListener("submit", this._submit.bind(this));
+    // Rounded에 대한 EventListener 추가
+    this._shadowRoot
+      .getElementById("bps_donutDataLabel")
+      .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("bps_donutDataLabelSize")
+      .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("bps_dataMarkerSize")
+      .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("bps_axis_label_color")
+      .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("bps_inclined")
+      .addEventListener("change", this._submit.bind(this));
+    // Custom scale에 대한 EventListener 추가
+    this._shadowRoot
+      .getElementById("bps_imgFill")
+      .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("bps_imgSelect")
+      .addEventListener("change", this.showImg.bind(this));
+    this.img = "";
+    this._shadowRoot
+      .getElementById("bps_axisLabelIcon")
+      .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("bps_absolute")
+      .addEventListener("change", this._submit.bind(this));
+  }
 
-    _submit(e) {
-        e.preventDefault();
-        this.dispatchEvent(new CustomEvent("propertiesChanged", {
-                detail: {
-                    properties: {
-                        // property 변경--rounded
-                        donutDataLabel: this.donutDataLabel,
-                        dataMarkerSize: this.dataMarkerSize,
-                        axisLabelColor: this.axisLabelColor,
-                        donutDataLabelSize: this.donutDataLabelSize,
-                        inclined: this.inclined,
-                        // property 변경--custom scale
-                        midDataLabel: this.midDataLabel,
-                        imgFill: this.imgFill,
-                        img: this.img,
-                        axisLabelIcon: this.axisLabelIcon,
-                        absolute: this.absolute,
-                    }
-                }
-        }));
-    }
+  _submit(e) {
+    e.preventDefault();
+    this.dispatchEvent(
+      new CustomEvent("propertiesChanged", {
+        detail: {
+          properties: {
+            // property 변경--rounded
+            donutDataLabel: this.donutDataLabel,
+            dataMarkerSize: this.dataMarkerSize,
+            axisLabelColor: this.axisLabelColor,
+            donutDataLabelSize: this.donutDataLabelSize,
+            inclined: this.inclined,
+            // property 변경--custom scale
+            midDataLabel: this.midDataLabel,
+            imgFill: this.imgFill,
+            img: this.img,
+            axisLabelIcon: this.axisLabelIcon,
+            absolute: this.absolute,
+          },
+        },
+      })
+    );
+  }
 
-    showImg() {
-        var file = this._shadowRoot.getElementById('bps_imgSelect').files[0];
-        var reader = new FileReader();
-        reader.onload = (e) => {
-            this.img = e.target.result;
-            this.dispatchEvent(new CustomEvent("propertiesChanged", {
-                detail: {
-                    properties: {
-                        // property 변경--rounded
-                        donutDataLabel: this.donutDataLabel,
-                        dataMarkerSize: this.dataMarkerSize,
-                        axisLabelColor: this.axisLabelColor,
-                        donutDataLabelSize: this.donutDataLabelSize,
-                        inclined: this.inclined,
-                        // property 변경--custom scale
-                        midDataLabel: this.midDataLabel,
-                        imgFill: this.imgFill,
-                        img: this.img,
-                        axisLabelIcon: this.axisLabelIcon,
-                        absolute: this.absolute,
-                    }
-                }
-            }));
-        };
-        reader.readAsDataURL(file);
-    }
+  showImg() {
+    var file = this._shadowRoot.getElementById("bps_imgSelect").files[0];
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      this.img = e.target.result;
+      this.dispatchEvent(
+        new CustomEvent("propertiesChanged", {
+          detail: {
+            properties: {
+              // property 변경--rounded
+              donutDataLabel: this.donutDataLabel,
+              dataMarkerSize: this.dataMarkerSize,
+              axisLabelColor: this.axisLabelColor,
+              donutDataLabelSize: this.donutDataLabelSize,
+              inclined: this.inclined,
+              // property 변경--custom scale
+              midDataLabel: this.midDataLabel,
+              imgFill: this.imgFill,
+              img: this.img,
+              axisLabelIcon: this.axisLabelIcon,
+              absolute: this.absolute,
+            },
+          },
+        })
+      );
+    };
+    reader.readAsDataURL(file);
+  }
 
-    // rounded에 대한 getter, setter 만들기
+  // rounded에 대한 getter, setter 만들기
 
+  set donutDataLabel(value) {
+    this._shadowRoot.getElementById("bps_donutDataLabel").checked = !!value;
+  }
 
+  get donutDataLabel() {
+    return this._shadowRoot.getElementById("bps_donutDataLabel").checked;
+  }
 
+  set donutDataLabelSize(value) {
+    this._shadowRoot.getElementById("bps_donutDataLabelSize").value = value;
+  }
 
-    set donutDataLabel(value) {
-        (this._shadowRoot.getElementById("bps_donutDataLabel")).checked = !!value;
-    }
+  get donutDataLabelSize() {
+    return this._shadowRoot.getElementById("bps_donutDataLabelSize").value;
+  }
 
-    get donutDataLabel() {
-        return (this._shadowRoot.getElementById("bps_donutDataLabel")).checked;
-    }
+  set dataMarkerSize(value) {
+    this._shadowRoot.getElementById("bps_dataMarkerSize").value = value;
+  }
 
-    set donutDataLabelSize(value) {
-        (this._shadowRoot.getElementById("bps_donutDataLabelSize")).value = value;
-    }
+  get dataMarkerSize() {
+    return this._shadowRoot.getElementById("bps_dataMarkerSize").value;
+  }
 
-    get donutDataLabelSize() {
-        return (this._shadowRoot.getElementById("bps_donutDataLabelSize")).value;
-    }
+  set axisLabelColor(value) {
+    this._shadowRoot.getElementById("bps_axis_label_color").value = value;
+  }
 
-    set dataMarkerSize(value) {
-        (this._shadowRoot.getElementById("bps_dataMarkerSize")).value = value;
-    }
+  get axisLabelColor() {
+    return this._shadowRoot.getElementById("bps_axis_label_color").value;
+  }
 
-    get dataMarkerSize() {
-        return (this._shadowRoot.getElementById("bps_dataMarkerSize")).value;
-    }
+  set inclined(value) {
+    this._shadowRoot.getElementById("bps_inclined").checked = !!value;
+  }
 
-    set axisLabelColor(value) {
-        (this._shadowRoot.getElementById("bps_axis_label_color")).value = value;
-    }
+  get inclined() {
+    return this._shadowRoot.getElementById("bps_inclined").checked;
+  }
 
-    get axisLabelColor() {
-        return (this._shadowRoot.getElementById("bps_axis_label_color")).value;
-    }
-
-    set inclined(value) {
-        (this._shadowRoot.getElementById("bps_inclined")).checked = !!value;
-    }
-
-    get inclined() {
-        return (this._shadowRoot.getElementById("bps_inclined")).checked;
-    }
-
-/*
+  /*
     set customUnit(value) {
         (this._shadowRoot.getElementById("bps_customUnit")).checked = !!value;
         if(!!value){
@@ -228,36 +249,34 @@ class VizPlotareaBuilderPanel extends HTMLElement {
         return $("#bps_numberFormatSelect", this._shadowRoot).val();
     }
 */
-    set imgFill(value) {
-        (this._shadowRoot.getElementById("bps_imgFill")).checked = !!value;
-        if(!!value){
-            (this._shadowRoot.getElementById("bps_imgFillArea")).style.display = "";
-        } else {
-            (this._shadowRoot.getElementById("bps_imgFillArea")).style.display = "none";
-        }
+  set imgFill(value) {
+    this._shadowRoot.getElementById("bps_imgFill").checked = !!value;
+    if (!!value) {
+      this._shadowRoot.getElementById("bps_imgFillArea").style.display = "";
+    } else {
+      this._shadowRoot.getElementById("bps_imgFillArea").style.display = "none";
     }
+  }
 
-    get imgFill() {
-        return (this._shadowRoot.getElementById("bps_imgFill")).checked;
-    }
+  get imgFill() {
+    return this._shadowRoot.getElementById("bps_imgFill").checked;
+  }
 
-    set axisLabelIcon(value) {
-        (this._shadowRoot.getElementById("bps_axisLabelIcon")).checked = !!value;
-    }
+  set axisLabelIcon(value) {
+    this._shadowRoot.getElementById("bps_axisLabelIcon").checked = !!value;
+  }
 
-    get axisLabelIcon() {
-        return (this._shadowRoot.getElementById("bps_axisLabelIcon")).checked;
-    }
+  get axisLabelIcon() {
+    return this._shadowRoot.getElementById("bps_axisLabelIcon").checked;
+  }
 
-    set absolute(value) {
-        (this._shadowRoot.getElementById("bps_absolute")).checked = !!value;
-    }
+  set absolute(value) {
+    this._shadowRoot.getElementById("bps_absolute").checked = !!value;
+  }
 
-    get absolute() {
-        return (this._shadowRoot.getElementById("bps_absolute")).checked;
-    }
-
-
+  get absolute() {
+    return this._shadowRoot.getElementById("bps_absolute").checked;
+  }
 }
 
 customElements.define("viz-plotarea-build-en", VizPlotareaBuilderPanel);
