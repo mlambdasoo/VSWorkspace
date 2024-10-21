@@ -9,6 +9,13 @@
       this._shadowRoot.appendChild(template.content.cloneNode(true));
     }
 
+    onBeforeUpdate(changedProps) {
+      console.log(changedProps);
+    }
+    onAfterUpdate(changedProps) {
+      console.log(changedProps);
+    }
+
     setExtensionData(extensionData) {
       console.log(extensionData);
       const { chartSize, chartType, primaryRows, secondaryRows } =
