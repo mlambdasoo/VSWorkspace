@@ -57,6 +57,13 @@
       this._shadowRoot.appendChild(style);
     }
 
+    onBeforeUpdate(changedProps) {
+      console.log(changedProps);
+    }
+    onAfterUpdate(changedProps) {
+      console.log(changedProps);
+    }
+
     render() {
       console.log("render");
       this._markersContainer.innerHTML = "";
