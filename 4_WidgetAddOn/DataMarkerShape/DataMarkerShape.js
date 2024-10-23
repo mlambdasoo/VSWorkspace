@@ -86,7 +86,7 @@
         const options = {};
         console.log(singleSeries.name);
         this._measures.push(singleSeries.name);
-        this._submit;
+        this._submit.bind(this);
         this.renderASeries(singleSeries, options);
       });
 
