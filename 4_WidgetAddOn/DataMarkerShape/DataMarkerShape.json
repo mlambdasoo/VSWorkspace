@@ -59,7 +59,7 @@
         "lineColor": {
           "type": "string",
           "description": "line color",
-          "default": "black"
+          "default": "000000"
         }
       }
     }

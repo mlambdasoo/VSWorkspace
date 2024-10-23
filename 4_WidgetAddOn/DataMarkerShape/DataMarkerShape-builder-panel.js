@@ -9,8 +9,8 @@ plotareaFormTemplate.innerHTML = `
                 <option value="triangle">Triangle</option>
                 <option value="square">Square</option>
                 <option value="cross">Cross</option>
-            </select>
-            <label for="linecolor">Type line color(hex code):</label>
+            </select><br>
+            <label for="linecolor">Line color(hex code):</label>
             <input id="linecolor" type="text" size="6" maxlength="6" value="000000">
             <input type="submit" style="display:none;">
         </fieldset>
