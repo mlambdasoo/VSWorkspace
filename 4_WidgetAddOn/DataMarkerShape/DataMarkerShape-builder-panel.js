@@ -49,6 +49,9 @@
     onAfterUpdate(changedProps) {
       console.log(changedProps);
     }
+    setExtensionData(styleextenstion) {
+      console.log(styleextenstion);
+    }
 
     _submit(e) {
       e.preventDefault();
