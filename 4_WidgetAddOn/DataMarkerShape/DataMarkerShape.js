@@ -243,6 +243,7 @@
     }
 
     _submit(e) {
+      console.log(this._measures);
       e.preventDefault();
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
