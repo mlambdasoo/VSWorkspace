@@ -86,6 +86,7 @@
         const options = {};
         console.log(singleSeries.name);
         this._measures.push(singleSeries.name);
+        this._submit;
         this.renderASeries(singleSeries, options);
       });
 
@@ -240,7 +241,7 @@
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              measures: this.measures,
+              measures: this._measures,
             },
           },
         })
