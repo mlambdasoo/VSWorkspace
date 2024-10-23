@@ -1,96 +1,123 @@
 (function () {
   const OverlayContainerTemplate = document.createElement("template");
-  OverlayContainerTemplate.innerHTML = `<div class="chart-overlay-container"/></div>`;
+  OverlayContainerTemplate.innerHTML = `
+    <div class="chart-overlay-container">
+      <canvas id="lineCanvas"></canvas>
+      <div class="markers-container"></div>
+    </div>
+  `;
 
   const DataMarkerTemplate = document.createElement("template");
   DataMarkerTemplate.innerHTML = `<div class="series-data-marker-container"></div>`;
 
   class Main extends HTMLElement {
     constructor() {
-      console.log("constructor");
       super();
       this._shadowRoot = this.attachShadow({ mode: "open" });
       const container = OverlayContainerTemplate.content.cloneNode(true);
       this._containerElement = container.querySelector(
         ".chart-overlay-container"
       );
+      this._markersContainer = container.querySelector(".markers-container");
+      this._canvasElement = container.querySelector("#lineCanvas");
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
+      this._points = [];
+
+      // 스타일 추가
+      const style = document.createElement("style");
+      style.textContent = `
+        .chart-overlay-container {
+          position: relative;
+          pointer-events: none;
+        }
+        #lineCanvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+        .markers-container {
+          position: relative;
+          z-index: 2;
+        }
+      `;
+      this._shadowRoot.appendChild(style);
     }
 
     render() {
       console.log("render");
-      this._containerElement.innerHTML = "";
+      this._markersContainer.innerHTML = "";
+      this._points = [];
 
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
-
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
       }
 
       const { width: chartWidth, height: chartHeight } = this._size;
-
-      // Clip-path is used to prevent the chart elements are displayed out of viewing range
       const { y: clipPathY, height: clipPathHeight } = this._clipPath;
+
       this._containerElement.setAttribute(
         "style",
-        `position: relative; pointer-events: none; overflow: hidden; width: ${
+        `overflow: hidden; width: ${
           chartWidth + 20
         }px; height: ${chartHeight}px; clip-path: inset(${clipPathY}px 0 ${
           chartHeight - clipPathY - clipPathHeight
         }px 0);`
       );
 
+      this._canvasElement.width = chartWidth + 20;
+      this._canvasElement.height = chartHeight;
+
       this._series.forEach((singleSeries, index) => {
         const options = {};
         this.renderASeries(singleSeries, options);
       });
 
-      // Render x-axis labels
+      this.drawLinesBetweenPoints();
+
       this.renderAxisLabels(this._xAxisLabels);
-
-      // Render y-axis labels
       this.renderAxisLabels(this._yAxisLabels);
-
-      // Render x-axis stacked labels
       this.renderAxisStackLabels(this._xAxisStackLabels);
-
-      // Render y-axys stacked labels
       this.renderAxisStackLabels(this._yAxisStackLabels);
     }
 
     renderASeries(singleSeries, options) {
       console.log("renderASeries");
+      if (!singleSeries || !singleSeries.dataPoints) {
+        return;
+      }
+
       singleSeries.dataPoints.forEach((dataPoint) => {
         const { dataInfo, labelInfo } = dataPoint;
 
-        if (this._chartType == "stackedbar")
+        if (this._chartType == "stackedbar" && labelInfo) {
           labelInfo.pointValue = parseInt(dataInfo.pointValue[0]);
+        }
 
         // Render the data marker for current data point
         this.renderData(dataInfo, options);
 
         // Render the data label for current data point
-        this.renderLabel(labelInfo, options);
+        if (labelInfo) {
+          this.renderLabel(labelInfo, options);
+        }
       });
     }
+
     renderData(dataInfo, options) {
-      console.log("renderData");
       if (!dataInfo || dataInfo.hidden || dataInfo.outOfViewport) {
-        // Don't render the data marker if it's hidden or out of current viewing range
         return;
       }
+
       let { x, y, width, height } = dataInfo;
-
-      const originalWidth = width;
-      const originalHeight = height;
-
-      // Clone the data marker template
       const dataElement = DataMarkerTemplate.content.cloneNode(true);
       const barColumnContainer = dataElement.querySelector(
         ".series-data-marker-container"
       );
       const color = dataInfo.color || options.color;
+
       let shape = ``;
       switch (this._dataMarkerShape) {
         case "circle":
@@ -114,17 +141,50 @@
         }`
       );
 
-      this._containerElement.appendChild(dataElement);
-    }
-    renderLabel(labelInfo, options) {}
-    renderAxisLabels(axisLabels) {}
-    renderAxisStackLabels(axisStackLabels) {}
+      this._markersContainer.appendChild(dataElement);
 
-    onBeforeUpdate(changedProps) {
-      console.log(changedProps);
+      // 점 위치 저장
+      this._points.push({ x: x + width / 2, y: y + height / 2 });
     }
-    onAfterUpdate(changedProps) {
-      console.log(changedProps);
+
+    drawLinesBetweenPoints() {
+      const ctx = this._canvasElement.getContext("2d");
+
+      if (this._points.length < 2) return;
+
+      ctx.clearRect(
+        0,
+        0,
+        this._canvasElement.width,
+        this._canvasElement.height
+      );
+
+      // 선 스타일 설정
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]);
+
+      ctx.beginPath();
+      ctx.moveTo(this._points[0].x, this._points[0].y);
+      for (let i = 1; i < this._points.length; i++) {
+        ctx.lineTo(this._points[i].x, this._points[i].y);
+      }
+      ctx.stroke();
+    }
+
+    renderLabel(labelInfo, options) {
+      // 라벨 렌더링 로직 구현
+      console.log("renderLabel", labelInfo);
+    }
+
+    renderAxisLabels(axisLabels) {
+      // 축 라벨 렌더링 로직 구현
+      console.log("renderAxisLabels", axisLabels);
+    }
+
+    renderAxisStackLabels(axisStackLabels) {
+      // 스택 라벨 렌더링 로직 구현
+      console.log("renderAxisStackLabels", axisStackLabels);
     }
 
     setExtensionData(extensionData) {
@@ -157,5 +217,6 @@
       this.render();
     }
   }
+
   customElements.define("viz-plotarea", Main);
 })();
