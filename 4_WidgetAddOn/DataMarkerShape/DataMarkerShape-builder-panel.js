@@ -4,7 +4,8 @@
     <form id="form">
         <fieldset>
             <legend>Plotarea Properties</legend>
-            <label for="shapeSelect">Select a shape:</label>
+            <label for="measureSelect">Select a measure</label>
+            <label for="shapeSelect">Select a shape</label>
             <select id="shapeSelect">
                 <option value="circle" selected>Circle</option>
                 <option value="triangle">Triangle</option>
@@ -40,6 +41,10 @@
       this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
+    }
+
+    setExtensionData(extensionData) {
+      console.log(extensionData);
     }
 
     _submit(e) {

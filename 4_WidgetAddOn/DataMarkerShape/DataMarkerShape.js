@@ -23,6 +23,7 @@
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
       this._lineColor = "000000";
+      this._selectedMeasure = "";
       this._points = [];
 
       // 스타일 추가
