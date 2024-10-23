@@ -24,7 +24,7 @@
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
       this._lineColor = "000000";
-      console.log(this.measures);
+      this._measures = [];
       this._points = [];
 
       // 스타일 추가
@@ -53,6 +53,18 @@
     }
     onAfterUpdate(changedProps) {
       console.log(changedProps);
+    }
+
+    measuressubmit() {
+      this.dispatchEvent(
+        new CustomEvent("propertiesChanged", {
+          detail: {
+            properties: {
+              measures: ["A"],
+            },
+          },
+        })
+      );
     }
 
     render() {
@@ -84,6 +96,8 @@
         const options = {};
         this.renderASeries(singleSeries, options);
       });
+
+      this.measuressubmit();
 
       this.drawLinesBetweenPoints();
 
