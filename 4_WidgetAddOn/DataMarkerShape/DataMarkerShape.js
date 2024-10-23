@@ -50,6 +50,7 @@
 
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
+      this.measuressubmit();
     }
     onAfterUpdate(changedProps) {
       console.log(changedProps);
@@ -96,8 +97,6 @@
         const options = {};
         this.renderASeries(singleSeries, options);
       });
-
-      this.measuressubmit();
 
       this.drawLinesBetweenPoints();
 
