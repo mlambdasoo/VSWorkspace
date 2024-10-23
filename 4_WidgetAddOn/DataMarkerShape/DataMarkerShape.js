@@ -25,6 +25,7 @@
       this._dataMarkerShape = "circle";
       this._lineColor = "000000";
       this._selectedMeasure = "";
+      this._measures = [];
       this._points = [];
       this._tempdata = [
         {
@@ -84,7 +85,7 @@
       this._series.forEach((singleSeries, index) => {
         const options = {};
         console.log(singleSeries.name);
-        this.measures.push(singleSeries.name);
+        this._measures.push(singleSeries.name);
         this.renderASeries(singleSeries, options);
       });
 
