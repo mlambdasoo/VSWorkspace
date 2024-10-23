@@ -41,11 +41,13 @@
       this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
-      console.log(["stlying", extensionData]);
     }
 
-    setExtensionData(extensionData) {
-      console.log(extensionData);
+    onBeforeUpdate(changedProps) {
+      console.log(changedProps);
+    }
+    onAfterUpdate(changedProps) {
+      console.log(changedProps);
     }
 
     _submit(e) {

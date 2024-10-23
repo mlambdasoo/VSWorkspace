@@ -191,20 +191,11 @@
       });
     }
 
-    renderLabel(labelInfo, options) {
-      // 라벨 렌더링 로직 구현
-      console.log("renderLabel", labelInfo);
-    }
+    renderLabel(labelInfo, options) {}
 
-    renderAxisLabels(axisLabels) {
-      // 축 라벨 렌더링 로직 구현
-      console.log("renderAxisLabels", axisLabels);
-    }
+    renderAxisLabels(axisLabels) {}
 
-    renderAxisStackLabels(axisStackLabels) {
-      // 스택 라벨 렌더링 로직 구현
-      console.log("renderAxisStackLabels", axisStackLabels);
-    }
+    renderAxisStackLabels(axisStackLabels) {}
 
     setExtensionData(extensionData) {
       console.log(extensionData);
