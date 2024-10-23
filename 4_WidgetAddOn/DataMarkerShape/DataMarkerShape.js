@@ -91,9 +91,9 @@
 
       this._series.forEach((singleSeries, index) => {
         const options = {};
-        console.log(singleSeries.name);
         this._measures.push(singleSeries.name);
-        this._submit.bind(this);
+        console.log(this._measures);
+        this.submit;
         this.renderASeries(singleSeries, options);
       });
 
@@ -242,9 +242,7 @@
       this.render();
     }
 
-    _submit(e) {
-      console.log(this._measures);
-      e.preventDefault();
+    submit() {
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
