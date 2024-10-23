@@ -1,6 +1,6 @@
 (function () {
   const OverlayContainerTemplate = document.createElement("template");
-  OverlayContainerTemplate.innerHTML = `<div class="chart-overlay-container"/></div>`;
+  OverlayContainerTemplate.innerHTML = `<div class="chart-overlay-container"><canvas id="lineCanvas"></canvas></div>`;
 
   const DataMarkerTemplate = document.createElement("template");
   DataMarkerTemplate.innerHTML = `<div class="series-data-marker-container"></div>`;
@@ -13,8 +13,10 @@
       this._containerElement = container.querySelector(
         ".chart-overlay-container"
       );
+      this._canvasElement = container.querySelector("#lineCanvas");
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
+      this._points = []; // 점 위치를 저장할 배열
     }
 
     render() {
@@ -40,10 +42,18 @@
         }px 0);`
       );
 
+      this._canvasElement.width = chartWidth + 20;
+      this._canvasElement.height = chartHeight;
+
+      this._points = []; // 점을 그리기 전 위치 배열을 초기화
+
       this._series.forEach((singleSeries, index) => {
         const options = {};
         this.renderASeries(singleSeries, options);
       });
+
+      // 모든 점이 그려진 후 선을 그림
+      this.drawLinesBetweenPoints();
 
       // Render x-axis labels
       this.renderAxisLabels(this._xAxisLabels);
@@ -54,7 +64,7 @@
       // Render x-axis stacked labels
       this.renderAxisStackLabels(this._xAxisStackLabels);
 
-      // Render y-axys stacked labels
+      // Render y-axis stacked labels
       this.renderAxisStackLabels(this._yAxisStackLabels);
     }
 
@@ -73,6 +83,7 @@
         this.renderLabel(labelInfo, options);
       });
     }
+
     renderData(dataInfo, options) {
       console.log("renderData");
       if (!dataInfo || dataInfo.hidden || dataInfo.outOfViewport) {
@@ -114,7 +125,38 @@
       );
 
       this._containerElement.appendChild(dataElement);
+
+      // 점 위치를 배열에 저장
+      this._points.push({ x: x + width / 2, y: y + height / 2 });
     }
+
+    drawLinesBetweenPoints() {
+      const ctx = this._canvasElement.getContext("2d");
+
+      if (this._points.length < 2) return;
+
+      ctx.clearRect(
+        0,
+        0,
+        this._canvasElement.width,
+        this._canvasElement.height
+      );
+
+      // 선 스타일 설정
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 2;
+      ctx.setLineDash([5, 5]); // 점선
+
+      ctx.beginPath();
+      for (let i = 0; i < this._points.length - 1; i++) {
+        const point1 = this._points[i];
+        const point2 = this._points[i + 1];
+        ctx.moveTo(point1.x, point1.y);
+        ctx.lineTo(point2.x, point2.y);
+      }
+      ctx.stroke();
+    }
+
     renderLabel(labelInfo, options) {}
     renderAxisLabels(axisLabels) {}
     renderAxisStackLabels(axisStackLabels) {}
