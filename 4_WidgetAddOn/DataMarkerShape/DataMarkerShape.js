@@ -24,17 +24,8 @@
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
       this._lineColor = "000000";
-      this._selectedMeasure = "";
-      this._measures = [];
+      console.log(this.measures);
       this._points = [];
-      this._tempdata = [
-        {
-          name: "Gross Margin",
-          shape: "tringle",
-          line: "dotted",
-          color: "black",
-        },
-      ];
 
       // 스타일 추가
       const style = document.createElement("style");
@@ -90,10 +81,7 @@
       this._canvasElement.height = chartHeight;
 
       this._series.forEach((singleSeries, index) => {
-        const options = {};
-        this._measures.push(singleSeries.name);
-        console.log(this._measures);
-        this.submit;
+        //const options = {};
         this.renderASeries(singleSeries, options);
       });
 
@@ -240,18 +228,6 @@
       this._chartType = chartType;
       this._isHorizontal = isHorizontal;
       this.render();
-    }
-
-    submit() {
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: {
-            properties: {
-              measures: this._measures,
-            },
-          },
-        })
-      );
     }
 
     set dataMarkerShape(value) {

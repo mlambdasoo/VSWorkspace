@@ -41,16 +41,7 @@
       this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
-    }
-
-    onBeforeUpdate(changedProps) {
-      console.log(changedProps);
-    }
-    onAfterUpdate(changedProps) {
-      console.log(changedProps);
-    }
-    setExtensionData(styleextenstion) {
-      console.log(styleextenstion);
+      this.measures;
     }
 
     _submit(e) {

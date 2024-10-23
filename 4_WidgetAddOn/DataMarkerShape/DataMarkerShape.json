@@ -61,13 +61,10 @@
           "description": "line color",
           "default": "000000"
         },
-        "selectedMeasure": {
-          "type": "string",
-          "description": "selected measure"
-        },
         "measures": {
           "type": "string[]",
-          "description": "measures"
+          "description": "measures",
+          "default": null
         }
       }
     }
