@@ -55,6 +55,11 @@
           "type": "string",
           "description": "Shape of Data Marker",
           "default": "circle"
+        },
+        "lineColor": {
+          "type": "string",
+          "description": "line color",
+          "default": "black"
         }
       }
     }

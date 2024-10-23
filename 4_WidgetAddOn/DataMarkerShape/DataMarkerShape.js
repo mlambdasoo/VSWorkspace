@@ -172,7 +172,7 @@
         if (seriesPoints.length < 2) return;
 
         // 선 스타일 설정
-        ctx.strokeStyle = `${color}`;
+        ctx.strokeStyle = "black";
         ctx.lineWidth = 2;
         ctx.setLineDash([5, 5]);
 
