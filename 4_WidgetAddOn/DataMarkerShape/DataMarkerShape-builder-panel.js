@@ -10,6 +10,8 @@ plotareaFormTemplate.innerHTML = `
                 <option value="square">Square</option>
                 <option value="cross">Cross</option>
             </select>
+            <label for="linecolor">Type line color(hex code):</label>
+            <input id="linecolor" type="text" size="6" maxlength="6" value="000000">
             <input type="submit" style="display:none;">
         </fieldset>
     </form>
@@ -32,6 +34,9 @@ class VizPlotareaBuilderPanel extends HTMLElement {
     this._shadowRoot
       .getElementById("shapeSelect")
       .addEventListener("change", this._submit.bind(this));
+    this._shadowRoot
+      .getElementById("linecolor")
+      .addEventListener("change", this._submit.bind(this));
   }
 
   _submit(e) {
@@ -42,6 +47,7 @@ class VizPlotareaBuilderPanel extends HTMLElement {
           properties: {
             // property 변경--rounded
             dataMarkerShape: this.dataMarkerShape,
+            lineColor: this.lineColor,
           },
         },
       })
@@ -54,6 +60,14 @@ class VizPlotareaBuilderPanel extends HTMLElement {
 
   get dataMarkerShape() {
     return this._shadowRoot.getElementById("shapeSelect").value;
+  }
+
+  set lineColor(value) {
+    this._shadowRoot.getElementById("linecolor").value = value;
+  }
+
+  get lineColor() {
+    return this._shadowRoot.getElementById("linecolor").value;
   }
 }
 

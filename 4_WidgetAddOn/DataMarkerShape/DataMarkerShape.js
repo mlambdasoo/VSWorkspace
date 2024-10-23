@@ -22,6 +22,7 @@
       this._canvasElement = container.querySelector("#lineCanvas");
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
+      this._lineColor = "000000";
       this._points = [];
 
       // 스타일 추가
@@ -172,7 +173,7 @@
         if (seriesPoints.length < 2) return;
 
         // 선 스타일 설정
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "#" + this._lineColor;
         ctx.lineWidth = 2;
         ctx.setLineDash([5, 5]);
 
@@ -231,6 +232,11 @@
 
     set dataMarkerShape(value) {
       this._dataMarkerShape = value;
+      this.render();
+    }
+
+    set lineColor(value) {
+      this._lineColor = value;
       this.render();
     }
   }
