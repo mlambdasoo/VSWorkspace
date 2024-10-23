@@ -64,7 +64,7 @@
         "measures": {
           "type": "string[]",
           "description": "measures",
-          "default": null
+          "default": []
         }
       }
     }
