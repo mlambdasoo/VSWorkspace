@@ -81,7 +81,7 @@
       this._canvasElement.height = chartHeight;
 
       this._series.forEach((singleSeries, index) => {
-        //const options = {};
+        const options = {};
         this.renderASeries(singleSeries, options);
       });
 
