@@ -13,6 +13,7 @@
   class Main extends HTMLElement {
     constructor() {
       super();
+      console.log("constructor");
       this._shadowRoot = this.attachShadow({ mode: "open" });
       const container = OverlayContainerTemplate.content.cloneNode(true);
       this._containerElement = container.querySelector(
@@ -25,6 +26,14 @@
       this._lineColor = "000000";
       this._selectedMeasure = "";
       this._points = [];
+      this._tempdata = [
+        {
+          name: "Gross Margin",
+          shape: "tringle",
+          line: "dotted",
+          color: "black",
+        },
+      ];
 
       // 스타일 추가
       const style = document.createElement("style");
@@ -74,6 +83,8 @@
 
       this._series.forEach((singleSeries, index) => {
         const options = {};
+        console.log(singleSeries.name);
+        this.measures.push(singleSeries.name);
         this.renderASeries(singleSeries, options);
       });
 
@@ -220,6 +231,19 @@
       this._chartType = chartType;
       this._isHorizontal = isHorizontal;
       this.render();
+    }
+
+    _submit(e) {
+      e.preventDefault();
+      this.dispatchEvent(
+        new CustomEvent("propertiesChanged", {
+          detail: {
+            properties: {
+              measures: this.measures,
+            },
+          },
+        })
+      );
     }
 
     set dataMarkerShape(value) {

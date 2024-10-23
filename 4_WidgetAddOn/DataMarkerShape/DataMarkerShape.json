@@ -63,7 +63,11 @@
         },
         "selectedMeasure": {
           "type": "string",
-          "description": "line color"
+          "description": "selected measure"
+        },
+        "measures": {
+          "type": "string[]",
+          "description": "measures"
         }
       }
     }
