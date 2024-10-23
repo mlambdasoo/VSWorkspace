@@ -41,6 +41,7 @@
       this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
+      console.log(["stlying", extensionData]);
     }
 
     setExtensionData(extensionData) {
