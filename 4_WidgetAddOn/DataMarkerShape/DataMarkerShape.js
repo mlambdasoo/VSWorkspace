@@ -1,6 +1,11 @@
 (function () {
   const OverlayContainerTemplate = document.createElement("template");
-  OverlayContainerTemplate.innerHTML = `<div class="chart-overlay-container"><canvas id="lineCanvas"></canvas></div>`;
+  OverlayContainerTemplate.innerHTML = `
+    <div class="chart-overlay-container">
+      <canvas id="lineCanvas"></canvas>
+      <div class="markers-container"></div>
+    </div>
+  `;
 
   const DataMarkerTemplate = document.createElement("template");
   DataMarkerTemplate.innerHTML = `<div class="series-data-marker-container"></div>`;
@@ -13,29 +18,49 @@
       this._containerElement = container.querySelector(
         ".chart-overlay-container"
       );
+      this._markersContainer = container.querySelector(".markers-container");
       this._canvasElement = container.querySelector("#lineCanvas");
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
-      this._points = []; // 점 위치를 저장할 배열
+      this._points = [];
+
+      // 스타일 추가
+      const style = document.createElement("style");
+      style.textContent = `
+        .chart-overlay-container {
+          position: relative;
+          pointer-events: none;
+        }
+        #lineCanvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+        .markers-container {
+          position: relative;
+          z-index: 2;
+        }
+      `;
+      this._shadowRoot.appendChild(style);
     }
 
     render() {
       console.log("render");
-      this._containerElement.innerHTML = "";
+      this._markersContainer.innerHTML = "";
+      this._points = [];
 
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
-
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
       }
 
       const { width: chartWidth, height: chartHeight } = this._size;
-
-      // Clip-path is used to prevent the chart elements are displayed out of viewing range
       const { y: clipPathY, height: clipPathHeight } = this._clipPath;
+
       this._containerElement.setAttribute(
         "style",
-        `position: relative; pointer-events: none; overflow: hidden; width: ${
+        `overflow: hidden; width: ${
           chartWidth + 20
         }px; height: ${chartHeight}px; clip-path: inset(${clipPathY}px 0 ${
           chartHeight - clipPathY - clipPathHeight
@@ -45,62 +70,32 @@
       this._canvasElement.width = chartWidth + 20;
       this._canvasElement.height = chartHeight;
 
-      this._points = []; // 점을 그리기 전 위치 배열을 초기화
-
       this._series.forEach((singleSeries, index) => {
         const options = {};
         this.renderASeries(singleSeries, options);
       });
 
-      // 모든 점이 그려진 후 선을 그림
+      // 모든 점이 저장된 후 선 그리기
       this.drawLinesBetweenPoints();
 
-      // Render x-axis labels
       this.renderAxisLabels(this._xAxisLabels);
-
-      // Render y-axis labels
       this.renderAxisLabels(this._yAxisLabels);
-
-      // Render x-axis stacked labels
       this.renderAxisStackLabels(this._xAxisStackLabels);
-
-      // Render y-axis stacked labels
       this.renderAxisStackLabels(this._yAxisStackLabels);
     }
 
-    renderASeries(singleSeries, options) {
-      console.log("renderASeries");
-      singleSeries.dataPoints.forEach((dataPoint) => {
-        const { dataInfo, labelInfo } = dataPoint;
-
-        if (this._chartType == "stackedbar")
-          labelInfo.pointValue = parseInt(dataInfo.pointValue[0]);
-
-        // Render the data marker for current data point
-        this.renderData(dataInfo, options);
-
-        // Render the data label for current data point
-        this.renderLabel(labelInfo, options);
-      });
-    }
-
     renderData(dataInfo, options) {
-      console.log("renderData");
       if (!dataInfo || dataInfo.hidden || dataInfo.outOfViewport) {
-        // Don't render the data marker if it's hidden or out of current viewing range
         return;
       }
+
       let { x, y, width, height } = dataInfo;
-
-      const originalWidth = width;
-      const originalHeight = height;
-
-      // Clone the data marker template
       const dataElement = DataMarkerTemplate.content.cloneNode(true);
       const barColumnContainer = dataElement.querySelector(
         ".series-data-marker-container"
       );
       const color = dataInfo.color || options.color;
+
       let shape = ``;
       switch (this._dataMarkerShape) {
         case "circle":
@@ -124,9 +119,9 @@
         }`
       );
 
-      this._containerElement.appendChild(dataElement);
+      this._markersContainer.appendChild(dataElement);
 
-      // 점 위치를 배열에 저장
+      // 점 위치 저장
       this._points.push({ x: x + width / 2, y: y + height / 2 });
     }
 
@@ -145,14 +140,12 @@
       // 선 스타일 설정
       ctx.strokeStyle = "black";
       ctx.lineWidth = 2;
-      ctx.setLineDash([5, 5]); // 점선
+      ctx.setLineDash([5, 5]);
 
       ctx.beginPath();
-      for (let i = 0; i < this._points.length - 1; i++) {
-        const point1 = this._points[i];
-        const point2 = this._points[i + 1];
-        ctx.moveTo(point1.x, point1.y);
-        ctx.lineTo(point2.x, point2.y);
+      ctx.moveTo(this._points[0].x, this._points[0].y);
+      for (let i = 1; i < this._points.length; i++) {
+        ctx.lineTo(this._points[i].x, this._points[i].y);
       }
       ctx.stroke();
     }
