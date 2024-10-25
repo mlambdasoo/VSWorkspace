@@ -54,5 +54,5 @@
     }
   }
 
-  customElements.define("ex1-builder", VizPlotareaBuilderPanel);
+  customElements.define("exercise-one-builder", VizPlotareaBuilderPanel);
 })();

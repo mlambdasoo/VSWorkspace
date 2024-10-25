@@ -81,5 +81,5 @@
       this.render();
     }
   }
-  customElements.define("ex1", Main);
+  customElements.define("exercise-one", Main);
 })();
