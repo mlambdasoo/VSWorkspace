@@ -95,6 +95,12 @@
       console.log(["setlinecolor _linecolor main", value]);
       this.render();
     }
+
+    get lineColor() {
+      console.log(["setlinecolor value main", value]);
+      console.log(["setlinecolor _linecolor main", value]);
+      return "return";
+    }
   }
   customElements.define("exercise-one", Main);
 })();
