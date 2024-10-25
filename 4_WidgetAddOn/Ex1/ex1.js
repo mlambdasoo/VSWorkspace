@@ -40,7 +40,7 @@
 
     render() {
       console.log("render");
-      this.meaasurelist();
+      this.measurelist();
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
