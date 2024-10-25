@@ -48,7 +48,7 @@
     drawPoint(x, y, color) {
       console.log("drawPoint");
       const sampleelement = SampleTemplate.content.cloneNode(true);
-      const sampleContainer = container.querySelector(".sample-container");
+      const sampleContainer = sampleelement.querySelector(".sample-container");
 
       sampleContainer.style.left = `${x}px`;
       sampleContainer.style.top = `${y}px`;
