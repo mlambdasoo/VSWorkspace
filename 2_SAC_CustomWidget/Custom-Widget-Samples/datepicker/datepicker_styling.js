@@ -124,6 +124,7 @@
   class DatePickerAps extends HTMLElement {
     constructor() {
       super();
+      console.log(["constructor", this.dateVal]);
       this._checkForUpdates();
       this.appendChild(tmpl.content.cloneNode(true));
 
@@ -156,6 +157,12 @@
           this._submit.bind(this)
         )
       );
+    }
+    onCustomWidgetBeforeUpdate(changedProps) {
+      console.log(changedProps);
+    }
+    onCustomWidgetAfterUpdate(changedProps) {
+      console.log(changedProps);
     }
 
     async _checkForUpdates() {
