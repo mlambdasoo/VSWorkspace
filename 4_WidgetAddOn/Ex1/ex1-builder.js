@@ -53,7 +53,7 @@
     }
 
     set lineColor(value) {
-      console.log("setlinecolor");
+      console.log(["setlinecolor", value]);
       this._shadowRoot.getElementById("linecolor").value = value;
     }
 
