@@ -17,7 +17,6 @@
       this._shadowRoot.appendChild(container);
       this._lineColor = "";
       this._measures = ["measure1"];
-      this.measurelist();
     }
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
@@ -32,7 +31,7 @@
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              measures: "why....",
+              measures: "why",
             },
           },
         })
@@ -76,6 +75,7 @@
 
     setExtensionData(extensionData) {
       console.log(extensionData);
+      this.measurelist();
       const {
         chartType,
         isHorizontal,
