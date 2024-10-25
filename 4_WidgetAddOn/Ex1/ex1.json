@@ -56,8 +56,25 @@
           "default": "default"
         },
         "measures": {
-          "type": "string",
-          "default": "default"
+          "type": "stylingSetting",
+          "default": { "itemColor": "#93C939", "lineOpacity": 0.2 }
+        }
+      },
+      "types": {
+        "stylingSetting": {
+          "description": "type for styling settings",
+          "properties": [
+            {
+              "name": "itemColor",
+              "type": "string",
+              "description": "item cloor"
+            },
+            {
+              "name": "lineOpacity",
+              "type": "number",
+              "description": "line opacity"
+            }
+          ]
         }
       }
     }
