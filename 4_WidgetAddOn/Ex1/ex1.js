@@ -16,9 +16,11 @@
       );
       this._shadowRoot.appendChild(container);
       console.log(this.linecolor);
+      this._lineColor = "";
     }
     onBeforeUpdate(changedProps) {
       console.log(this.linecolor);
+      console.log(["this._lineColor", this._lineColor]);
       console.log(changedProps);
     }
     onAfterUpdate(changedProps) {
@@ -27,6 +29,8 @@
 
     render() {
       console.log("render");
+      console.log(["this._lineColor", this._lineColor]);
+
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
@@ -44,7 +48,7 @@
         }px 0);`
       );
 
-      this.drawPoint(100, 100, 10, 10, "red");
+      this.drawPoint(100, 100, 10, 10, this._lineColor);
     }
 
     drawPoint(x, y, width, height, color) {
@@ -82,6 +86,13 @@
       this._yAxisStackLabels = yAxisStackLabels;
       this._chartType = chartType;
       this._isHorizontal = isHorizontal;
+      this.render();
+    }
+
+    set lineColor(value) {
+      console.log(["setlinecolor value main", value]);
+      this._lineColor = value;
+      console.log(["setlinecolor _linecolor main", value]);
       this.render();
     }
   }
