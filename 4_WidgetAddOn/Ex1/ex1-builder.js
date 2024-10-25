@@ -57,9 +57,10 @@
       this._shadowRoot.getElementById("linecolor").value = value;
     }
 
-    // get lineColor() {
-    //   return this._shadowRoot.getElementById("linecolor").value;
-    // }
+    get lineColor() {
+      console.log("getlinecolor");
+      return this._shadowRoot.getElementById("linecolor").value;
+    }
   }
 
   customElements.define("exercise-one-builder", VizPlotareaBuilderPanel);
