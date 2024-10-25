@@ -30,7 +30,7 @@
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              measures: this._measures,
+              lineColor: "dispatch",
             },
           },
         })
