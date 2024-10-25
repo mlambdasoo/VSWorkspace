@@ -6,11 +6,11 @@
             <legend>Plotarea Properties</legend>
             <div class="measureSettings">
               <div class="measure">
-                <label>measure 0</label>
+                <label>Measure0</label>
               </div>
               <div class="settings">
                 <div>
-                  <label class="name">>Name:</label>
+                  <label class="name">Name:</label>
                   <input id="measure0_Name" type="text" name="name" size="20" maxlength="20">
                 </div>
                 <div>
@@ -18,7 +18,7 @@
                   <input id="measure0_Dotted" type="checkbox">
                 </div>
                 <div>
-                  <label class="lineColor">>Line Color (hex number):</label>
+                  <label class="lineColor">Line Color (hex number):</label>
                   <input id="measure0_LineColor" type="text" name="lineColor" size="20" maxlength="20">
                 </div>
                 <div>
@@ -79,7 +79,7 @@
       console.log(changedProps);
       this._props = { ...this._props, ...changedProps };
       if ("measure0Setting" in changedProps) {
-        this.updateDepthSettings(changedProps["measure0Setting"], 0);
+        this.updateMeasureSetting(changedProps["measure0Setting"], 0);
       }
     }
 
