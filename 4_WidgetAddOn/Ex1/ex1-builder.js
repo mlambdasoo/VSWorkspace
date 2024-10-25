@@ -31,8 +31,15 @@
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
     }
+    onBeforeUpdate(changedProps) {
+      console.log(["builder", changedProps]);
+    }
+    onAfterUpdate(changedProps) {
+      console.log(["builder", changedProps]);
+    }
 
     _submit(e) {
+      console.log("_submit");
       e.preventDefault();
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
