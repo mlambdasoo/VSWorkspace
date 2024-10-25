@@ -42,17 +42,19 @@
         }px 0);`
       );
 
-      this.drawPoint(100, 100, "red");
+      this.drawPoint(100, 100, 10, 10, "red");
     }
 
-    drawPoint(x, y, color) {
+    drawPoint(x, y, width, height, color) {
       console.log("drawPoint");
       const sampleelement = SampleTemplate.content.cloneNode(true);
       const sampleContainer = sampleelement.querySelector(".sample-container");
 
-      sampleContainer.style.left = `${x}px`;
-      sampleContainer.style.top = `${y}px`;
-      sampleContainer.style.backgroundColor = color;
+      sampleContainer.setAttribute(
+        "style",
+        `background-color: ${color}; position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;
+        }`
+      );
       this._containerElement.appendChild(sampleelement);
     }
 
