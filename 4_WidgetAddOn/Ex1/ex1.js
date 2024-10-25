@@ -94,11 +94,6 @@
       this._lineColor = value;
       console.log(["setlinecolor _linecolor main", value]);
       this.render();
-    }
-
-    get lineColor() {
-      console.log(["setlinecolor value main", value]);
-      console.log(["setlinecolor _linecolor main", value]);
       return "return";
     }
   }
