@@ -54,6 +54,7 @@
 
     fireChanged() {
       var properties = { dateVal: this.DP.getDateValue() };
+      console.log(["firechanged", properties]);
       if (this._enablerange) {
         properties.secondDateVal = this.DP.getSecondDateValue();
       }
@@ -75,6 +76,7 @@
     }
 
     set dateVal(value) {
+      console.log(["set dateVal", value]);
       if (value == undefined || !this.DP) return;
       if (typeof value === "string") value = new Date(value);
       this.DP.setDateValue(value);
