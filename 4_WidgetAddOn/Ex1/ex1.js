@@ -17,6 +17,7 @@
       this._shadowRoot.appendChild(container);
       this._lineColor = "";
       this._measures = ["measure1"];
+      this.measurelist();
     }
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
@@ -40,7 +41,7 @@
 
     render() {
       console.log("render");
-      this.measurelist();
+
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
