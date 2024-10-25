@@ -56,26 +56,38 @@
           "default": "default"
         },
         "measures": {
-          "type": "stylingSetting",
+          "type": "measureSetting",
           "default": { "itemColor": "#93C939", "lineOpacity": 0.2 }
         }
       },
       "types": {
-        "stylingSetting": {
-          "description": "type for styling settings",
-          "properties": [
-            {
-              "name": "itemColor",
-              "type": "string",
-              "description": "item cloor"
-            },
-            {
-              "name": "lineOpacity",
-              "type": "number",
-              "description": "line opacity"
-            }
-          ]
-        }
+        "measureSetting": [
+          {
+            "description": "type for styling settings",
+            "properties": [
+              {
+                "name": "measureName",
+                "type": "string",
+                "description": "Measure Name"
+              },
+              {
+                "name": "dotted",
+                "type": "boolean",
+                "description": "dotted or default"
+              },
+              {
+                "name": "dotted color",
+                "type": "string",
+                "description": "hex number"
+              },
+              {
+                "name": "dotted color",
+                "type": "string",
+                "description": "hex number"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

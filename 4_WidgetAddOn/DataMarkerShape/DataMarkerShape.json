@@ -61,16 +61,44 @@
           "description": "line color",
           "default": "000000"
         },
-        "measure": {
-          "type": "string",
-          "description": "measures",
-          "default": ""
-        },
-        "measures": {
-          "type": "string[]",
-          "description": "measures",
-          "default": []
+        "measure0Setting": {
+          "type": "measureSetting",
+          "default": {
+            "measureName": "",
+            "dotted": false,
+            "lineColor": "",
+            "markerShape": "circle"
+          }
         }
+      },
+      "types": {
+        "measureSetting": [
+          {
+            "description": "type for styling settings",
+            "properties": [
+              {
+                "name": "measureName",
+                "type": "string",
+                "description": "Measure Name"
+              },
+              {
+                "name": "dotted",
+                "type": "boolean",
+                "description": "dotted or default"
+              },
+              {
+                "name": "lineColor",
+                "type": "string",
+                "description": "dotted line color (hex number"
+              },
+              {
+                "name": "markerShape",
+                "type": "string",
+                "description": "Data Marker Shape"
+              }
+            ]
+          }
+        ]
       }
     }
   ]

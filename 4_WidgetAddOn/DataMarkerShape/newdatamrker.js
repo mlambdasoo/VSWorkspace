@@ -11,24 +11,34 @@
               <div class="settings">
                 <div>
                   <label class="name">>Name:</label>
-                  <input id="measure0_Name" type="text" name="name" size="20" maxlength="20">
+                  <input id="measure0_Name" type="text" name="name" />
                 </div>
                 <div>
                   <label class="dotted">dotted:</label>
-                  <input id="measure0_Dotted" type="checkbox">
+                  <input id="measure0_Dotted" type="text" name="opacity" />
                 </div>
                 <div>
                   <label class="lineColor">>Line Color (hex number):</label>
-                  <input id="measure0_LineColor" type="text" name="lineColor" size="20" maxlength="20">
+                  <input id="measure0_LineColor" type="text" name="lineColor" />
                 </div>
                 <div>
-                  <label class="makerShape">Select a shape</label>
-                  <select id="measure0_shape">
-                      <option value="circle" selected>Circle</option>
-                      <option value="triangle">Triangle</option>
-                      <option value="square">Square</option>
-                      <option value="cross">Cross</option>
-                  </select>
+                  <label class="MarkerShape">MarkerShape:</label>
+                  <input id="measure0_Shape" type="text" name="opacity" />
+                </div>
+              </div>
+            </div>
+            <div class="depthSettings">
+              <div class="depth">
+                <label>Depth 1</label>
+              </div>
+              <div class="settings">
+                <div>
+                  <label>Color:</label>
+                  <input id="depth1_itemColor" type="text" name="color" />
+                </div>
+                <div>
+                  <label class="lineOpacity">Line Opacity:</label>
+                  <input id="depth1_lineOpacity" type="text" name="opacity" />
                 </div>
               </div>
             </div>
@@ -50,37 +60,14 @@
         plotareaFormTemplate.content.cloneNode(true)
       );
       this._shadowRoot
-        .getElementById("measure0_Name")
-        .addEventListener(
-          "change",
-          this.onMeasureSettingsChanged.bind(this, 0)
-        );
+        .getElementById("form")
+        .addEventListener("submit", this._submit.bind(this));
       this._shadowRoot
-        .getElementById("measure0_Dotted")
-        .addEventListener(
-          "change",
-          this.onMeasureSettingsChanged.bind(this, 0)
-        );
+        .getElementById("shapeSelect")
+        .addEventListener("change", this._submit.bind(this));
       this._shadowRoot
-        .getElementById("measure0_LineColor")
-        .addEventListener(
-          "change",
-          this.onMeasureSettingsChanged.bind(this, 0)
-        );
-      this._shadowRoot
-        .getElementById("measure0_shape")
-        .addEventListener(
-          "change",
-          this.onMeasureSettingsChanged.bind(this, 0)
-        );
-    }
-
-    onBeforeUpdate(changedProps) {
-      console.log(changedProps);
-      this._props = { ...this._props, ...changedProps };
-      if ("measure0Setting" in changedProps) {
-        this.updateDepthSettings(changedProps["measure0Setting"], 0);
-      }
+        .getElementById("linecolor")
+        .addEventListener("change", this._submit.bind(this));
     }
 
     updateMeasureSetting(settings, index) {
@@ -110,30 +97,30 @@
     }
 
     set measure0Name(value) {
-      this._shadowRoot.getElementById("measure0_Name").value = value;
+      this._shadowRoot.getElementById("linecolor").value = value;
     }
     get measure0Name() {
-      return this._shadowRoot.getElementById("measure0_Name").value;
+      return this._shadowRoot.getElementById("linecolor").value;
     }
     set measure0Dotted(value) {
-      this._shadowRoot.getElementById("measure0_Dotted").value = value;
+      this._shadowRoot.getElementById("linecolor").value = value;
     }
 
     get measure0Dotted() {
-      return this._shadowRoot.getElementById("measure0_Dotted").value;
+      return this._shadowRoot.getElementById("linecolor").value;
     }
     set measure0LineColor(value) {
-      this._shadowRoot.getElementById("measure0_LineColor").value = value;
+      this._shadowRoot.getElementById("linecolor").value = value;
     }
 
     get measure0LineColor() {
-      return this._shadowRoot.getElementById("measure0_LineColor").value;
+      return this._shadowRoot.getElementById("linecolor").value;
     }
     set measure0MarkerShape(value) {
-      this._shadowRoot.getElementById("measure0_shape").value = value;
+      this._shadowRoot.getElementById("linecolor").value = value;
     }
     get measure0MarkerShape() {
-      return this._shadowRoot.getElementById("measure0_shape").value;
+      return this._shadowRoot.getElementById("linecolor").value;
     }
   }
 
