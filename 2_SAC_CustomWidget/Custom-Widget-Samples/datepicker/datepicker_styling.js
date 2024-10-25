@@ -1,5 +1,5 @@
 (function () {
-  let version = "0.2.6";
+  let version = "2.5.2";
   let tmpl = document.createElement("template");
   tmpl.innerHTML = `
         <style>
@@ -109,8 +109,6 @@
                 <option name="aps_format" value="yyyy-MM-dd">YYYY-MM-DD</option>
                 <option name="aps_format" value="MM/dd/yyyy">MM/DD/YYYY</option>
                 <option name="aps_format" value="dd.MM.yyyy">DD.MM.YYYY</option>
-                <option name="aps_format" value="MM-y">MM-y</option>
-                <option name="aps_format" value="yyyy">yyyy</option>
             </select>
         </div>
         <p>Theme</p>

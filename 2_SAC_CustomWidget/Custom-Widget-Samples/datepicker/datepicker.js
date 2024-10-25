@@ -1,5 +1,5 @@
 (function () {
-  let version = "0.2.6";
+  let version = "2.5.2";
   let tmpl = document.createElement("template");
   tmpl.innerHTML = `<link rel="stylesheet" type="text/css" href="https://widgets.nkappler.de/datepicker/releases/${version}/light.css"/>`;
 
@@ -53,8 +53,8 @@
     }
 
     fireChanged() {
-      var properties = { dateVal: this.DP.getDateValue() };
       console.log(["firechanged", properties]);
+      var properties = { dateVal: this.DP.getDateValue() };
       if (this._enablerange) {
         properties.secondDateVal = this.DP.getSecondDateValue();
       }
@@ -76,7 +76,7 @@
     }
 
     set dateVal(value) {
-      console.log(["set dateVal", value]);
+      console.log(["dateval", value]);
       if (value == undefined || !this.DP) return;
       if (typeof value === "string") value = new Date(value);
       this.DP.setDateValue(value);
