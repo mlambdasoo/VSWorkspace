@@ -53,7 +53,7 @@
         },
         "lineColor": {
           "type": "boolean",
-          "default": ""
+          "default": "default"
         }
       }
     }

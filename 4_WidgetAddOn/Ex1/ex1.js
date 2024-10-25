@@ -18,6 +18,7 @@
       console.log(this.linecolor);
     }
     onBeforeUpdate(changedProps) {
+      console.log(this.linecolor);
       console.log(changedProps);
     }
     onAfterUpdate(changedProps) {
