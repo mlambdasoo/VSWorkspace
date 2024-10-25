@@ -159,7 +159,7 @@
       );
     }
     onCustomWidgetBeforeUpdate(changedProps) {
-      console.log(changedProps);
+      console.log(["styling", changedProps]);
     }
     onCustomWidgetAfterUpdate(changedProps) {
       console.log(changedProps);
