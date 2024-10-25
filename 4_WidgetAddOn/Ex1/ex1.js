@@ -17,6 +17,7 @@
       this._shadowRoot.appendChild(container);
       this._lineColor = "";
       this._measures = ["measure1"];
+      this.meaasurelist();
     }
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
@@ -26,11 +27,12 @@
     }
 
     measurelist() {
+      console.log(this._measures);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              lineColor: "dispath",
+              measures: this._measures,
             },
           },
         })
@@ -98,12 +100,13 @@
     }
 
     set lineColor(value) {
-      this.measurelist();
       console.log(["setlinecolor value main", value]);
       this._lineColor = value;
       console.log(["setlinecolor _linecolor main", value]);
       this.render();
-      return "return";
+    }
+    set measures(value) {
+      console.log(["setmeasures value main", value]);
     }
   }
   customElements.define("exercise-one", Main);
