@@ -15,6 +15,7 @@
         ".chart-overlay-container"
       );
       this._shadowRoot.appendChild(container);
+      console.log(this.linecolor);
     }
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
