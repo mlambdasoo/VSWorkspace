@@ -56,7 +56,6 @@
           chartHeight - clipPathY - clipPathHeight
         }px 0);`
       );
-      this.measurelist();
       this.drawPoint(100, 100, 10, 10, this._lineColor);
     }
 
@@ -102,6 +101,7 @@
       console.log(["setlinecolor value main", value]);
       this._lineColor = value;
       console.log(["setlinecolor _linecolor main", value]);
+      this.measurelist();
       this.render();
       return "return";
     }
