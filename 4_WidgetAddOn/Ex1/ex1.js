@@ -30,7 +30,7 @@
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              lineColor: "dispatch",
+              lineColor: "dispath",
             },
           },
         })
@@ -98,10 +98,10 @@
     }
 
     set lineColor(value) {
+      this.measurelist();
       console.log(["setlinecolor value main", value]);
       this._lineColor = value;
       console.log(["setlinecolor _linecolor main", value]);
-      this.measurelist();
       this.render();
       return "return";
     }
