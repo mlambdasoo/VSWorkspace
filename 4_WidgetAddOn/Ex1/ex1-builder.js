@@ -46,12 +46,13 @@
     }
 
     set lineColor(value) {
+      console.log("setlinecolor");
       this._shadowRoot.getElementById("linecolor").value = value;
     }
 
-    get lineColor() {
-      return this._shadowRoot.getElementById("linecolor").value;
-    }
+    // get lineColor() {
+    //   return this._shadowRoot.getElementById("linecolor").value;
+    // }
   }
 
   customElements.define("exercise-one-builder", VizPlotareaBuilderPanel);
