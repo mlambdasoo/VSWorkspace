@@ -58,7 +58,10 @@
     }
 
     get lineColor() {
-      console.log("getlinecolor");
+      console.log([
+        "getlinecolor",
+        this._shadowRoot.getElementById("linecolor").value,
+      ]);
       return this._shadowRoot.getElementById("linecolor").value;
     }
   }
