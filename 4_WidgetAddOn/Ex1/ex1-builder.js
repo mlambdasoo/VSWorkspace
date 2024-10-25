@@ -30,6 +30,8 @@
       this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
+      console.log("builder constructor");
+      console.log(this.measures);
     }
     onBeforeUpdate(changedProps) {
       console.log(["builder-Before", changedProps]);
