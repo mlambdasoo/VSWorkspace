@@ -1,8 +1,8 @@
 {
-  "id": "com.sudong.addon.ex1",
+  "id": "com.sudong.addon.ex1.setter",
   "version": "1.0.0",
-  "name": "Sudong Widget add-on ex1",
-  "description": "A widget customization add-on basic",
+  "name": "Sudong Widget add-on setter test ",
+  "description": "A widget customization add-on basic setter test",
   "icon": "undefined",
   "vendor": "SAP",
   "eula": "EULA",
