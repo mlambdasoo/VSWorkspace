@@ -39,7 +39,7 @@
     }
 
     _submit(e) {
-      console.log("_submit");
+      console.log(["_submit", this.lineColor]);
       e.preventDefault();
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
