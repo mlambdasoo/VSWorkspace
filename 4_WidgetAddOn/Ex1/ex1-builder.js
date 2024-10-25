@@ -32,6 +32,7 @@
         .addEventListener("change", this._submit.bind(this));
       console.log("builder constructor");
       console.log(this.measures);
+      console.log(this.lineColor);
     }
     onBeforeUpdate(changedProps) {
       console.log(["builder-Before", changedProps]);
