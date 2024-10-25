@@ -52,8 +52,12 @@
           "default": false
         },
         "lineColor": {
-          "type": "boolean",
+          "type": "string",
           "default": "default"
+        },
+        "measures": {
+          "type": "string[]",
+          "default": []
         }
       }
     }

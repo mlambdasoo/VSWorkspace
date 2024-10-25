@@ -15,22 +15,31 @@
         ".chart-overlay-container"
       );
       this._shadowRoot.appendChild(container);
-      console.log(this.linecolor);
       this._lineColor = "";
+      this._measures = ["measure1"];
     }
     onBeforeUpdate(changedProps) {
-      console.log(this.linecolor);
-      console.log(["this._lineColor", this._lineColor]);
       console.log(changedProps);
     }
     onAfterUpdate(changedProps) {
       console.log(changedProps);
     }
 
+    measurelist() {
+      this.dispatchEvent(
+        new CustomEvent("propertiesChanged", {
+          detail: {
+            properties: {
+              measures: this._measures,
+            },
+          },
+        })
+      );
+    }
+
     render() {
       console.log("render");
-      console.log(["this._lineColor", this._lineColor]);
-
+      this.measurelist();
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
