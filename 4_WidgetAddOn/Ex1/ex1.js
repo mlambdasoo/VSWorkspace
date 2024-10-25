@@ -39,7 +39,7 @@
 
     render() {
       console.log("render");
-      this.measurelist();
+
       const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
@@ -56,7 +56,7 @@
           chartHeight - clipPathY - clipPathHeight
         }px 0);`
       );
-
+      this.measurelist();
       this.drawPoint(100, 100, 10, 10, this._lineColor);
     }
 
