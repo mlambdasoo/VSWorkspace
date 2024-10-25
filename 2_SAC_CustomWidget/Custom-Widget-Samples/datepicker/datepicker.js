@@ -66,7 +66,12 @@
         })
       );
     }
-
+    onCustomWidgetBeforeUpdate(changedProps) {
+      console.log(changedProps);
+    }
+    onCustomWidgetAfterUpdate(changedProps) {
+      console.log(changedProps);
+    }
     clear() {
       this.DP.setValue("");
     }
