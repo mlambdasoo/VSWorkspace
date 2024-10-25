@@ -4,15 +4,6 @@
     <form id="form">
         <fieldset>
             <legend>Plotarea Properties</legend>
-            <label for="measureSelect">Input a measure name</label>
-            <input id="measureSelect" type="text" size="20" maxlength="20" value="">
-            <label for="shapeSelect">Select a shape</label>
-            <select id="shapeSelect">
-                <option value="circle" selected>Circle</option>
-                <option value="triangle">Triangle</option>
-                <option value="square">Square</option>
-                <option value="cross">Cross</option>
-            </select><br>
             <label for="linecolor">Line color(hex code):</label>
             <input id="linecolor" type="text" size="6" maxlength="6" value="000000">
             <input type="submit" style="display:none;">
@@ -37,12 +28,8 @@
         .getElementById("form")
         .addEventListener("submit", this._submit.bind(this));
       this._shadowRoot
-        .getElementById("shapeSelect")
-        .addEventListener("change", this._submit.bind(this));
-      this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
-      this.measures;
     }
 
     _submit(e) {
@@ -51,29 +38,11 @@
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              // property 변경--rounded
-              dataMarkerShape: this.dataMarkerShape,
               lineColor: this.lineColor,
             },
           },
         })
       );
-    }
-
-    set dataMarkerShape(value) {
-      this._shadowRoot.getElementById("shapeSelect").value = value;
-    }
-
-    get dataMarkerShape() {
-      return this._shadowRoot.getElementById("shapeSelect").value;
-    }
-
-    set lineColor(value) {
-      this._shadowRoot.getElementById("linecolor").value = value;
-    }
-
-    get lineColor() {
-      return this._shadowRoot.getElementById("linecolor").value;
     }
 
     set lineColor(value) {
@@ -85,5 +54,5 @@
     }
   }
 
-  customElements.define("viz-plotarea-build", VizPlotareaBuilderPanel);
+  customElements.define("ex1-builder", VizPlotareaBuilderPanel);
 })();

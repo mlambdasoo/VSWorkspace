@@ -13,8 +13,15 @@
       "webcomponents": [
         {
           "kind": "main",
-          "tag": "viz-plotarea",
+          "tag": "ex1",
           "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Ex1/ex1.js",
+          "integrity": "",
+          "ignoreIntegrity": true
+        },
+        {
+          "kind": "builder",
+          "tag": "ex1-builder",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Ex1/ex1-builder.js",
           "integrity": "",
           "ignoreIntegrity": true
         }
@@ -43,6 +50,10 @@
         "sapHideOriginalYAxisStackLabels": {
           "type": "boolean",
           "default": false
+        },
+        "lineColor": {
+          "type": "boolean",
+          "default": ""
         }
       }
     }

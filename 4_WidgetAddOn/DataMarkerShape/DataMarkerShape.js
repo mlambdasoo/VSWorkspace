@@ -26,6 +26,7 @@
       this._lineColor = "000000";
       this._measures = [];
       this._points = [];
+      this._measure = "";
 
       // 스타일 추가
       const style = document.createElement("style");
@@ -56,18 +57,6 @@
       console.log(changedProps);
     }
 
-    measuressubmit() {
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: {
-            properties: {
-              measures: ["A"],
-            },
-          },
-        })
-      );
-    }
-
     render() {
       console.log("render");
       this._markersContainer.innerHTML = "";
@@ -95,7 +84,9 @@
 
       this._series.forEach((singleSeries, index) => {
         const options = {};
-        this.renderASeries(singleSeries, options);
+        if (singleSeries.name == this._measure) {
+          this.renderASeries(singleSeries, options);
+        }
       });
 
       this.drawLinesBetweenPoints();
@@ -250,6 +241,11 @@
 
     set lineColor(value) {
       this._lineColor = value;
+      this.render();
+    }
+
+    set measure(value) {
+      this._measure = value;
       this.render();
     }
   }
