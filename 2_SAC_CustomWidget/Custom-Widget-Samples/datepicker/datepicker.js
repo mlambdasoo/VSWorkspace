@@ -53,8 +53,8 @@
     }
 
     fireChanged() {
-      console.log(["firechanged", properties]);
       var properties = { dateVal: this.DP.getDateValue() };
+      console.log(["firechanged", properties]);
       if (this._enablerange) {
         properties.secondDateVal = this.DP.getSecondDateValue();
       }
