@@ -32,7 +32,7 @@
         new CustomEvent("propertiesChanged", {
           detail: {
             properties: {
-              measures: this._measures,
+              measures: "why....",
             },
           },
         })

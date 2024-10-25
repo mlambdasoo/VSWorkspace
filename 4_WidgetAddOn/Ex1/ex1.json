@@ -56,8 +56,7 @@
           "default": "default"
         },
         "measures": {
-          "type": "string[]",
-          "default": []
+          "type": "string"
         }
       }
     }
