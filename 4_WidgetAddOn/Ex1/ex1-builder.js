@@ -60,13 +60,13 @@
       this._shadowRoot.getElementById("linecolor").value = value;
     }
 
-    get lineColor() {
-      console.log([
-        "getlinecolor",
-        this._shadowRoot.getElementById("linecolor").value,
-      ]);
-      return this._shadowRoot.getElementById("linecolor").value;
-    }
+    // get lineColor() {
+    //   console.log([
+    //     "getlinecolor",
+    //     this._shadowRoot.getElementById("linecolor").value,
+    //   ]);
+    //   return this._shadowRoot.getElementById("linecolor").value;
+    // }
   }
 
   customElements.define("exercise-one-builder", VizPlotareaBuilderPanel);
