@@ -32,10 +32,10 @@
         .addEventListener("change", this._submit.bind(this));
     }
     onBeforeUpdate(changedProps) {
-      console.log(["builder", changedProps]);
+      console.log(["builder-Before", changedProps]);
     }
     onAfterUpdate(changedProps) {
-      console.log(["builder", changedProps]);
+      console.log(["builder-After", changedProps]);
     }
 
     _submit(e) {
