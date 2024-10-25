@@ -57,7 +57,7 @@
         },
         "measures": {
           "type": "string",
-          "deafult": "default"
+          "default": "default"
         }
       }
     }
