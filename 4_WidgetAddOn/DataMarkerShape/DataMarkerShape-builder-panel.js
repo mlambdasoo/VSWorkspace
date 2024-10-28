@@ -104,7 +104,7 @@
         lineColor: this[`measure${index}LineColor`],
         markerShape: this[`measure${index}MarkerShape`],
       };
-
+      console.log(properties);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
