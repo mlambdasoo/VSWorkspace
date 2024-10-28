@@ -169,15 +169,21 @@
     }
 
     set measure0Name(value) {
+      console.log(["setmeasure0Name", value]);
       this._shadowRoot.getElementById("measure0_Name").value = value;
     }
     get measure0Name() {
       return this._shadowRoot.getElementById("measure0_Name").value;
     }
     set measure0Dotted(value) {
+      console.log(["setmeasure0Dotted", value]);
       this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
     }
     get measure0Dotted() {
+      console.log([
+        "getmeasure0Dotted",
+        this._shadowRoot.getElementById("measure0_Dotted").checked,
+      ]);
       return this._shadowRoot.getElementById("measure0_Dotted").checked;
     }
     set measure0LineColor(value) {
@@ -199,9 +205,14 @@
       return this._shadowRoot.getElementById("measure1_Name").value;
     }
     set measure1Dotted(value) {
+      console.log(["measure1Dotted", value]);
       this._shadowRoot.getElementById("measure1_Dotted").checked = !!value;
     }
     get measure1Dotted() {
+      console.log([
+        "getmeasure1Dotted",
+        this._shadowRoot.getElementById("measure1_Dotted").checked,
+      ]);
       return this._shadowRoot.getElementById("measure1_Dotted").checked;
     }
     set measure1LineColor(value) {
