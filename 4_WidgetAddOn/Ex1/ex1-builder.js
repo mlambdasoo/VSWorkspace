@@ -20,6 +20,7 @@
   class VizPlotareaBuilderPanel extends HTMLElement {
     constructor() {
       super();
+      console.log("builder constructor");
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(
         plotareaFormTemplate.content.cloneNode(true)
@@ -30,9 +31,6 @@
       this._shadowRoot
         .getElementById("linecolor")
         .addEventListener("change", this._submit.bind(this));
-      console.log("builder constructor");
-      console.log(this.measures);
-      console.log(this.lineColor);
     }
     onBeforeUpdate(changedProps) {
       console.log(["builder-Before", changedProps]);
@@ -60,13 +58,13 @@
       this._shadowRoot.getElementById("linecolor").value = value;
     }
 
-    // get lineColor() {
-    //   console.log([
-    //     "getlinecolor",
-    //     this._shadowRoot.getElementById("linecolor").value,
-    //   ]);
-    //   return this._shadowRoot.getElementById("linecolor").value;
-    // }
+    get lineColor() {
+      console.log([
+        "getlinecolor",
+        this._shadowRoot.getElementById("linecolor").value,
+      ]);
+      return this._shadowRoot.getElementById("linecolor").value;
+    }
   }
 
   customElements.define("exercise-one-builder", VizPlotareaBuilderPanel);

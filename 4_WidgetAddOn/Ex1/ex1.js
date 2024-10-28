@@ -16,26 +16,12 @@
       );
       this._shadowRoot.appendChild(container);
       this._lineColor = "";
-      this._measures = ["measure1"];
     }
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
     }
     onAfterUpdate(changedProps) {
       console.log(changedProps);
-    }
-
-    measurelist() {
-      console.log(this._measures);
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: {
-            properties: {
-              measures: "why",
-            },
-          },
-        })
-      );
     }
 
     render() {
@@ -99,15 +85,12 @@
       this.render();
     }
 
-    set lineColor(value) {
-      console.log(["setlinecolor value main", value]);
-      this._lineColor = value;
-      console.log(["setlinecolor _linecolor main", value]);
-      this.render();
-    }
-    set measures(value) {
-      console.log(["setmeasures value main", value]);
-    }
+    // set lineColor(value) {
+    //   console.log(["setlinecolor value main", value]);
+    //   this._lineColor = value;
+    //   console.log(["setlinecolor _linecolor main", value]);
+    //   this.render();
+    // }
   }
   customElements.define("exercise-one", Main);
 })();

@@ -119,7 +119,6 @@
     set measure0Dotted(value) {
       this._shadowRoot.getElementById("measure0_Dotted").value = value;
     }
-
     get measure0Dotted() {
       return this._shadowRoot.getElementById("measure0_Dotted").value;
     }
