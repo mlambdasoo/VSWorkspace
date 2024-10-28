@@ -139,30 +139,44 @@
       console.log(["AFter", changedProps]);
     }
 
+    // updateMeasureSetting(settings, index) {
+    //   this[`measure${index}Name`] = settings.measureName;
+    //   this[`measure${index}Dotted`] = settings.dotted;
+    //   this[`measure${index}LineColor`] = settings.lineColor;
+    //   this[`measure${index}MarkerShape`] = settings.markerShape;
+    //   console.log(["updateMeasureSetting", this[`measure${index}Name`]]);
+    // }
+
     updateMeasureSetting(settings, index) {
-      this[`measure${index}Name`] = settings.measureName;
-      this[`measure${index}Dotted`] = settings.dotted;
-      this[`measure${index}LineColor`] = settings.lineColor;
-      this[`measure${index}MarkerShape`] = settings.markerShape;
+      this.measure0Name = settings.measureName;
+      this.measure1Name = settings.measureName;
+
       console.log(["updateMeasureSetting", this[`measure${index}Name`]]);
     }
 
     onMeasureSettingsChanged(index, e) {
       e.preventDefault();
 
-      const properties = {};
-      properties[`measure${index}Settings`] = {
-        measureName: this[`measure${index}Name`],
-        dotted: this[`measure${index}Dotted`],
-        lineColor: this[`measure${index}LineColor`],
-        markerShape: this[`measure${index}MarkerShape`],
-      };
+      //   const properties = {};
+      //   properties[`measure${index}Settings`] = {
+      //     measureName: this[`measure${index}Name`],
+      //     dotted: this[`measure${index}Dotted`],
+      //     lineColor: this[`measure${index}LineColor`],
+      //     markerShape: this[`measure${index}MarkerShape`],
+      //   };
 
-      console.log(["properties", properties]);
+      // console.log(["properties", properties]);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
-            properties,
+            properties: {
+              measure0Settings: {
+                measure0Name: this.measure0Name,
+              },
+              measure0Settings: {
+                measure0Name: this.measure0Name,
+              },
+            },
           },
         })
       );
@@ -175,58 +189,72 @@
     get measure0Name() {
       return this._shadowRoot.getElementById("measure0_Name").value;
     }
-    set measure0Dotted(value) {
-      console.log(["setmeasure0Dotted", value]);
-      this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
-    }
-    get measure0Dotted() {
-      console.log([
-        "getmeasure0Dotted",
-        this._shadowRoot.getElementById("measure0_Dotted").checked,
-      ]);
-      return this._shadowRoot.getElementById("measure0_Dotted").checked;
-    }
-    set measure0LineColor(value) {
-      this._shadowRoot.getElementById("measure0_LineColor").value = value;
-    }
-    get measure0LineColor() {
-      return this._shadowRoot.getElementById("measure0_LineColor").value;
-    }
-    set measure0MarkerShape(value) {
-      this._shadowRoot.getElementById("measure0_shape").value = value;
-    }
-    get measure0MarkerShape() {
-      return this._shadowRoot.getElementById("measure0_shape").value;
-    }
     set measure1Name(value) {
       this._shadowRoot.getElementById("measure1_Name").value = value;
     }
     get measure1Name() {
       return this._shadowRoot.getElementById("measure1_Name").value;
     }
-    set measure1Dotted(value) {
-      console.log(["measure1Dotted", value]);
-      this._shadowRoot.getElementById("measure1_Dotted").checked = !!value;
-    }
-    get measure1Dotted() {
-      console.log([
-        "getmeasure1Dotted",
-        this._shadowRoot.getElementById("measure1_Dotted").checked,
-      ]);
-      return this._shadowRoot.getElementById("measure1_Dotted").checked;
-    }
-    set measure1LineColor(value) {
-      this._shadowRoot.getElementById("measure1_LineColor").value = value;
-    }
-    get measure1LineColor() {
-      return this._shadowRoot.getElementById("measure1_LineColor").value;
-    }
-    set measure1MarkerShape(value) {
-      this._shadowRoot.getElementById("measure1_shape").value = value;
-    }
-    get measure1MarkerShape() {
-      return this._shadowRoot.getElementById("measure1_shape").value;
-    }
+
+    // set measure0Name(value) {
+    //   console.log(["setmeasure0Name", value]);
+    //   this._shadowRoot.getElementById("measure0_Name").value = value;
+    // }
+    // get measure0Name() {
+    //   return this._shadowRoot.getElementById("measure0_Name").value;
+    // }
+    // set measure0Dotted(value) {
+    //   console.log(["setmeasure0Dotted", value]);
+    //   this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
+    // }
+    // get measure0Dotted() {
+    //   console.log([
+    //     "getmeasure0Dotted",
+    //     this._shadowRoot.getElementById("measure0_Dotted").checked,
+    //   ]);
+    //   return this._shadowRoot.getElementById("measure0_Dotted").checked;
+    // }
+    // set measure0LineColor(value) {
+    //   this._shadowRoot.getElementById("measure0_LineColor").value = value;
+    // }
+    // get measure0LineColor() {
+    //   return this._shadowRoot.getElementById("measure0_LineColor").value;
+    // }
+    // set measure0MarkerShape(value) {
+    //   this._shadowRoot.getElementById("measure0_shape").value = value;
+    // }
+    // get measure0MarkerShape() {
+    //   return this._shadowRoot.getElementById("measure0_shape").value;
+    // }
+    // set measure1Name(value) {
+    //   this._shadowRoot.getElementById("measure1_Name").value = value;
+    // }
+    // get measure1Name() {
+    //   return this._shadowRoot.getElementById("measure1_Name").value;
+    // }
+    // set measure1Dotted(value) {
+    //   console.log(["measure1Dotted", value]);
+    //   this._shadowRoot.getElementById("measure1_Dotted").checked = !!value;
+    // }
+    // get measure1Dotted() {
+    //   console.log([
+    //     "getmeasure1Dotted",
+    //     this._shadowRoot.getElementById("measure1_Dotted").checked,
+    //   ]);
+    //   return this._shadowRoot.getElementById("measure1_Dotted").checked;
+    // }
+    // set measure1LineColor(value) {
+    //   this._shadowRoot.getElementById("measure1_LineColor").value = value;
+    // }
+    // get measure1LineColor() {
+    //   return this._shadowRoot.getElementById("measure1_LineColor").value;
+    // }
+    // set measure1MarkerShape(value) {
+    //   this._shadowRoot.getElementById("measure1_shape").value = value;
+    // }
+    // get measure1MarkerShape() {
+    //   return this._shadowRoot.getElementById("measure1_shape").value;
+    // }
   }
 
   customElements.define("viz-plotarea-build", VizPlotareaBuilderPanel);
