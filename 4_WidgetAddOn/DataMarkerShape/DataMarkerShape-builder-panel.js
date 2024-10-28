@@ -94,12 +94,12 @@
     onMeasureSettingsChanged(index, e) {
       e.preventDefault();
       const properties = {};
-      properties[`measure${index}Settings`] = {
+      properties[`measure${index}Settings`].push({
         measureName: this[`measure${index}Name`],
         dotted: this[`measure${index}Dotted`],
         lineColor: this[`measure${index}LineColor`],
         markerShape: this[`measure${index}MarkerShape`],
-      };
+      });
       console.log(["properties", properties]);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {

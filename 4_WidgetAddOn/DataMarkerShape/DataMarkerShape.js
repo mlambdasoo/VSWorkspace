@@ -22,10 +22,9 @@
       this._markersContainer = container.querySelector(".markers-container");
       this._canvasElement = container.querySelector("#lineCanvas");
       this._shadowRoot.appendChild(container);
-      this._dataMarkerShape = "circle";
-      this._lineColor = "000000";
       this._points = [];
       this._props = {};
+      this._measures = [];
 
       // 스타일 추가
       const style = document.createElement("style");
@@ -56,7 +55,7 @@
       console.log(changedProps);
     }
 
-    render() {
+    render(props) {
       console.log("render");
       this._markersContainer.innerHTML = "";
       this._points = [];

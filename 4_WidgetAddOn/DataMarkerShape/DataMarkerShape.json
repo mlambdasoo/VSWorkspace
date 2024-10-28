@@ -52,7 +52,7 @@
           "default": false
         },
         "measure0Settings": {
-          "type": "measureSettings",
+          "type": "measureSettings[]",
           "default": {
             "measureName": "",
             "dotted": false,
