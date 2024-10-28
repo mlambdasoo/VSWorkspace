@@ -61,7 +61,7 @@
           "description": "line color",
           "default": "000000"
         },
-        "measure0Setting": {
+        "measure0Settings": {
           "type": "measureSetting",
           "default": {
             "measureName": "",
