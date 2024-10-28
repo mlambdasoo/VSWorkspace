@@ -83,6 +83,10 @@
       }
     }
 
+    onAfterUpdate(changedProps) {
+      console.log(changedProps);
+    }
+
     updateMeasureSetting(settings, index) {
       this[`measure${index}Name`] = settings.measureName;
       this[`measure${index}Dotted`] = settings.dotted;
@@ -91,6 +95,7 @@
     }
 
     onMeasureSettingsChanged(index, e) {
+      console.log(this[`measure${index}Name`]);
       e.preventDefault();
       const properties = {};
       properties[`measure${index}Settings`] = {
