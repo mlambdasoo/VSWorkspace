@@ -76,12 +76,12 @@
     }
 
     onBeforeUpdate(changedProps) {
-      console.log(changedProps);
+      console.log(["before", changedProps]);
       this.updateMeasureSetting(changedProps["measure0Setting"], 0);
     }
 
     onAfterUpdate(changedProps) {
-      console.log(changedProps);
+      console.log(["AFter", changedProps]);
     }
 
     updateMeasureSetting(settings, index) {
