@@ -131,7 +131,6 @@
       if ("measure0Settings" in changedProps) {
         this.updateMeasureSetting(changedProps["measure0Settings"], 0);
       }
-
       if ("measure1Settings" in changedProps) {
         this.updateMeasureSetting(changedProps["measure1Settings"], 1);
       }
@@ -177,6 +176,10 @@
       this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
     }
     get measure0Dotted() {
+      console.log([
+        "get",
+        this._shadowRoot.getElementById("measure0_Dotted").checked,
+      ]);
       return this._shadowRoot.getElementById("measure0_Dotted").checked;
     }
     set measure0LineColor(value) {
@@ -202,6 +205,10 @@
       this._shadowRoot.getElementById("measure1_Dotted").checked = !!value;
     }
     get measure1Dotted() {
+      console.log([
+        "get",
+        this._shadowRoot.getElementById("measure1_Dotted").checked,
+      ]);
       return this._shadowRoot.getElementById("measure1_Dotted").checked;
     }
     set measure1LineColor(value) {
