@@ -52,7 +52,16 @@
           "default": false
         },
         "measure0Settings": {
-          "type": "measureSettings[]",
+          "type": "measureSettings",
+          "default": {
+            "measureName": "",
+            "dotted": false,
+            "lineColor": "",
+            "markerShape": "circle"
+          }
+        },
+        "measure1Settings": {
+          "type": "measureSettings",
           "default": {
             "measureName": "",
             "dotted": false,
@@ -62,7 +71,7 @@
         }
       },
       "types": {
-        "measureSettings": {
+        "measureSetting": {
           "description": "type for styling settings",
           "properties": [
             {
