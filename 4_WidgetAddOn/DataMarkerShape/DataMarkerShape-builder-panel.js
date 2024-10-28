@@ -93,18 +93,26 @@
 
     onMeasureSettingsChanged(index, e) {
       e.preventDefault();
-      const properties = {};
-      properties[`measure${index}Settings`].push({
+      // const properties = {};
+      // properties[`measure${index}Settings`].push({
+      //   measureName: this[`measure${index}Name`],
+      //   dotted: this[`measure${index}Dotted`],
+      //   lineColor: this[`measure${index}LineColor`],
+      //   markerShape: this[`measure${index}MarkerShape`],
+      // });
+      this._measures = [];
+      this._measures.push({
         measureName: this[`measure${index}Name`],
         dotted: this[`measure${index}Dotted`],
         lineColor: this[`measure${index}LineColor`],
         markerShape: this[`measure${index}MarkerShape`],
       });
+
       console.log(["properties", properties]);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
-            properties,
+            properties: this._measures,
           },
         })
       );
