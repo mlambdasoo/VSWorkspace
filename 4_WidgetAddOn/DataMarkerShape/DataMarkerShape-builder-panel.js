@@ -31,6 +31,32 @@
                   </select>
                 </div>
               </div>
+              <div class="measure">
+                <label>Measure1</label>
+              </div>
+              <div class="settings">
+                <div>
+                  <label class="name">Name:</label>
+                  <input id="measure1_Name" type="text" name="name" size="20" maxlength="20">
+                </div>
+                <div>
+                  <label class="dotted">dotted:</label>
+                  <input id="measure1_Dotted" type="checkbox">
+                </div>
+                <div>
+                  <label class="lineColor">Line Color (hex number):</label>
+                  <input id="measure1_LineColor" type="text" name="lineColor" size="20" maxlength="20">
+                </div>
+                <div>
+                  <label class="makerShape">Select a shape</label>
+                  <select id="measure1_shape">
+                      <option value="circle" selected>Circle</option>
+                      <option value="triangle">Triangle</option>
+                      <option value="square">Square</option>
+                      <option value="cross">Cross</option>
+                  </select>
+                </div>
+              </div>
             </div>
         </fieldset>
     </form>
@@ -73,11 +99,36 @@
           "change",
           this.onMeasureSettingsChanged.bind(this, 0)
         );
+      this._shadowRoot
+        .getElementById("measure1_Name")
+        .addEventListener(
+          "change",
+          this.onMeasureSettingsChanged.bind(this, 1)
+        );
+      this._shadowRoot
+        .getElementById("measure1_Dotted")
+        .addEventListener(
+          "change",
+          this.onMeasureSettingsChanged.bind(this, 1)
+        );
+      this._shadowRoot
+        .getElementById("measure1_LineColor")
+        .addEventListener(
+          "change",
+          this.onMeasureSettingsChanged.bind(this, 1)
+        );
+      this._shadowRoot
+        .getElementById("measure1_shape")
+        .addEventListener(
+          "change",
+          this.onMeasureSettingsChanged.bind(this, 1)
+        );
     }
 
     onBeforeUpdate(changedProps) {
       console.log(["before", changedProps]);
       this.updateMeasureSetting(changedProps["measure0Settings"], 0);
+      this.updateMeasureSetting(changedProps["measure0Settings"], 1);
     }
 
     onAfterUpdate(changedProps) {
