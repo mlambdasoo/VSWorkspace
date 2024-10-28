@@ -113,34 +113,51 @@
 
     set measure0Settings(value) {
       console.log(["measure0Settings", value]);
+      this._shadowRoot.getElementById("measure0_Name").value =
+        value.measureName;
+      this._shadowRoot.getElementById("measure0_Dotted").checked =
+        !!value.dotted;
+      this._shadowRoot.getElementById("measure0_LineColor").value =
+        value.lineColor;
+      this._shadowRoot.getElementById("measure0_shape").value =
+        value.markerShape;
     }
 
-    set measure0Name(value) {
-      console.log(["measure0Name", value]);
-      this._shadowRoot.getElementById("measure0_Name").value = value;
-    }
-    get measure0Name() {
-      return this._shadowRoot.getElementById("measure0_Name").value;
-    }
-    set measure0Dotted(value) {
-      this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
-    }
-    get measure0Dotted() {
-      return this._shadowRoot.getElementById("measure0_Dotted").checked;
-    }
-    set measure0LineColor(value) {
-      this._shadowRoot.getElementById("measure0_LineColor").value = value;
+    get measure0Settings() {
+      return (
+        this._shadowRoot.getElementById("measure0_Name").value,
+        this._shadowRoot.getElementById("measure0_Dotted").checked,
+        this._shadowRoot.getElementById("measure0_LineColor").value,
+        this._shadowRoot.getElementById("measure0_shape").value
+      );
     }
 
-    get measure0LineColor() {
-      return this._shadowRoot.getElementById("measure0_LineColor").value;
-    }
-    set measure0MarkerShape(value) {
-      this._shadowRoot.getElementById("measure0_shape").value = value;
-    }
-    get measure0MarkerShape() {
-      return this._shadowRoot.getElementById("measure0_shape").value;
-    }
+    // set measure0Name(value) {
+    //   console.log(["measure0Name", value]);
+    //   this._shadowRoot.getElementById("measure0_Name").value = value;
+    // }
+    // get measure0Name() {
+    //   return this._shadowRoot.getElementById("measure0_Name").value;
+    // }
+    // set measure0Dotted(value) {
+    //   this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
+    // }
+    // get measure0Dotted() {
+    //   return this._shadowRoot.getElementById("measure0_Dotted").checked;
+    // }
+    // set measure0LineColor(value) {
+    //   this._shadowRoot.getElementById("measure0_LineColor").value = value;
+    // }
+
+    // get measure0LineColor() {
+    //   return this._shadowRoot.getElementById("measure0_LineColor").value;
+    // }
+    // set measure0MarkerShape(value) {
+    //   this._shadowRoot.getElementById("measure0_shape").value = value;
+    // }
+    // get measure0MarkerShape() {
+    //   return this._shadowRoot.getElementById("measure0_shape").value;
+    // }
   }
 
   customElements.define("viz-plotarea-build", VizPlotareaBuilderPanel);
