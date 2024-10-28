@@ -24,9 +24,7 @@
       this._shadowRoot.appendChild(container);
       this._dataMarkerShape = "circle";
       this._lineColor = "000000";
-      this._measures = [];
       this._points = [];
-      this._measure = "";
 
       // 스타일 추가
       const style = document.createElement("style");
@@ -51,7 +49,6 @@
 
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
-      this.measuressubmit();
     }
     onAfterUpdate(changedProps) {
       console.log(changedProps);
@@ -236,16 +233,6 @@
 
     set dataMarkerShape(value) {
       this._dataMarkerShape = value;
-      this.render();
-    }
-
-    set lineColor(value) {
-      this._lineColor = value;
-      this.render();
-    }
-
-    set measure(value) {
-      this._measure = value;
       this.render();
     }
   }

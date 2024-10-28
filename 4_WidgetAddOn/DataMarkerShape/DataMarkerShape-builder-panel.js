@@ -110,6 +110,7 @@
     }
 
     set measure0Name(value) {
+      console.log(value);
       this._shadowRoot.getElementById("measure0_Name").value = value;
     }
     get measure0Name() {
