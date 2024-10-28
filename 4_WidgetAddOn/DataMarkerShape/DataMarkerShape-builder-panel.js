@@ -1,8 +1,7 @@
 (function () {
   const plotareaFormTemplate = document.createElement("template");
   plotareaFormTemplate.innerHTML = `
-    <form id="form">
-        <fieldset>
+          <div>
             <legend>Plotarea Properties</legend>
             <div class="measureSettings">
               <div class="measure">
@@ -60,8 +59,7 @@
                 </div>
               </div>
             </div>
-        </fieldset>
-    </form>
+          </div>
     <style>
     :host {
         display: block;
