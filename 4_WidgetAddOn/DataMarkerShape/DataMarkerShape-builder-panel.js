@@ -128,8 +128,13 @@
 
     onBeforeUpdate(changedProps) {
       console.log(["before", changedProps]);
-      this.updateMeasureSetting(changedProps["measure0Settings"], 0);
-      this.updateMeasureSetting(changedProps["measure1Settings"], 1);
+      if ("measure0Settings" in changedProps) {
+        this.updateMeasureSetting(changedProps["measure0Settings"], 0);
+      }
+
+      if ("measure1Settings" in changedProps) {
+        this.updateMeasureSetting(changedProps["measure1Settings"], 1);
+      }
     }
 
     onAfterUpdate(changedProps) {
