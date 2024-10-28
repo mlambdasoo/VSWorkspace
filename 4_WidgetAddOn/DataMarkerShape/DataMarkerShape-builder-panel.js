@@ -77,10 +77,7 @@
 
     onBeforeUpdate(changedProps) {
       console.log(changedProps);
-      this._props = { ...this._props, ...changedProps };
-      if ("measure0Setting" in changedProps) {
-        this.updateMeasureSetting(changedProps["measure0Setting"], 0);
-      }
+      this.updateMeasureSetting(changedProps["measure0Setting"], 0);
     }
 
     onAfterUpdate(changedProps) {
