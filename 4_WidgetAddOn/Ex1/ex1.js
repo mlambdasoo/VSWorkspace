@@ -61,7 +61,6 @@
 
     setExtensionData(extensionData) {
       console.log(extensionData);
-      this.measurelist();
       const {
         chartType,
         isHorizontal,
