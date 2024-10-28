@@ -25,6 +25,7 @@
       this._dataMarkerShape = "circle";
       this._lineColor = "000000";
       this._points = [];
+      this._props = {};
 
       // 스타일 추가
       const style = document.createElement("style");
@@ -48,7 +49,8 @@
     }
 
     onBeforeUpdate(changedProps) {
-      console.log(changedProps);
+      this._props = { ...this._props, ...changedProps };
+      console.log(["thisprops", this._props]);
     }
     onAfterUpdate(changedProps) {
       console.log(changedProps);
@@ -80,7 +82,12 @@
       this._canvasElement.height = chartHeight;
 
       this._series.forEach((singleSeries, index) => {
-        const options = {};
+        const options = {
+          measureName: singleSeries.name,
+          dotted: false,
+          lineColor: singleSeries.color,
+          markerShape: "circle",
+        };
         if (singleSeries.name == this._measure) {
           this.renderASeries(singleSeries, options);
         }
