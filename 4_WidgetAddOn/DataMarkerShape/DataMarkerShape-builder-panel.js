@@ -144,10 +144,12 @@
       this[`measure${index}Dotted`] = settings.dotted;
       this[`measure${index}LineColor`] = settings.lineColor;
       this[`measure${index}MarkerShape`] = settings.markerShape;
+      console.log(["updateMeasureSetting", this[`measure${index}Name`]]);
     }
 
     onMeasureSettingsChanged(index, e) {
       e.preventDefault();
+
       const properties = {};
       properties[`measure${index}Settings`] = {
         measureName: this[`measure${index}Name`],
@@ -155,6 +157,7 @@
         lineColor: this[`measure${index}LineColor`],
         markerShape: this[`measure${index}MarkerShape`],
       };
+
       console.log(["properties", properties]);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
