@@ -112,7 +112,9 @@
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
-            properties: this._measures,
+            properties: {
+              measure0Settings: this._measures,
+            },
           },
         })
       );
