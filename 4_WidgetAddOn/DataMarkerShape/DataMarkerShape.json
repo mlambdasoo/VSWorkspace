@@ -72,33 +72,31 @@
         }
       },
       "types": {
-        "measureSetting": [
-          {
-            "description": "type for styling settings",
-            "properties": [
-              {
-                "name": "measureName",
-                "type": "string",
-                "description": "Measure Name"
-              },
-              {
-                "name": "dotted",
-                "type": "boolean",
-                "description": "dotted or default"
-              },
-              {
-                "name": "lineColor",
-                "type": "string",
-                "description": "dotted line color (hex number"
-              },
-              {
-                "name": "markerShape",
-                "type": "string",
-                "description": "Data Marker Shape"
-              }
-            ]
-          }
-        ]
+        "measureSetting": {
+          "description": "type for styling settings",
+          "properties": [
+            {
+              "name": "measureName",
+              "type": "string",
+              "description": "Measure Name"
+            },
+            {
+              "name": "dotted",
+              "type": "boolean",
+              "description": "dotted or default"
+            },
+            {
+              "name": "lineColor",
+              "type": "string",
+              "description": "dotted line color (hex number"
+            },
+            {
+              "name": "markerShape",
+              "type": "string",
+              "description": "Data Marker Shape"
+            }
+          ]
+        }
       }
     }
   ]

@@ -95,7 +95,7 @@
     }
 
     onMeasureSettingsChanged(index, e) {
-      console.log(this[`measure${index}Name`]);
+      console.log(["onMeasureChanged", this[`measure${index}Name`]]);
       e.preventDefault();
       const properties = {};
       properties[`measure${index}Settings`] = {
@@ -115,7 +115,7 @@
     }
 
     set measure0Name(value) {
-      console.log(value);
+      console.log(["measure0Name", value]);
       this._shadowRoot.getElementById("measure0_Name").value = value;
     }
     get measure0Name() {
