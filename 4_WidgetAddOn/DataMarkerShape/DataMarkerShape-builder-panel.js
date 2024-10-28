@@ -31,7 +31,8 @@
                   </select>
                 </div>
               </div>
-              <br><br>
+            </div>
+            <div class="measureSettings">
               <div class="measure">
                 <label>Measure1</label>
               </div>
@@ -176,10 +177,6 @@
       this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
     }
     get measure0Dotted() {
-      console.log([
-        "get",
-        this._shadowRoot.getElementById("measure0_Dotted").checked,
-      ]);
       return this._shadowRoot.getElementById("measure0_Dotted").checked;
     }
     set measure0LineColor(value) {
@@ -194,7 +191,6 @@
     get measure0MarkerShape() {
       return this._shadowRoot.getElementById("measure0_shape").value;
     }
-
     set measure1Name(value) {
       this._shadowRoot.getElementById("measure1_Name").value = value;
     }
@@ -205,10 +201,6 @@
       this._shadowRoot.getElementById("measure1_Dotted").checked = !!value;
     }
     get measure1Dotted() {
-      console.log([
-        "get",
-        this._shadowRoot.getElementById("measure1_Dotted").checked,
-      ]);
       return this._shadowRoot.getElementById("measure1_Dotted").checked;
     }
     set measure1LineColor(value) {
