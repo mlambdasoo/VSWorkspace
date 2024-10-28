@@ -108,7 +108,7 @@
         markerShape: this[`measure${index}MarkerShape`],
       });
 
-      console.log(["properties", properties]);
+      //  console.log(["properties", properties]);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
           detail: {
