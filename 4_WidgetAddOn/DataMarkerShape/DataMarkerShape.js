@@ -236,11 +236,6 @@
       this._isHorizontal = isHorizontal;
       this.render();
     }
-
-    set dataMarkerShape(value) {
-      this._dataMarkerShape = value;
-      this.render();
-    }
   }
 
   customElements.define("viz-plotarea", Main);
