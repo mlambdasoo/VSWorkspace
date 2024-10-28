@@ -62,7 +62,7 @@
           "default": "000000"
         },
         "measure0Settings": {
-          "type": "measureSetting",
+          "type": "measureSettings",
           "default": {
             "measureName": "",
             "dotted": false,
@@ -72,7 +72,7 @@
         }
       },
       "types": {
-        "measureSetting": {
+        "measureSettings": {
           "description": "type for styling settings",
           "properties": [
             {

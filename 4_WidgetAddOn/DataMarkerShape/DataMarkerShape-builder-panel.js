@@ -77,7 +77,7 @@
 
     onBeforeUpdate(changedProps) {
       console.log(["before", changedProps]);
-      this.updateMeasureSetting(changedProps["measure0Setting"], 0);
+      this.updateMeasureSetting(changedProps["measure0Settings"], 0);
     }
 
     onAfterUpdate(changedProps) {
@@ -111,8 +111,8 @@
       );
     }
 
-    set measure0Setting(value) {
-      console.log(["measure0Setting", value]);
+    set measure0Settings(value) {
+      console.log(["measure0Settings", value]);
     }
 
     set measure0Name(value) {
