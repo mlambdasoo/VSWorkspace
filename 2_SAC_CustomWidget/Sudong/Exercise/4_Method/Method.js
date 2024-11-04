@@ -48,6 +48,20 @@
       console.log("disconnectedCallback");
     }
 
+    setChartType(value) {
+      this.charttype = value;
+      console.log(this.charttype);
+      // this.dispatchEvent(
+      //   new CustomEvent("propertiesChanged", {
+      //     detail: { properties: { value } },
+      //   })
+      // );
+    }
+
+    getChartType() {
+      return this.charttype;
+    }
+
     async render() {
       console.log("render");
       const dataBinding = this.myDataBinding;
@@ -59,5 +73,5 @@
     }
   }
 
-  customElements.define("com-sap-sac-exercise-lsd-property", Basic);
+  customElements.define("com-sap-sac-exercise-lsd-method", Basic);
 })();
