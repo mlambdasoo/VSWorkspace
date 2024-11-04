@@ -46,8 +46,14 @@
       console.log("disconnectedCallback");
     }
 
-    render() {
-      this._root.textContent = `Hello Custom Widget clientWidth: ${this.clientWidth}, clientHeight: ${this.clientHeight}`;
+    async render() {
+      console.log("render");
+      const dataBinding = this.myDataBinding;
+      if (!dataBinding || dataBinding.state !== "success") {
+        return;
+      }
+      this._root.textContent = JSON.stringify(dataBinding);
+      console.log(JSON.stringify(dataBinding));
     }
   }
 
