@@ -2,17 +2,17 @@
   "eula": "",
   "vendor": "LEE.SUDONG",
   "license": "",
-  "id": "com.sap.sac.exercise.lsd.method",
+  "id": "com.sap.sac.exercise.lsd.method.dispatch",
   "version": "1.0.0",
-  "name": "Exercise 4 - Method",
+  "name": "Exercise 4 - 1 - Method dispatch",
   "icon": "",
-  "newInstancePrefix": "Method",
-  "description": "Custom Widget Exercise 4 - Method",
+  "newInstancePrefix": "MethodDispatch",
+  "description": "Custom Widget Exercise 4-1 - Method dispatch",
   "webcomponents": [
     {
       "kind": "main",
-      "tag": "com-sap-sac-exercise-lsd-method",
-      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/4_Method/Method.js",
+      "tag": "com-sap-sac-exercise-lsd-method-dispatch",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/4_1_Method/Method.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
