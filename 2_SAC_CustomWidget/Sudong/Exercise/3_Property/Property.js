@@ -28,14 +28,17 @@
 
     onCustomWidgetAfterUpdate(changedProps) {
       console.log(["onCustomWidgetAfterUpdate", changedProps]);
+      console.log(this.charttype);
     }
 
     connectedCallback() {
+      console.log(this.charttype);
       console.log("ConnectedCallback");
     }
 
     ////custom widget 크기가 조정 될때////
     onCustomWidgetResize(width, height) {
+      console.log(this.charttype);
       this.render();
     }
 
