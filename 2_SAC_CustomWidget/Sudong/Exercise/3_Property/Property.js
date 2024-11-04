@@ -16,12 +16,12 @@
       this._root = this._shadowRoot.getElementById("root");
       console.log("constructor");
       console.log(this.charttype);
-      console.log(this.simpleobjecttype);
     }
 
     ///Custom widget의 업데이트가 발생하는경우 AfterUpdate까지 순서대로 호출///
     onCustomWidgetBeforeUpdate(changedProps) {
       console.log(["onCustomWidgetBeforeUpdate", changedProps]);
+      console.log(this.charttype);
     }
 
     //Setter function 호출
@@ -50,6 +50,7 @@
 
     async render() {
       console.log("render");
+      console.log(this.charttype);
       const dataBinding = this.myDataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;

@@ -33,8 +33,7 @@
     },
     "simpleobjecttype": {
       "type": "Object<string>",
-      "description": "Exercise",
-      "default": { "color": "#BCDC50" }
+      "description": "Exercise"
     }
   },
   "methods": {},
