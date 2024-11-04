@@ -15,30 +15,28 @@
       this._shadowRoot.appendChild(template.content.cloneNode(true));
       this._root = this._shadowRoot.getElementById("root");
       console.log("constructor");
-      console.log(this.charttype);
+      this.charttype = "";
     }
 
     ///Custom widget의 업데이트가 발생하는경우 AfterUpdate까지 순서대로 호출///
     onCustomWidgetBeforeUpdate(changedProps) {
       console.log(["onCustomWidgetBeforeUpdate", changedProps]);
-      console.log(this.charttype);
     }
 
     //Setter function 호출
 
     onCustomWidgetAfterUpdate(changedProps) {
       console.log(["onCustomWidgetAfterUpdate", changedProps]);
+      //Property의 Default값이 할당되는 시점
       console.log(this.charttype);
     }
 
     connectedCallback() {
-      console.log(this.charttype);
       console.log("ConnectedCallback");
     }
 
     ////custom widget 크기가 조정 될때////
     onCustomWidgetResize(width, height) {
-      console.log(this.charttype);
       this.render();
     }
 
@@ -53,7 +51,6 @@
 
     async render() {
       console.log("render");
-      console.log(this.charttype);
       const dataBinding = this.myDataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
