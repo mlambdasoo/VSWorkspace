@@ -57,5 +57,5 @@
     }
   }
 
-  customElements.define("com-sap-sac-exercise-lsd1-basic", Basic);
+  customElements.define("com-sap-sac-exercise-lsd-databinding", Basic);
 })();

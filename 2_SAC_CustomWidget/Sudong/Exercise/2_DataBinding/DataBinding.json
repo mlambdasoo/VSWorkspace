@@ -2,17 +2,17 @@
   "eula": "",
   "vendor": "LEE.SUDONG",
   "license": "",
-  "id": "com.sap.sac.exercise.lsd.1.basic",
+  "id": "com.sap.sac.exercise.lsd.databinding",
   "version": "1.0.0",
-  "name": "Exercise 1 - Basic",
+  "name": "Exercise 2 - Data Binding",
   "icon": "",
-  "newInstancePrefix": "Basic",
-  "description": "Custom Widget Exercise 1 - Basic",
+  "newInstancePrefix": "DataBinding",
+  "description": "Custom Widget Exercise 2 - Data Binding",
   "webcomponents": [
     {
       "kind": "main",
-      "tag": "com-sap-sac-exercise-lsd1-basic",
-      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/1_Basic/Basic.js",
+      "tag": "com-sap-sac-exercise-lsd-databinding",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/2_DataBinding/DataBinding.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
