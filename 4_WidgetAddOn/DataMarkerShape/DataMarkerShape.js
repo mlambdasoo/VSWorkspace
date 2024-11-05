@@ -213,6 +213,9 @@
         case "cross":
           shape = `clip-path: polygon(0% 0%, 100% 100%, 0% 100%, 100% 0%);`;
           break;
+        default:
+          shape = `border-radius: 50%;`; // 기본값으로 circle 모양 설정
+          break;
       }
 
       barColumnContainer.setAttribute(
