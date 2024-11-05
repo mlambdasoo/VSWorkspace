@@ -204,7 +204,7 @@
         case "circle":
           shape = `border-radius: 50%;`;
           break;
-        case "rectangle":
+        case "square":
           shape = ``;
           break;
         case "triangle":
