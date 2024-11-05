@@ -213,6 +213,7 @@
     }
 
     onAfterUpdate(changedProps) {
+      console.log(this.allmeasures);
       console.log(["AFter", changedProps]);
     }
 

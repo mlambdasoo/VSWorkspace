@@ -51,6 +51,9 @@
           "type": "boolean",
           "default": false
         },
+        "allmeasures": {
+          "type": "string[]"
+        },
         "measure0Name": {
           "type": "string",
           "default": ""
