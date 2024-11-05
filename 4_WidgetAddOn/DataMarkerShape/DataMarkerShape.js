@@ -198,8 +198,7 @@
       const barColumnContainer = dataElement.querySelector(
         ".series-data-marker-container"
       );
-      const color = dataInfo.color || options.color;
-      console.log(color);
+      const color = dataInfo.color;
       let shape = ``;
       switch (options.markerShape) {
         case "circle":
@@ -226,20 +225,11 @@
       this._markersContainer.appendChild(dataElement);
     }
 
-    renderLabel(labelInfo, options) {
-      // 라벨 렌더링 로직 구현
-      console.log("renderLabel", labelInfo);
-    }
+    renderLabel(labelInfo, options) {}
 
-    renderAxisLabels(axisLabels) {
-      // 축 라벨 렌더링 로직 구현
-      console.log("renderAxisLabels", axisLabels);
-    }
+    renderAxisLabels(axisLabels) {}
 
-    renderAxisStackLabels(axisStackLabels) {
-      // 스택 라벨 렌더링 로직 구현
-      console.log("renderAxisStackLabels", axisStackLabels);
-    }
+    renderAxisStackLabels(axisStackLabels) {}
 
     setExtensionData(extensionData) {
       console.log(extensionData);
@@ -263,7 +253,7 @@
       this._yAxisStackLabels = yAxisStackLabels;
       this._chartType = chartType;
       this._isHorizontal = isHorizontal;
-      this.render();
+      this.render(this._props);
     }
   }
 
