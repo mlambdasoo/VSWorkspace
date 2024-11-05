@@ -166,17 +166,17 @@
       //   };
 
       // console.log(["properties", properties]);
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: {
-            properties: {
-              measure0Settings: {
-                measure0Name: this.measure0Name,
-              },
-            },
-          },
-        })
-      );
+      // this.dispatchEvent(
+      //   new CustomEvent("propertiesChanged", {
+      //     detail: {
+      //       properties: {
+      //         measure0Settings: {
+      //           measure0Name: this.measure0Name,
+      //         },
+      //       },
+      //     },
+      //   })
+      // );
     }
 
     set measure0Settings(value) {
