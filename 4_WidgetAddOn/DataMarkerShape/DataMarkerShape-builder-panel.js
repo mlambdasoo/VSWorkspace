@@ -179,11 +179,11 @@
       // );
     }
 
-    set measure0Settings(value) {
+    set measure0Name(value) {
       console.log(["setmeasure0Name", value]);
       this._shadowRoot.getElementById("measure0_Name").value = value;
     }
-    get measure0Settings() {
+    get measure0Name() {
       console.log(this._shadowRoot.getElementById("measure0_Name").value);
       return this._shadowRoot.getElementById("measure0_Name").value;
     }
