@@ -182,11 +182,12 @@
       );
     }
 
-    set measure0Name(value) {
+    set measure0Settings(value) {
       console.log(["setmeasure0Name", value]);
       this._shadowRoot.getElementById("measure0_Name").value = value;
     }
-    get measure0Name() {
+    get measure0Settings() {
+      console.log(this._shadowRoot.getElementById("measure0_Name").value);
       return this._shadowRoot.getElementById("measure0_Name").value;
     }
     set measure1Name(value) {
