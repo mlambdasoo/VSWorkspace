@@ -89,14 +89,16 @@
       this._series.forEach((singleSeries, index) => {
         // measureName 속성에서 찾기
         let measureNumber = null;
-        for (const [key, value] of Object.entries(props)) {
-          if (
-            key.startsWith("measure") &&
-            key.endsWith("Name") &&
-            value === singleSeries.name
-          ) {
-            measureNumber = key.match(/\d+/)[0]; // 숫자 추출
-            break;
+        if (props) {
+          for (const [key, value] of Object.entries(props)) {
+            if (
+              key.startsWith("measure") &&
+              key.endsWith("Name") &&
+              value === singleSeries.name
+            ) {
+              measureNumber = key.match(/\d+/)[0]; // 숫자 추출
+              break;
+            }
           }
         }
 
@@ -118,27 +120,28 @@
         this.renderASeries(singleSeries, options);
 
         // 각 시리즈별로 선 그리기
-        const seriesPoints = this._points[this._points.length - 1];
-        if (seriesPoints && seriesPoints.length >= 2) {
-          // 선 스타일 설정
-          ctx.strokeStyle = options.lineColor
-            ? `#${options.lineColor}`
-            : `#${this._lineColor}`;
-          ctx.lineWidth = 2;
+        if (options.dotted) {
+          const seriesPoints = this._points[this._points.length - 1];
+          if (seriesPoints && seriesPoints.length >= 2) {
+            // 선 스타일 설정
+            ctx.strokeStyle = options.lineColor
+              ? `#${options.lineColor}`
+              : `#${this._lineColor}`;
+            ctx.lineWidth = 2;
 
-          // dotted 속성에 따라 선 스타일 설정
-          if (options.dotted) {
+            // dotted 속성에 따라 선 스타일 설정
+
             ctx.setLineDash([5, 5]);
+
+            ctx.beginPath();
+            ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
+
+            for (let i = 1; i < seriesPoints.length; i++) {
+              ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
+            }
+
+            ctx.stroke();
           }
-
-          ctx.beginPath();
-          ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
-
-          for (let i = 1; i < seriesPoints.length; i++) {
-            ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
-          }
-
-          ctx.stroke();
         }
       });
 
