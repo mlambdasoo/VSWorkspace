@@ -173,9 +173,6 @@
               measure0Settings: {
                 measure0Name: this.measure0Name,
               },
-              measure0Settings: {
-                measure0Name: this.measure0Name,
-              },
             },
           },
         })
