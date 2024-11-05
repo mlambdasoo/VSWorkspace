@@ -276,70 +276,70 @@
       return this._shadowRoot.getElementById("measure1_Name").value;
     }
     set measure1Dotted(value) {
-      this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
+      this._shadowRoot.getElementById("measure1_Dotted").checked = !!value;
     }
     get measure1Dotted() {
-      return this._shadowRoot.getElementById("measure0_Dotted").checked;
+      return this._shadowRoot.getElementById("measure1_Dotted").checked;
     }
     set measure1LineColor(value) {
-      this._shadowRoot.getElementById("measure0_LineColor").value = value;
+      this._shadowRoot.getElementById("measure1_LineColor").value = value;
     }
     get measure1LineColor() {
-      return this._shadowRoot.getElementById("measure0_LineColor").value;
+      return this._shadowRoot.getElementById("measure1_LineColor").value;
     }
     set measure1MarkerShape(value) {
-      this._shadowRoot.getElementById("measure0_shape").value = value;
+      this._shadowRoot.getElementById("measure1_shape").value = value;
     }
     get measure1MarkerShape() {
-      return this._shadowRoot.getElementById("measure0_shape").value;
+      return this._shadowRoot.getElementById("measure1_shape").value;
     }
     set measure2Name(value) {
-      this._shadowRoot.getElementById("measure1_Name").value = value;
+      this._shadowRoot.getElementById("measure2_Name").value = value;
     }
     get measure2Name() {
-      return this._shadowRoot.getElementById("measure1_Name").value;
+      return this._shadowRoot.getElementById("measure2_Name").value;
     }
     set measure2Dotted(value) {
-      this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
+      this._shadowRoot.getElementById("measure2_Dotted").checked = !!value;
     }
     get measure2Dotted() {
-      return this._shadowRoot.getElementById("measure0_Dotted").checked;
+      return this._shadowRoot.getElementById("measure2_Dotted").checked;
     }
     set measure2LineColor(value) {
-      this._shadowRoot.getElementById("measure0_LineColor").value = value;
+      this._shadowRoot.getElementById("measure2_LineColor").value = value;
     }
     get measure2LineColor() {
-      return this._shadowRoot.getElementById("measure0_LineColor").value;
+      return this._shadowRoot.getElementById("measure2_LineColor").value;
     }
     set measure2MarkerShape(value) {
-      this._shadowRoot.getElementById("measure0_shape").value = value;
+      this._shadowRoot.getElementById("measure2_shape").value = value;
     }
     get measure2MarkerShape() {
-      return this._shadowRoot.getElementById("measure0_shape").value;
+      return this._shadowRoot.getElementById("measure2_shape").value;
     }
     set measure3Name(value) {
-      this._shadowRoot.getElementById("measure1_Name").value = value;
+      this._shadowRoot.getElementById("measure3_Name").value = value;
     }
     get measure3Name() {
-      return this._shadowRoot.getElementById("measure1_Name").value;
+      return this._shadowRoot.getElementById("measure3_Name").value;
     }
     set measure3Dotted(value) {
-      this._shadowRoot.getElementById("measure0_Dotted").checked = !!value;
+      this._shadowRoot.getElementById("measure3_Dotted").checked = !!value;
     }
     get measure3Dotted() {
-      return this._shadowRoot.getElementById("measure0_Dotted").checked;
+      return this._shadowRoot.getElementById("measure3_Dotted").checked;
     }
     set measure3LineColor(value) {
-      this._shadowRoot.getElementById("measure0_LineColor").value = value;
+      this._shadowRoot.getElementById("measure3_LineColor").value = value;
     }
     get measure3LineColor() {
-      return this._shadowRoot.getElementById("measure0_LineColor").value;
+      return this._shadowRoot.getElementById("measure3_LineColor").value;
     }
     set measure3MarkerShape(value) {
-      this._shadowRoot.getElementById("measure0_shape").value = value;
+      this._shadowRoot.getElementById("measure3_shape").value = value;
     }
     get measure3MarkerShape() {
-      return this._shadowRoot.getElementById("measure0_shape").value;
+      return this._shadowRoot.getElementById("measure3_shape").value;
     }
   }
 
