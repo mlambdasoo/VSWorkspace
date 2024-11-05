@@ -13,7 +13,7 @@
             <input id="measure0_Name" type="text" name="name" size="20" maxlength="20">
         </div>
         <div>
-            <label class="dotted">dotted:</label>
+            <label class="dotted">Dotted:</label>
             <input id="measure0_Dotted" type="checkbox">
         </div>
         <div>
@@ -42,7 +42,7 @@
             <input id="measure1_Name" type="text" name="name" size="20" maxlength="20">
         </div>
         <div>
-            <label class="dotted">dotted:</label>
+            <label class="dotted">Dotted:</label>
             <input id="measure1_Dotted" type="checkbox">
         </div>
         <div>
@@ -71,7 +71,7 @@
             <input id="measure2_Name" type="text" name="name" size="20" maxlength="20">
         </div>
         <div>
-            <label class="dotted">dotted:</label>
+            <label class="dotted">Dotted:</label>
             <input id="measure2_Dotted" type="checkbox">
         </div>
         <div>
@@ -100,7 +100,7 @@
             <input id="measure3_Name" type="text" name="name" size="20" maxlength="20">
         </div>
         <div>
-            <label class="dotted">dotted:</label>
+            <label class="dotted">Dotted:</label>
             <input id="measure3_Dotted" type="checkbox">
         </div>
         <div>

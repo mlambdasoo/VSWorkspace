@@ -48,6 +48,30 @@
     }
 
     onAfterUpdate(changedProps) {
+      this.changedProps = {
+        sapHideOriginalDataPointMarks: true,
+        sapHideOriginalDataPointLabels: false,
+        sapHideOriginalXAxisLabels: false,
+        sapHideOriginalYAxisLabels: false,
+        sapHideOriginalXAxisStackLabels: false,
+        sapHideOriginalYAxisStackLabels: false,
+        measure0Name: "Gross Margin",
+        measure0Dotted: true,
+        measure0LineColor: "",
+        measure0MarkerShape: "cross",
+        measure1Name: "",
+        measure1Dotted: false,
+        measure1LineColor: "",
+        measure1MarkerShape: "circle",
+        measure2Name: "",
+        measure2Dotted: false,
+        measure2LineColor: "",
+        measure2MarkerShape: "circle",
+        measure3Name: "",
+        measure3Dotted: false,
+        measure3LineColor: "",
+        measure3MarkerShape: "circle",
+      };
       this._props = { ...this._props, ...this.changedProps };
       this.render(this._props);
     }
@@ -77,15 +101,6 @@
       this._canvasElement.width = chartWidth + 20;
       this._canvasElement.height = chartHeight;
 
-      // Canvas context 초기화
-      const ctx = this._canvasElement.getContext("2d");
-      ctx.clearRect(
-        0,
-        0,
-        this._canvasElement.width,
-        this._canvasElement.height
-      );
-
       this._series.forEach((singleSeries, index) => {
         // measureName 속성에서 찾기
         let measureNumber = null;
@@ -100,7 +115,7 @@
           }
         }
 
-        let options = {};
+        const options = {};
         if (measureNumber !== null) {
           const name = props[`measure${measureNumber}Name`];
           const dotted = props[`measure${measureNumber}Dotted`];
@@ -116,31 +131,9 @@
         }
         console.log(options);
         this.renderASeries(singleSeries, options);
-
-        // 각 시리즈별로 선 그리기
-        const seriesPoints = this._points[this._points.length - 1];
-        if (seriesPoints && seriesPoints.length >= 2) {
-          // 선 스타일 설정
-          ctx.strokeStyle = options.lineColor
-            ? `#${options.lineColor}`
-            : `#${this._lineColor}`;
-          ctx.lineWidth = 2;
-
-          // dotted 속성에 따라 선 스타일 설정
-          if (options.dotted) {
-            ctx.setLineDash([5, 5]);
-          }
-
-          ctx.beginPath();
-          ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
-
-          for (let i = 1; i < seriesPoints.length; i++) {
-            ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
-          }
-
-          ctx.stroke();
-        }
       });
+
+      this.drawLinesBetweenPoints();
 
       this.renderAxisLabels(this._xAxisLabels);
       this.renderAxisLabels(this._yAxisLabels);
@@ -221,6 +214,37 @@
       );
 
       this._markersContainer.appendChild(dataElement);
+    }
+
+    drawLinesBetweenPoints() {
+      const ctx = this._canvasElement.getContext("2d");
+      ctx.clearRect(
+        0,
+        0,
+        this._canvasElement.width,
+        this._canvasElement.height
+      );
+
+      // 각 시리즈별로 선 그리기
+      this._points.forEach((seriesPoints) => {
+        if (seriesPoints.length < 2) return;
+
+        // 선 스타일 설정
+        ctx.strokeStyle = "#" + this._lineColor;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+
+        ctx.beginPath();
+        // 첫 번째 점으로 이동
+        ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
+
+        // 나머지 점들을 순서대로 연결
+        for (let i = 1; i < seriesPoints.length; i++) {
+          ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
+        }
+
+        ctx.stroke();
+      });
     }
 
     renderLabel(labelInfo, options) {

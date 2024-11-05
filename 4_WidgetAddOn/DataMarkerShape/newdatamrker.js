@@ -1,128 +1,265 @@
 (function () {
-  const plotareaFormTemplate = document.createElement("template");
-  plotareaFormTemplate.innerHTML = `
-    <form id="form">
-        <fieldset>
-            <legend>Plotarea Properties</legend>
-            <div class="measureSettings">
-              <div class="measure">
-                <label>measure 0</label>
-              </div>
-              <div class="settings">
-                <div>
-                  <label class="name">>Name:</label>
-                  <input id="measure0_Name" type="text" name="name" />
-                </div>
-                <div>
-                  <label class="dotted">dotted:</label>
-                  <input id="measure0_Dotted" type="text" name="opacity" />
-                </div>
-                <div>
-                  <label class="lineColor">>Line Color (hex number):</label>
-                  <input id="measure0_LineColor" type="text" name="lineColor" />
-                </div>
-                <div>
-                  <label class="MarkerShape">MarkerShape:</label>
-                  <input id="measure0_Shape" type="text" name="opacity" />
-                </div>
-              </div>
-            </div>
-            <div class="depthSettings">
-              <div class="depth">
-                <label>Depth 1</label>
-              </div>
-              <div class="settings">
-                <div>
-                  <label>Color:</label>
-                  <input id="depth1_itemColor" type="text" name="color" />
-                </div>
-                <div>
-                  <label class="lineOpacity">Line Opacity:</label>
-                  <input id="depth1_lineOpacity" type="text" name="opacity" />
-                </div>
-              </div>
-            </div>
-        </fieldset>
-    </form>
-    <style>
-    :host {
-        display: block;
-        padding: 1em 1em 1em 1em;
-    }
-    </style>
-`;
+  const OverlayContainerTemplate = document.createElement("template");
+  OverlayContainerTemplate.innerHTML = `
+    <div class="chart-overlay-container">
+      <canvas id="lineCanvas"></canvas>
+      <div class="markers-container"></div>
+    </div>
+  `;
 
-  class VizPlotareaBuilderPanel extends HTMLElement {
+  const DataMarkerTemplate = document.createElement("template");
+  DataMarkerTemplate.innerHTML = `<div class="series-data-marker-container"></div>`;
+
+  class Main extends HTMLElement {
     constructor() {
       super();
       this._shadowRoot = this.attachShadow({ mode: "open" });
-      this._shadowRoot.appendChild(
-        plotareaFormTemplate.content.cloneNode(true)
+      const container = OverlayContainerTemplate.content.cloneNode(true);
+      this._containerElement = container.querySelector(
+        ".chart-overlay-container"
       );
-      this._shadowRoot
-        .getElementById("form")
-        .addEventListener("submit", this._submit.bind(this));
-      this._shadowRoot
-        .getElementById("shapeSelect")
-        .addEventListener("change", this._submit.bind(this));
-      this._shadowRoot
-        .getElementById("linecolor")
-        .addEventListener("change", this._submit.bind(this));
+      this._markersContainer = container.querySelector(".markers-container");
+      this._canvasElement = container.querySelector("#lineCanvas");
+      this._shadowRoot.appendChild(container);
+      this._dataMarkerShape = "circle";
+      this._lineColor = "000000";
+      this._points = [];
+      this._props = {};
+
+      // 스타일 추가
+      const style = document.createElement("style");
+      style.textContent = `
+        .chart-overlay-container {
+          position: relative;
+          pointer-events: none;
+        }
+        #lineCanvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+        }
+        .markers-container {
+          position: relative;
+          z-index: 2;
+        }
+      `;
+      this._shadowRoot.appendChild(style);
     }
 
-    updateMeasureSetting(settings, index) {
-      this[`measure${index}Name`] = settings.measureName;
-      this[`measure${index}Dotted`] = settings.dotted;
-      this[`measure${index}LineColor`] = settings.lineColor;
-      this[`measure${index}MarkerShape`] = settings.markerShape;
-    }
-
-    onMeasureSettingsChanged(index, e) {
-      e.preventDefault();
-      const properties = {};
-      properties[`measure${index}Settings`] = {
-        measureName: this[`measure${index}Name`],
-        dotted: this[`measure${index}Dotted`],
-        lineColor: this[`measure${index}LineColor`],
-        markerShape: this[`measure${index}MarkerShape`],
+    onAfterUpdate(changedProps) {
+      this.changedProps = {
+        sapHideOriginalDataPointMarks: true,
+        sapHideOriginalDataPointLabels: false,
+        sapHideOriginalXAxisLabels: false,
+        sapHideOriginalYAxisLabels: false,
+        sapHideOriginalXAxisStackLabels: false,
+        sapHideOriginalYAxisStackLabels: false,
+        measure0Name: "Gross Margin",
+        measure0Dotted: true,
+        measure0LineColor: "",
+        measure0MarkerShape: "cross",
+        measure1Name: "",
+        measure1Dotted: false,
+        measure1LineColor: "",
+        measure1MarkerShape: "circle",
+        measure2Name: "",
+        measure2Dotted: false,
+        measure2LineColor: "",
+        measure2MarkerShape: "circle",
+        measure3Name: "",
+        measure3Dotted: false,
+        measure3LineColor: "",
+        measure3MarkerShape: "circle",
       };
+      this._props = { ...this._props, ...this.changedProps };
+      this.render(this._props);
+    }
 
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: {
-            properties,
-          },
-        })
+    render(props) {
+      console.log("render");
+      this._markersContainer.innerHTML = "";
+      this._points = [];
+
+      const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
+      if (!supportedChartTypes.includes(this._chartType)) {
+        return;
+      }
+
+      const { width: chartWidth, height: chartHeight } = this._size;
+      const { y: clipPathY, height: clipPathHeight } = this._clipPath;
+
+      this._containerElement.setAttribute(
+        "style",
+        `overflow: hidden; width: ${
+          chartWidth + 20
+        }px; height: ${chartHeight}px; clip-path: inset(${clipPathY}px 0 ${
+          chartHeight - clipPathY - clipPathHeight
+        }px 0);`
       );
+
+      this._canvasElement.width = chartWidth + 20;
+      this._canvasElement.height = chartHeight;
+
+      this._series.forEach((singleSeries, index) => {
+        const options = {};
+        this.renderASeries(singleSeries, options);
+      });
+
+      this.drawLinesBetweenPoints();
+
+      this.renderAxisLabels(this._xAxisLabels);
+      this.renderAxisLabels(this._yAxisLabels);
+      this.renderAxisStackLabels(this._xAxisStackLabels);
+      this.renderAxisStackLabels(this._yAxisStackLabels);
     }
 
-    set measure0Name(value) {
-      this._shadowRoot.getElementById("linecolor").value = value;
-    }
-    get measure0Name() {
-      return this._shadowRoot.getElementById("linecolor").value;
-    }
-    set measure0Dotted(value) {
-      this._shadowRoot.getElementById("linecolor").value = value;
+    renderASeries(singleSeries, options) {
+      console.log("renderASeries");
+      if (!singleSeries || !singleSeries.dataPoints) {
+        return;
+      }
+
+      // 각 시리즈마다 새로운 점 배열 시작
+      const seriesPoints = [];
+
+      singleSeries.dataPoints.forEach((dataPoint) => {
+        const { dataInfo, labelInfo } = dataPoint;
+
+        if (this._chartType == "stackedbar" && labelInfo) {
+          labelInfo.pointValue = parseInt(dataInfo.pointValue[0]);
+        }
+
+        // 점 정보를 현재 시리즈의 배열에 추가
+        if (dataInfo && !dataInfo.hidden && !dataInfo.outOfViewport) {
+          seriesPoints.push({
+            x: dataInfo.x + dataInfo.width / 2,
+            y: dataInfo.y + dataInfo.height / 2,
+          });
+        }
+
+        this.renderData(dataInfo, options);
+
+        if (labelInfo) {
+          this.renderLabel(labelInfo, options);
+        }
+      });
+
+      // 현재 시리즈의 점들을 전체 points 배열에 추가
+      if (seriesPoints.length > 0) {
+        this._points.push(seriesPoints);
+      }
     }
 
-    get measure0Dotted() {
-      return this._shadowRoot.getElementById("linecolor").value;
-    }
-    set measure0LineColor(value) {
-      this._shadowRoot.getElementById("linecolor").value = value;
+    renderData(dataInfo, options) {
+      if (!dataInfo || dataInfo.hidden || dataInfo.outOfViewport) {
+        return;
+      }
+
+      let { x, y, width, height } = dataInfo;
+      const dataElement = DataMarkerTemplate.content.cloneNode(true);
+      const barColumnContainer = dataElement.querySelector(
+        ".series-data-marker-container"
+      );
+      const color = dataInfo.color || options.color;
+
+      let shape = ``;
+      switch (this._dataMarkerShape) {
+        case "circle":
+          shape = `border-radius: 50%;`;
+          break;
+        case "rectangle":
+          shape = ``;
+          break;
+        case "triangle":
+          shape = `clip-path: polygon(50% 0%, 100% 100%, 0% 100%);`;
+          break;
+        case "cross":
+          shape = `clip-path: polygon(0% 0%, 100% 100%, 0% 100%, 100% 0%);`;
+          break;
+      }
+
+      barColumnContainer.setAttribute(
+        "style",
+        `${shape} background-color: ${color}; position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;${
+          dataInfo.opacity !== undefined ? `opacity: ${dataInfo.opacity};` : ""
+        }`
+      );
+
+      this._markersContainer.appendChild(dataElement);
     }
 
-    get measure0LineColor() {
-      return this._shadowRoot.getElementById("linecolor").value;
+    drawLinesBetweenPoints() {
+      const ctx = this._canvasElement.getContext("2d");
+      ctx.clearRect(
+        0,
+        0,
+        this._canvasElement.width,
+        this._canvasElement.height
+      );
+
+      // 각 시리즈별로 선 그리기
+      this._points.forEach((seriesPoints) => {
+        if (seriesPoints.length < 2) return;
+
+        // 선 스타일 설정
+        ctx.strokeStyle = "#" + this._lineColor;
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+
+        ctx.beginPath();
+        // 첫 번째 점으로 이동
+        ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
+
+        // 나머지 점들을 순서대로 연결
+        for (let i = 1; i < seriesPoints.length; i++) {
+          ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
+        }
+
+        ctx.stroke();
+      });
     }
-    set measure0MarkerShape(value) {
-      this._shadowRoot.getElementById("linecolor").value = value;
+
+    renderLabel(labelInfo, options) {
+      // 라벨 렌더링 로직 구현
+      console.log("renderLabel", labelInfo);
     }
-    get measure0MarkerShape() {
-      return this._shadowRoot.getElementById("linecolor").value;
+
+    renderAxisLabels(axisLabels) {
+      // 축 라벨 렌더링 로직 구현
+      console.log("renderAxisLabels", axisLabels);
+    }
+
+    renderAxisStackLabels(axisStackLabels) {
+      // 스택 라벨 렌더링 로직 구현
+      console.log("renderAxisStackLabels", axisStackLabels);
+    }
+
+    setExtensionData(extensionData) {
+      console.log(extensionData);
+      const {
+        chartType,
+        isHorizontal,
+        chartSize,
+        clipPath,
+        series,
+        xAxisLabels,
+        xAxisStackLabels,
+        yAxisLabels,
+        yAxisStackLabels,
+      } = extensionData;
+      this._size = chartSize;
+      this._clipPath = clipPath;
+      this._series = series;
+      this._xAxisLabels = xAxisLabels;
+      this._yAxisLabels = yAxisLabels;
+      this._xAxisStackLabels = xAxisStackLabels;
+      this._yAxisStackLabels = yAxisStackLabels;
+      this._chartType = chartType;
+      this._isHorizontal = isHorizontal;
+      this.render();
     }
   }
 
-  customElements.define("viz-plotarea-build", VizPlotareaBuilderPanel);
+  customElements.define("viz-plotarea", Main);
 })();
