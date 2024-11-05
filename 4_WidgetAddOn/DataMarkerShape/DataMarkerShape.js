@@ -257,15 +257,6 @@
       this._chartType = chartType;
       this._isHorizontal = isHorizontal;
       this.render(this._props);
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: {
-            properties: {
-              allmeasures: ["tttt"],
-            },
-          },
-        })
-      );
     }
   }
 
