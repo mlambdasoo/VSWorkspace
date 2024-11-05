@@ -48,7 +48,7 @@
     }
 
     onAfterUpdate(changedProps) {
-      this._props = { ...this._props, ...this.changedProps };
+      this._props = { ...this._props, ...changedProps };
       this.render(this._props);
     }
 
