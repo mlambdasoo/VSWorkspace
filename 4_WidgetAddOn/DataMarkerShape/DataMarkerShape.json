@@ -51,50 +51,69 @@
           "type": "boolean",
           "default": false
         },
-        "measure0Settings": {
-          "type": "measureSettings",
-          "default": {
-            "measureName": "",
-            "dotted": false,
-            "lineColor": "",
-            "markerShape": "circle"
-          }
+        "measure0Name": {
+          "type": "string",
+          "default": ""
         },
-        "measure1Settings": {
-          "type": "measureSettings",
-          "default": {
-            "measureName": "",
-            "dotted": false,
-            "lineColor": "",
-            "markerShape": "circle"
-          }
-        }
-      },
-      "types": {
-        "measureSetting": {
-          "description": "type for styling settings",
-          "properties": [
-            {
-              "name": "measureName",
-              "type": "string",
-              "description": "Measure Name"
-            },
-            {
-              "name": "dotted",
-              "type": "boolean",
-              "description": "dotted or default"
-            },
-            {
-              "name": "lineColor",
-              "type": "string",
-              "description": "dotted line color (hex number"
-            },
-            {
-              "name": "markerShape",
-              "type": "string",
-              "description": "Data Marker Shape"
-            }
-          ]
+        "measure0Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure0LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure0MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        },
+        "measure1Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure1Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure1LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure1MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        },
+        "measure2Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure2Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure2LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure2MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        },
+        "measure3Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure3Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure3LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure3MarkerShape": {
+          "type": "string",
+          "default": "circle"
         }
       }
     }
