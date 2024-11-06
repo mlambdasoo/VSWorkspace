@@ -53,7 +53,7 @@
       console.log(this.charttype);
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
-          detail: { properties: { value } },
+          detail: { properties: { charttype: this.charttype } },
         })
       );
     }
