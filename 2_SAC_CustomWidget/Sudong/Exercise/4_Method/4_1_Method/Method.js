@@ -51,11 +51,11 @@
     setChartType(value) {
       this.charttype = value;
       console.log(this.charttype);
-      // this.dispatchEvent(
-      //   new CustomEvent("propertiesChanged", {
-      //     detail: { properties: { value } },
-      //   })
-      // );
+      this.dispatchEvent(
+        new CustomEvent("propertiesChanged", {
+          detail: { properties: { value } },
+        })
+      );
     }
 
     getChartType() {
