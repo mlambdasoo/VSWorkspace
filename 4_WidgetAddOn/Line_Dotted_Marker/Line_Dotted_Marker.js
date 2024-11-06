@@ -60,6 +60,16 @@
       const supportedChartTypes = ["line"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
+      } else {
+        this.dispatchEvent(
+          new CustomEvent("propertiesChanged", {
+            detail: {
+              properties: {
+                sapHideOriginalDataPointMarks: true,
+              },
+            },
+          })
+        );
       }
 
       const { width: chartWidth, height: chartHeight } = this._size;
@@ -123,14 +133,10 @@
         if (options.dotted) {
           const seriesPoints = this._points[this._points.length - 1];
           if (seriesPoints && seriesPoints.length >= 2) {
-            // 선 스타일 설정
             ctx.strokeStyle = options.lineColor
               ? `#${options.lineColor}`
               : `#${this._lineColor}`;
             ctx.lineWidth = 2;
-
-            // dotted 속성에 따라 선 스타일 설정
-
             ctx.setLineDash([5, 5]);
 
             ctx.beginPath();
@@ -144,11 +150,6 @@
           }
         }
       });
-
-      this.renderAxisLabels(this._xAxisLabels);
-      this.renderAxisLabels(this._yAxisLabels);
-      this.renderAxisStackLabels(this._xAxisStackLabels);
-      this.renderAxisStackLabels(this._yAxisStackLabels);
     }
 
     renderASeries(singleSeries, options) {
@@ -156,18 +157,13 @@
       if (!singleSeries || !singleSeries.dataPoints) {
         return;
       }
-
-      // 각 시리즈마다 새로운 점 배열 시작
       const seriesPoints = [];
-
       singleSeries.dataPoints.forEach((dataPoint) => {
         const { dataInfo, labelInfo } = dataPoint;
 
         if (this._chartType == "stackedbar" && labelInfo) {
           labelInfo.pointValue = parseInt(dataInfo.pointValue[0]);
         }
-
-        // 점 정보를 현재 시리즈의 배열에 추가
         if (dataInfo && !dataInfo.hidden && !dataInfo.outOfViewport) {
           seriesPoints.push({
             x: dataInfo.x + dataInfo.width / 2,
@@ -176,10 +172,6 @@
         }
 
         this.renderData(dataInfo, options);
-
-        if (labelInfo) {
-          this.renderLabel(labelInfo, options);
-        }
       });
 
       // 현재 시리즈의 점들을 전체 points 배열에 추가
@@ -229,10 +221,6 @@
     }
 
     renderLabel(labelInfo, options) {}
-
-    renderAxisLabels(axisLabels) {}
-
-    renderAxisStackLabels(axisStackLabels) {}
 
     setExtensionData(extensionData) {
       console.log(extensionData);
