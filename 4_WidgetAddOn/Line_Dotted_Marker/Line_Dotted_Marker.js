@@ -57,21 +57,10 @@
       this._markersContainer.innerHTML = "";
       this._points = [];
 
-      const supportedChartTypes = ["line"];
+      const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
-      } else {
-        this.dispatchEvent(
-          new CustomEvent("propertiesChanged", {
-            detail: {
-              properties: {
-                sapHideOriginalDataPointMarks: true,
-              },
-            },
-          })
-        );
       }
-
       const { width: chartWidth, height: chartHeight } = this._size;
       const { y: clipPathY, height: clipPathHeight } = this._clipPath;
 

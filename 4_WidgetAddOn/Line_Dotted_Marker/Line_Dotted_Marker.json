@@ -29,7 +29,7 @@
       "properties": {
         "sapHideOriginalDataPointMarks": {
           "type": "boolean",
-          "default": false
+          "default": true
         },
         "sapHideOriginalDataPointLabels": {
           "type": "boolean",
