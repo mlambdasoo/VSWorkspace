@@ -180,28 +180,29 @@
         ".series-data-marker-container"
       );
       const color = dataInfo.color;
-      let shape = ``;
+      let shape_color = ``;
       switch (options.markerShape) {
         case "circle":
-          shape = `border-radius: 50%;`;
+          shape_color = `border-radius: 50%;background-color: ${color};`;
           break;
         case "square":
-          shape = ``;
+          shape_color = `background-color: ${color};`;
           break;
         case "triangle":
-          shape = `clip-path: polygon(50% 0%, 100% 100%, 0% 100%);`;
+          shape_color = `clip-path: polygon(50% 0%, 100% 100%, 0% 100%);background-color: ${color};`;
           break;
         case "cross":
-          shape = `clip-path: polygon(0% 0%, 100% 100%, 0% 100%, 100% 0%);`;
+          shape_color = `background: linear-gradient(45deg, transparent 45%, ${color} 45%, ${color} 55%, transparent 55%), 
+                linear-gradient(-45deg, transparent 45%, ${color} 45%, ${color} 55%, transparent 55%);background-color: transparent;`;
           break;
         default:
-          shape = `border-radius: 50%;`; // 기본값으로 circle 모양 설정
+          shape_color = `border-radius: 50%;background-color: ${color};`; // 기본값으로 circle 모양 설정
           break;
       }
 
       barColumnContainer.setAttribute(
         "style",
-        `${shape} background-color: ${color}; position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;${
+        `${shape_color} position: absolute; top: ${y}px; left: ${x}px; width: ${width}px; height: ${height}px;${
           dataInfo.opacity !== undefined ? `opacity: ${dataInfo.opacity};` : ""
         }`
       );
