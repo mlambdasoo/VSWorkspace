@@ -48,7 +48,7 @@
     }
 
     onAfterUpdate(changedProps) {
-      this._props = { ...this._props, ...this.changedProps };
+      this._props = { ...this._props, ...changedProps };
       this.render(this._props);
     }
 
@@ -57,7 +57,7 @@
       this._markersContainer.innerHTML = "";
       this._points = [];
 
-      const supportedChartTypes = ["barcolumn", "stackedbar", "line", "area"];
+      const supportedChartTypes = ["line"];
       if (!supportedChartTypes.includes(this._chartType)) {
         return;
       }
@@ -89,14 +89,16 @@
       this._series.forEach((singleSeries, index) => {
         // measureName 속성에서 찾기
         let measureNumber = null;
-        for (const [key, value] of Object.entries(props)) {
-          if (
-            key.startsWith("measure") &&
-            key.endsWith("Name") &&
-            value === singleSeries.name
-          ) {
-            measureNumber = key.match(/\d+/)[0]; // 숫자 추출
-            break;
+        if (props) {
+          for (const [key, value] of Object.entries(props)) {
+            if (
+              key.startsWith("measure") &&
+              key.endsWith("Name") &&
+              value === singleSeries.name
+            ) {
+              measureNumber = key.match(/\d+/)[0]; // 숫자 추출
+              break;
+            }
           }
         }
 
@@ -118,27 +120,28 @@
         this.renderASeries(singleSeries, options);
 
         // 각 시리즈별로 선 그리기
-        const seriesPoints = this._points[this._points.length - 1];
-        if (seriesPoints && seriesPoints.length >= 2) {
-          // 선 스타일 설정
-          ctx.strokeStyle = options.lineColor
-            ? `#${options.lineColor}`
-            : `#${this._lineColor}`;
-          ctx.lineWidth = 2;
+        if (options.dotted) {
+          const seriesPoints = this._points[this._points.length - 1];
+          if (seriesPoints && seriesPoints.length >= 2) {
+            // 선 스타일 설정
+            ctx.strokeStyle = options.lineColor
+              ? `#${options.lineColor}`
+              : `#${this._lineColor}`;
+            ctx.lineWidth = 2;
 
-          // dotted 속성에 따라 선 스타일 설정
-          if (options.dotted) {
+            // dotted 속성에 따라 선 스타일 설정
+
             ctx.setLineDash([5, 5]);
+
+            ctx.beginPath();
+            ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
+
+            for (let i = 1; i < seriesPoints.length; i++) {
+              ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
+            }
+
+            ctx.stroke();
           }
-
-          ctx.beginPath();
-          ctx.moveTo(seriesPoints[0].x, seriesPoints[0].y);
-
-          for (let i = 1; i < seriesPoints.length; i++) {
-            ctx.lineTo(seriesPoints[i].x, seriesPoints[i].y);
-          }
-
-          ctx.stroke();
         }
       });
 
@@ -195,14 +198,13 @@
       const barColumnContainer = dataElement.querySelector(
         ".series-data-marker-container"
       );
-      const color = dataInfo.color || options.color;
-      console.log(color);
+      const color = dataInfo.color;
       let shape = ``;
       switch (options.markerShape) {
         case "circle":
           shape = `border-radius: 50%;`;
           break;
-        case "rectangle":
+        case "square":
           shape = ``;
           break;
         case "triangle":
@@ -210,6 +212,9 @@
           break;
         case "cross":
           shape = `clip-path: polygon(0% 0%, 100% 100%, 0% 100%, 100% 0%);`;
+          break;
+        default:
+          shape = `border-radius: 50%;`; // 기본값으로 circle 모양 설정
           break;
       }
 
@@ -223,20 +228,11 @@
       this._markersContainer.appendChild(dataElement);
     }
 
-    renderLabel(labelInfo, options) {
-      // 라벨 렌더링 로직 구현
-      console.log("renderLabel", labelInfo);
-    }
+    renderLabel(labelInfo, options) {}
 
-    renderAxisLabels(axisLabels) {
-      // 축 라벨 렌더링 로직 구현
-      console.log("renderAxisLabels", axisLabels);
-    }
+    renderAxisLabels(axisLabels) {}
 
-    renderAxisStackLabels(axisStackLabels) {
-      // 스택 라벨 렌더링 로직 구현
-      console.log("renderAxisStackLabels", axisStackLabels);
-    }
+    renderAxisStackLabels(axisStackLabels) {}
 
     setExtensionData(extensionData) {
       console.log(extensionData);
@@ -260,9 +256,9 @@
       this._yAxisStackLabels = yAxisStackLabels;
       this._chartType = chartType;
       this._isHorizontal = isHorizontal;
-      this.render();
+      this.render(this._props);
     }
   }
 
-  customElements.define("viz-plotarea", Main);
+  customElements.define("dottedline-marker", Main);
 })();

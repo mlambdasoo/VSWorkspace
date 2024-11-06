@@ -1,8 +1,8 @@
 {
-  "id": "com.sudong.addon.ex1",
+  "id": "com.sudong.sac.addon.dottedline.marker",
   "version": "1.0.0",
-  "name": "Sudong Widget add-on ex1",
-  "description": "A widget customization add-on basic",
+  "name": "Dotted Line and Custom Marker",
+  "description": "Dotted Line and Custom Marker Add-on",
   "icon": "undefined",
   "vendor": "SAP",
   "eula": "EULA",
@@ -13,15 +13,15 @@
       "webcomponents": [
         {
           "kind": "main",
-          "tag": "viz-plotarea",
-          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/DataMarkerShape/DataMarkerShape.js",
+          "tag": "dottedline-marker",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Line_Dotted_Marker/Line_Dotted_Marker.js",
           "integrity": "",
           "ignoreIntegrity": true
         },
         {
           "kind": "builder",
-          "tag": "viz-plotarea-build",
-          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/DataMarkerShape/DataMarkerShape-builder-panel.js",
+          "tag": "dottedline-marker-builder",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Line_Dotted_Marker/Line_Dotted_Marker_Builder.js",
           "integrity": "",
           "ignoreIntegrity": true
         }

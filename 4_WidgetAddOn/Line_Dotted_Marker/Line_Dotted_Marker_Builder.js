@@ -344,5 +344,5 @@
     }
   }
 
-  customElements.define("viz-plotarea-build", VizPlotareaBuilderPanel);
+  customElements.define("dottedline-marker-builder", VizPlotareaBuilderPanel);
 })();
