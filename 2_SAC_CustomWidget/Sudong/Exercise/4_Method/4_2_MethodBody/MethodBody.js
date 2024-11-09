@@ -74,5 +74,5 @@
     }
   }
 
-  customElements.define("com-sap-sac-exercise-lsd-method", Basic);
+  customElements.define("com-sap-sac-exercise-lsd-method-dispatch", Basic);
 })();

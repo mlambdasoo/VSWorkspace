@@ -1,0 +1,73 @@
+{
+  "eula": "",
+  "vendor": "LEE.SUDONG",
+  "license": "",
+  "id": "com.sap.sac.exercise.lsd.method.dispatch",
+  "version": "1.0.0",
+  "name": "Exercise 4_1 - Method dispatch",
+  "icon": "",
+  "newInstancePrefix": "MethodDispatch",
+  "description": "Custom Widget Exercise 4_1 - Method dispatch",
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "com-sap-sac-exercise-lsd-method-dispatch",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/4_Method/4_2_MethodBody/MethodBody.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "height": {
+      "type": "integer",
+      "default": 420
+    },
+    "charttype": {
+      "type": "string",
+      "description": "Exercise",
+      "default": "bar"
+    },
+    "simpleobjecttype": {
+      "type": "Object<string>",
+      "description": "Exercise"
+    }
+  },
+  "methods": {
+    "setChartType": {
+      "description": "Set chart type",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "Chart type"
+        }
+      ],
+      "body": "this.charttype = value;"
+    },
+    "getChartType": {
+      "returnType": "string",
+      "body": "return this.charttype"
+    }
+  },
+  "events": {},
+  "dataBindings": {
+    "myDataBinding": {
+      "feeds": [
+        {
+          "id": "dimensions",
+          "description": "Dimensions",
+          "type": "dimension"
+        },
+        {
+          "id": "measures",
+          "description": "Measures",
+          "type": "mainStructureMember"
+        }
+      ]
+    }
+  }
+}
