@@ -51,10 +51,10 @@
     setChartType(value) {
       this.charttype = value;
       console.log(this.charttype);
-      //propertiesChagned라는 custom event를 dispatch함으로써 CustomWidget Framework에 변경사항을 전달
+      //propertiesChagned라는 custom event를 dispatch함으로써 CustomWidget Framework에 변경사항을 전달 (Style, Builder, Main간 공유 목적)
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
-          detail: { properties: { value } },
+          detail: { properties: { charttype: this.charttype } },
         })
       );
     }
