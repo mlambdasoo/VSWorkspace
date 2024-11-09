@@ -87,6 +87,79 @@
           "description": "education name"
         }
       ]
+    },
+    "Document": {
+      "description": "A document",
+      "properties": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of the document",
+          "mandatory": true
+        }
+      ]
+    },
+    "Book": {
+      "extends": "Document",
+      "description": "A book document",
+      "properties": [
+        {
+          "name": "bookContentType",
+          "type": "BookContentType",
+          "description": "Content type of the book",
+          "mandatory": true
+        },
+        {
+          "name": "numberOfPages",
+          "type": "integer",
+          "description": "Number of pages"
+        }
+      ]
+    },
+    "Video": {
+      "extends": "Document",
+      "description": "A video document",
+      "properties": [
+        {
+          "name": "videoContentType",
+          "type": "VideoContentType",
+          "description": "Content type of the video",
+          "mandatory": true
+        },
+        {
+          "name": "length",
+          "type": "integer",
+          "description": "Length of footage in seconds"
+        }
+      ]
+    },
+    "BookContentType": {
+      "extends": "Enum",
+      "description": "A set of values to describe the book content type",
+      "properties": [
+        {
+          "name": "TXT",
+          "description": "A book in plain text format"
+        },
+        {
+          "name": "PDF",
+          "description": "A book in PDF format"
+        }
+      ]
+    },
+    "VideoContentType": {
+      "extends": "Enum",
+      "description": "A set of values to describe the video content type",
+      "properties": [
+        {
+          "name": "AVI",
+          "description": "A video in AVI format"
+        },
+        {
+          "name": "MP4",
+          "description": "A video in MP4 format"
+        }
+      ]
     }
   },
   "dataBindings": {
