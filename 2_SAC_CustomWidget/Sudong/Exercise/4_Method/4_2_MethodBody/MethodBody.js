@@ -48,21 +48,6 @@
       console.log("disconnectedCallback");
     }
 
-    setChartType(value) {
-      this.charttype = value;
-      console.log(this.charttype);
-      //propertiesChagned라는 custom event를 dispatch함으로써 CustomWidget Framework에 변경사항을 전달
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: { properties: { value } },
-        })
-      );
-    }
-
-    getChartType() {
-      return this.charttype;
-    }
-
     async render() {
       console.log("render");
       const dataBinding = this.myDataBinding;
