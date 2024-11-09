@@ -50,7 +50,7 @@
     },
     "getChartType": {
       "returnType": "string",
-      "body": "return this.charttype"
+      "body": "return this.charttype;"
     }
   },
   "events": {},
