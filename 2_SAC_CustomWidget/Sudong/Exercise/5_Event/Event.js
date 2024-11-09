@@ -2,6 +2,10 @@
   const template = document.createElement("template");
   template.innerHTML = `
         <style>
+        .button2 {
+          width: 100%;
+          height: 100%;
+        }   
         </style>
         <div id="root" style="width: 100%; height: 100%;">
          <button id="button1" type="button">Click Me!</button> 
