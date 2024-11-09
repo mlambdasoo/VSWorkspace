@@ -1,0 +1,108 @@
+{
+  "eula": "",
+  "vendor": "LEE.SUDONG",
+  "license": "",
+  "id": "com.sap.sac.exercise.lsd.customtype",
+  "version": "1.0.0",
+  "name": "Exercise 6 - Custom Type",
+  "icon": "",
+  "newInstancePrefix": "CustomType",
+  "description": "Custom Widget Exercise 6 - Custom Type",
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "com-sap-sac-exercise-lsd-customtype",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/6_Type/CustomType.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "height": {
+      "type": "integer",
+      "default": 420
+    },
+    "charttype": {
+      "type": "string",
+      "description": "Exercise",
+      "default": "bar"
+    },
+    "simpleobjecttype": {
+      "type": "Object<string>",
+      "description": "Exercise"
+    },
+    "myCustomProp": {
+      "type": "mydatatype",
+      "default": { "index": 1, "name": "default education" },
+      "description": "My Custom Properties"
+    }
+  },
+  "methods": {
+    "setChartType": {
+      "description": "Set chart type",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "Chart type"
+        }
+      ]
+    },
+    "getChartType": {
+      "returnType": "string"
+    },
+    "getCustomType": {
+      "description": "Get data on my custom type",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "mydatatype",
+          "description": "my Custom Data type {index: integer, name: string}"
+        }
+      ],
+      "returnType": "mydatatype"
+    }
+  },
+  "events": {
+    "Click": {
+      "description": "Dispatch when user click a custom widget"
+    }
+  },
+  "types": {
+    "mydatatype": {
+      "description": "my data type",
+      "properties": [
+        {
+          "name": "index",
+          "type": "integer",
+          "description": "education index"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "education name"
+        }
+      ]
+    }
+  },
+  "dataBindings": {
+    "myDataBinding": {
+      "feeds": [
+        {
+          "id": "dimensions",
+          "description": "Dimensions",
+          "type": "dimension"
+        },
+        {
+          "id": "measures",
+          "description": "Measures",
+          "type": "mainStructureMember"
+        }
+      ]
+    }
+  }
+}
