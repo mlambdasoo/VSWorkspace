@@ -2,7 +2,7 @@
   const template = document.createElement("template");
   template.innerHTML = `
         <style>
-        .button2 {
+        #button1 {
           width: 100%;
           height: 100%;
         }   
@@ -24,6 +24,7 @@
         //parent로 전파되는것을 방지
         e.stopPropagation();
         console.log("click");
+        //Json에서 정의한 event명으로 생성
         this.dispatchEvent(new Event("Click"));
       });
     }
