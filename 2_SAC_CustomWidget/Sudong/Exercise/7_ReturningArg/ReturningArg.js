@@ -60,6 +60,7 @@
       console.log("disconnectedCallback");
     }
 
+    //// 일반적인 javascript는 참조로 return을 하지만 Custom widget에 의해서 Copy가 전달됨
     getArrayByValue(values) {
       return values; // "values" is not the original, but already a copy
     }

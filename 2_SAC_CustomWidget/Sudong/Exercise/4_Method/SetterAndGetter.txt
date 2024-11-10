@@ -1,0 +1,4 @@
+Setter와 Getter 구성 시
+
+다음 형태로 구현하지 말것
+Setter는 JSON Body로 Getter는 Native JS로 구현 혹은 반대로 Mix해서 사용하지 말것 
