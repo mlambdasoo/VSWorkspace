@@ -1,0 +1,10 @@
+스크립트 Method로 전달될때 반환 구조
+
+1. Simple Type(예: 문자열, 정수, 숫자, 불리언)과 Script API 데이터 타입(예: 버튼)은 항상 값으로 반환. 즉, 인수의 복사본이 반환
+
+2. Array와 Simple Object Type객체(예: object<string>)는 값으로 반환되거나 참조로 반환. 
+이는 스크립트 메소드 구현이 정의된 위치에 따라 다름
+  1 - 값인 경우(복사본): Native Javascript로 정의할때
+  2 - 참조인 경우: JSON Body로 정의할때
+
+일반적인 Javascript 모두 참조로 전달 되지만, Custom Widget은 Framework와 Web component의 분리를 위해 복사하는 형태로 구성

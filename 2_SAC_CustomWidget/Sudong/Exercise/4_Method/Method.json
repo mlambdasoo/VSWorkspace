@@ -1,0 +1,71 @@
+{
+  "eula": "",
+  "vendor": "LEE.SUDONG",
+  "license": "",
+  "id": "com.sap.sac.exercise.lsd.method",
+  "version": "1.0.0",
+  "name": "Exercise 4 - Method",
+  "icon": "",
+  "newInstancePrefix": "Method",
+  "description": "Custom Widget Exercise 4 - Method",
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "com-sap-sac-exercise-lsd-method",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/4_Method/Method.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "height": {
+      "type": "integer",
+      "default": 420
+    },
+    "charttype": {
+      "type": "string",
+      "description": "Exercise",
+      "default": "bar"
+    },
+    "simpleobjecttype": {
+      "type": "Object<string>",
+      "description": "Exercise"
+    }
+  },
+  "methods": {
+    "setChartType": {
+      "description": "Set chart type",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "Chart type"
+        }
+      ]
+    },
+    "getChartType": {
+      "returnType": "string"
+    }
+  },
+  "events": {},
+  "dataBindings": {
+    "myDataBinding": {
+      "feeds": [
+        {
+          "id": "dimensions",
+          "description": "Dimensions",
+          "type": "dimension"
+        },
+        {
+          "id": "measures",
+          "description": "Measures",
+          "type": "mainStructureMember"
+        }
+      ]
+    }
+  }
+}

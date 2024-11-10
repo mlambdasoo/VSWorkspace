@@ -59,7 +59,7 @@ var transformData = (inputData) => {
         margin-top: 10px;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         box-sizing: border-box;
-        font-size: 16px;
+        font-size: 17px;
       }
     </style>
     <div id="widget-container">
@@ -84,30 +84,49 @@ var transformData = (inputData) => {
       this._isTreeVisible = false;
       this.selectedKey = [];
       this.selectedText = [];
+      this._clickListenerAdded = false;
+      console.log("constructor");
     }
 
     onCustomWidgetBeforeUpdate(changedProps) {
+      console.log("onCustomWidgetBeforeUpdate");
       console.log(changedProps);
       this._props = { ...this._props, ...changedProps };
     }
 
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log("onCustomWidgetAfterUpdate");
       console.log(changedProps);
       this.adjustRootHeight();
       this.render();
     }
 
-    // onCustomWidgetResize(width, height) {
-    //   console.log(changedProps)
-    //    if (this.designMode == true) {
-    //      this.adjustRootHeight();
-    //      this.render();
-    //    }
-    // }
+    connectedCallback() {
+      console.log("connectedCallback");
+      this._widgetContainer.addEventListener("click", (e) => {
+        e.stopPropagation();
+        console.log("click");
+        this.toggleTree();
+      });
+
+      this._list.addEventListener("treeExpanded", (e) => {
+        e.stopPropagation();
+        console.log("treeExpanded");
+      });
+      this._list.addEventListener("treeCollapsed", (e) => {
+        e.stopPropagation();
+        console.log("treeCollapsed");
+      });
+    }
+
+    onCustomWidgetResize(width, height) {
+      console.log("onCustomWidgetResize");
+    }
 
     onCustomWidgetDestroy() {}
 
     async render() {
+      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
@@ -116,28 +135,13 @@ var transformData = (inputData) => {
       const { dimensions, measures } = parseMetadata(metadata);
       const treedata = transformData(data);
       console.log(data);
-      console.log(dimensions);
-      console.log(measures);
       this._widgetTitle.textContent = dimensions[0].description;
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
       // 이벤트 디스패치
-      this._widgetContainer.addEventListener("click", () => {
-        this.dispatchEvent(new Event("onClick")); // 커스텀 이벤트 디스패치
-      });
 
       // 이벤트 리스너 등록
-      this.addEventListener("onClick", (e) => {
-        e.stopPropagation(); // 클릭 이벤트의 전파를 막음
-        this.toggleTree(); // 트리 토글 동작
-      });
-      this._list.addEventListener("treeExpanded", (e) => {
-        e.stopPropagation();
-      });
-      this._list.addEventListener("treeCollapsed", (e) => {
-        e.stopPropagation();
-      });
 
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {

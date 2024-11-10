@@ -15,16 +15,16 @@
     {
       "kind": "main",
       "tag": "com-sap-sac-sample-echarts-sankeyyg",
-      "url": "/main.js",
-      "integrity": "sha256-6Jr/asl/QIhzXIKTPujY2A2VAuwjaTeRt2xMkIsgmE4=",
-      "ignoreIntegrity": false
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Custom-Widget-Samples/Sankey%20Chart%20with%20Styling%20Panel/main.js",
+      "integrity": "",
+      "ignoreIntegrity": true
     },
     {
       "kind": "styling",
       "tag": "com-sap-sac-sample-echarts-sankeyyg-styling",
-      "url": "/sankeyChartStyling.js",
-      "integrity": "sha256-AR0uDO+9h8nu9EyJotSinZ2APDWD5Ja2JmdFcZCH1Xo=",
-      "ignoreIntegrity": false
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Custom-Widget-Samples/Sankey%20Chart%20with%20Styling%20Panel/sankeyChartStyling.js",
+      "integrity": "",
+      "ignoreIntegrity": true
     }
   ],
   "properties": {
@@ -38,28 +38,28 @@
     },
     "depth0Settings": {
       "type": "stylingSetting",
-      "default": {"itemColor": "#348B26", "lineOpacity": 0.6}
+      "default": { "itemColor": "#348B26", "lineOpacity": 0.6 }
     },
     "depth1Settings": {
       "type": "stylingSetting",
-      "default": {"itemColor": "#4FB81C", "lineOpacity": 0.4}
+      "default": { "itemColor": "#4FB81C", "lineOpacity": 0.4 }
     },
     "depth2Settings": {
       "type": "stylingSetting",
-      "default": {"itemColor": "#93C939", "lineOpacity": 0.2}
+      "default": { "itemColor": "#93C939", "lineOpacity": 0.2 }
     },
     "depth3Settings": {
       "type": "stylingSetting",
-      "default": {"itemColor": "#BCDC50", "lineOpacity": 0.1}
+      "default": { "itemColor": "#BCDC50", "lineOpacity": 0.1 }
     }
   },
   "events": {},
   "methods": {
-		"getDataSource": {
-			"parameters": [],
-			"body": "return this.dataBindings.getDataBinding('dataBinding').getDataSource();",
-			"returnType": "DataSource"
-		}
+    "getDataSource": {
+      "parameters": [],
+      "body": "return this.dataBindings.getDataBinding('dataBinding').getDataSource();",
+      "returnType": "DataSource"
+    }
   },
   "types": {
     "stylingSetting": {

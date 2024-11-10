@@ -1,0 +1,121 @@
+{
+  "id": "com.sudong.sac.addon.dottedline.marker",
+  "version": "1.0.0",
+  "name": "Dotted Line and Custom Marker",
+  "description": "Dotted Line and Custom Marker Add-on",
+  "icon": "undefined",
+  "vendor": "SAP",
+  "eula": "EULA",
+  "license": "1.0",
+  "extensions": [
+    {
+      "extensionPoint": "sap.addOn.viz.plotarea.general",
+      "webcomponents": [
+        {
+          "kind": "main",
+          "tag": "dottedline-marker",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Line_Dotted_Marker/Line_Dotted_Marker.js",
+          "integrity": "",
+          "ignoreIntegrity": true
+        },
+        {
+          "kind": "builder",
+          "tag": "dottedline-marker-builder",
+          "url": "https://mlambdasoo.github.io/VSWorkspace/4_WidgetAddOn/Line_Dotted_Marker/Line_Dotted_Marker_Builder.js",
+          "integrity": "",
+          "ignoreIntegrity": true
+        }
+      ],
+      "properties": {
+        "sapHideOriginalDataPointMarks": {
+          "type": "boolean",
+          "default": true
+        },
+        "sapHideOriginalDataPointLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalXAxisLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalYAxisLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalXAxisStackLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "sapHideOriginalYAxisStackLabels": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure0Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure0Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure0LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure0MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        },
+        "measure1Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure1Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure1LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure1MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        },
+        "measure2Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure2Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure2LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure2MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        },
+        "measure3Name": {
+          "type": "string",
+          "default": ""
+        },
+        "measure3Dotted": {
+          "type": "boolean",
+          "default": false
+        },
+        "measure3LineColor": {
+          "type": "string",
+          "default": ""
+        },
+        "measure3MarkerShape": {
+          "type": "string",
+          "default": "circle"
+        }
+      }
+    }
+  ]
+}

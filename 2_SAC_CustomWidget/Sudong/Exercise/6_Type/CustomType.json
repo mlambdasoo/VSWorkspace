@@ -1,0 +1,181 @@
+{
+  "eula": "",
+  "vendor": "LEE.SUDONG",
+  "license": "",
+  "id": "com.sap.sac.exercise.lsd.customtype",
+  "version": "1.0.0",
+  "name": "Exercise 6 - Custom Type",
+  "icon": "",
+  "newInstancePrefix": "CustomType",
+  "description": "Custom Widget Exercise 6 - Custom Type",
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "com-sap-sac-exercise-lsd-customtype",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/6_Type/CustomType.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "height": {
+      "type": "integer",
+      "default": 420
+    },
+    "charttype": {
+      "type": "string",
+      "description": "Exercise",
+      "default": "bar"
+    },
+    "simpleobjecttype": {
+      "type": "Object<string>",
+      "description": "Exercise"
+    },
+    "myCustomProp": {
+      "type": "mydatatype",
+      "default": { "index": 1, "name": "default education" },
+      "description": "My Custom Properties"
+    }
+  },
+  "methods": {
+    "setChartType": {
+      "description": "Set chart type",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "string",
+          "description": "Chart type"
+        }
+      ]
+    },
+    "getChartType": {
+      "returnType": "string"
+    },
+    "getCustomType": {
+      "description": "Get data on my custom type",
+      "parameters": [
+        {
+          "name": "value",
+          "type": "mydatatype",
+          "description": "my Custom Data type {index: integer, name: string}"
+        }
+      ],
+      "returnType": "mydatatype"
+    }
+  },
+  "events": {
+    "Click": {
+      "description": "Dispatch when user click a custom widget"
+    }
+  },
+  "types": {
+    "mydatatype": {
+      "description": "my data type",
+      "properties": [
+        {
+          "name": "index",
+          "type": "integer",
+          "description": "education index"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "education name"
+        }
+      ]
+    },
+    "Document": {
+      "description": "A document",
+      "properties": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Name of the document",
+          "mandatory": true
+        }
+      ]
+    },
+    "Book": {
+      "extends": "Document",
+      "description": "A book document",
+      "properties": [
+        {
+          "name": "bookContentType",
+          "type": "BookContentType",
+          "description": "Content type of the book",
+          "mandatory": true
+        },
+        {
+          "name": "numberOfPages",
+          "type": "integer",
+          "description": "Number of pages"
+        }
+      ]
+    },
+    "Video": {
+      "extends": "Document",
+      "description": "A video document",
+      "properties": [
+        {
+          "name": "videoContentType",
+          "type": "VideoContentType",
+          "description": "Content type of the video",
+          "mandatory": true
+        },
+        {
+          "name": "length",
+          "type": "integer",
+          "description": "Length of footage in seconds"
+        }
+      ]
+    },
+    "BookContentType": {
+      "extends": "Enum",
+      "description": "A set of values to describe the book content type",
+      "properties": [
+        {
+          "name": "TXT",
+          "description": "A book in plain text format"
+        },
+        {
+          "name": "PDF",
+          "description": "A book in PDF format"
+        }
+      ]
+    },
+    "VideoContentType": {
+      "extends": "Enum",
+      "description": "A set of values to describe the video content type",
+      "properties": [
+        {
+          "name": "AVI",
+          "description": "A video in AVI format"
+        },
+        {
+          "name": "MP4",
+          "description": "A video in MP4 format"
+        }
+      ]
+    }
+  },
+  "dataBindings": {
+    "myDataBinding": {
+      "feeds": [
+        {
+          "id": "dimensions",
+          "description": "Dimensions",
+          "type": "dimension"
+        },
+        {
+          "id": "measures",
+          "description": "Measures",
+          "type": "mainStructureMember"
+        }
+      ]
+    }
+  }
+}

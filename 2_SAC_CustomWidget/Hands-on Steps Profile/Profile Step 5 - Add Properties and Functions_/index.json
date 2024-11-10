@@ -4,15 +4,15 @@
   "license": "",
   "id": "com.sap.sac.exercise.lsd.5",
   "version": "1.0.0",
-  "name": "Guided Custom Widget Exercise 5",
+  "name": "Ex5 - Add Properties and Functions",
   "icon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAzklEQVQ4jWNgoBAwkqLYOLGjguH//1RGxv+7z8yvymBgYGBgIcm2//8lGRgZlP7/Z5CDiTGRYgA2QLEBOL2gFVrPxsXDYcfAwMDw7cuPQ9dWN/4iyQBebi75vwz/dkPZagwMDLexqaOeF4wT2jcyMjL4Mfz/33tmQVUJsQYgueA/K4RmZCXFBQMfjQNvADwWGBkZHv3/z3CPgZHxOQMDAwPjv9/fGJiZ7sLZDAwM/xkZnzP8/3+PkZHhEaUWwwGjSWL7f0oMYGFgYFCmxAAACtUz95booNoAAAAASUVORK5CYII=",
-  "newInstancePrefix": "ExerciseCustomWidget",
-  "description": "A Guided Custom Widget Exercise",
+  "newInstancePrefix": "Ex5_PropAndFunc",
+  "description": "Ex5 - Add Properties and Functions",
   "webcomponents": [
     {
       "kind": "main",
       "tag": "com-sap-sac-exercise-lsd5-main",
-      "url": "/main.js",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Hands-on%20Steps%20Profile/Profile%20Step%205%20-%20Add%20Properties%20and%20Functions_/main.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
@@ -44,7 +44,7 @@
       ]
     }
   },
-  "events":{},
+  "events": {},
   "dataBindings": {
     "dataBinding": {
       "feeds": [

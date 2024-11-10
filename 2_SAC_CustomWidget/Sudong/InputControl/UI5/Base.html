@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SAPUI5 with Sequential Script Loading</title>
+    <script
+      src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+      id="sap-ui-bootstrap"
+      data-sap-ui-theme="sap_fiori_3"
+      data-sap-ui-libs="sap.m"
+      data-sap-ui-async="true"
+      data-sap-ui-resourceroots='{"custom": "./"}'
+    ></script>
+    <script>
+      sap.ui.getCore().attachInit(function () {
+        var script = document.createElement("script");
+        script.src = "Base.js";
+        document.head.appendChild(script);
+      });
+    </script>
+  </head>
+  <body>
+    <com-sapkorea-sac-sudong-base></com-sapkorea-sac-sudong-base>
+  </body>
+</html>
