@@ -1,0 +1,97 @@
+{
+  "eula": "",
+  "vendor": "LEE.SUDONG",
+  "license": "",
+  "id": "com.sap.sac.exercise.lsd.scriptAPI",
+  "version": "1.0.0",
+  "name": "Exercise 8 - Script API",
+  "icon": "",
+  "newInstancePrefix": "ScriptAPI",
+  "description": "Custom Widget Exercise 8 - Script API",
+  "webcomponents": [
+    {
+      "kind": "main",
+      "tag": "com-sap-sac-exercise-lsd-scriptapi",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/Sudong/Exercise/8_ScriptAPI/ScriptAPI.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "height": {
+      "type": "integer",
+      "default": 420
+    },
+    "charttype": {
+      "type": "string",
+      "description": "Exercise",
+      "default": "bar"
+    },
+    "simpleobjecttype": {
+      "type": "Object<string>",
+      "description": "Exercise"
+    },
+    "myCustomProp": {
+      "type": "mydatatype",
+      "default": { "index": 1, "name": "default education" },
+      "description": "My Custom Properties"
+    }
+  },
+  "methods": {
+    "setButtonText1": {
+      "parameters": [
+        { "name": "button", "type": "Button" },
+        { "name": "text", "type": "string" }
+      ],
+      "body": "button.setText(text);"
+    },
+    "setButtonText2": {
+      "parameters": [
+        { "name": "button", "type": "Button" },
+        { "name": "text", "type": "string" }
+      ]
+    }
+  },
+  "events": {
+    "Click": {
+      "description": "Dispatch when user click a custom widget"
+    }
+  },
+  "types": {
+    "mydatatype": {
+      "description": "my data type",
+      "properties": [
+        {
+          "name": "index",
+          "type": "integer",
+          "description": "education index"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "education name"
+        }
+      ]
+    }
+  },
+  "dataBindings": {
+    "myDataBinding": {
+      "feeds": [
+        {
+          "id": "dimensions",
+          "description": "Dimensions",
+          "type": "dimension"
+        },
+        {
+          "id": "measures",
+          "description": "Measures",
+          "type": "mainStructureMember"
+        }
+      ]
+    }
+  }
+}
