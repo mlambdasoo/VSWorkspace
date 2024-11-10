@@ -57,7 +57,7 @@
     },
     "getButtonText1": {
       "parameters": [{ "name": "button", "type": "Button" }],
-      "returnType": "button.getText();"
+      "body": "return button.getText();"
     },
     "getButtonText2": {
       "parameters": [{ "name": "button", "type": "Button" }],
