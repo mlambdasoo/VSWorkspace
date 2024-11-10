@@ -76,8 +76,8 @@
     }
 
     getButtonText2(button) {
-      button.getText().then((text) => {
-        return text;
+      return button.getText().then((text) => {
+        return "getButtonText2" + text;
       });
     }
 
