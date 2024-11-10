@@ -54,8 +54,21 @@
         { "name": "button", "type": "Button" },
         { "name": "text", "type": "string" }
       ]
+    },
+    "getButtonText1": {
+      "parameters": [{ "name": "button", "type": "Button" }],
+      "returnType": "button.getText();"
+    },
+    "getButtonText2": {
+      "parameters": [{ "name": "button", "type": "Button" }],
+      "returnType": "string"
+    },
+    "sendButtonText": {
+      "parameters": [{ "name": "button", "type": "Button" }],
+      "returnType": "string"
     }
   },
+  "imports": ["input-controls"],
   "events": {
     "Click": {
       "description": "Dispatch when user click a custom widget"

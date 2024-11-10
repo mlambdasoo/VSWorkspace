@@ -62,15 +62,23 @@
     }
 
     setButtonText2(button, text) {
-      button.setText(text); // (2) OK
-      _button = button;
+      button.setText(text);
+      this._button = button;
+      //다른 함수에서 사용하지 말것
       setTimeout(() => {
-        this._button.setText(text); // (3) WILL NOT WORK!
+        this._button.setText(text);
       });
     }
 
-    handleClick() {
-      this._button.setText("Hello!"); // (4) WILL NOT WORK!
+    async sendButtonText(button) {
+      var text = await button.getText();
+      console.log("전달된 Button Text : " + text);
+    }
+
+    getButtonText2(button) {
+      button.getText().then((text) => {
+        return text;
+      });
     }
 
     async render() {
