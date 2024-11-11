@@ -7,7 +7,7 @@
   "name": "Exercise 9 - Linked Analysis",
   "icon": "",
   "newInstancePrefix": "LinkedAnalysis",
-  "description": "Exercise 9 - Linked Analysis",
+  "description": "Custom Widget Exercise 9 - Linked Analysis",
   "webcomponents": [
     {
       "kind": "main",
