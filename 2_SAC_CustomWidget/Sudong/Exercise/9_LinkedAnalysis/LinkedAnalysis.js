@@ -133,6 +133,7 @@ var transformData = (inputData) => {
       }
       const { feed, data, metadata } = dataBinding;
       const { dimensions, measures } = parseMetadata(metadata);
+      this._dimensionId = dimensions[0].id;
       const treedata = transformData(data);
       console.log(data);
       this._widgetTitle.textContent = dimensions[0].description;
@@ -176,12 +177,19 @@ var transformData = (inputData) => {
       $(this._list).on("check_node.jstree uncheck_node.jstree", (e, data) => {
         const tree = $(this._list).jstree(true);
         const node = data.node;
-        console.log(node);
-        var selection = node;
-        this.dataBinding
+
+        const selected = this.getSelectedKey();
+        console.log(selected);
+        console.log(this._dimensionId);
+        const selections = selected.map((item) => ({
+          [this._dimensionId]: item,
+        }));
+        console.log(selections);
+
+        this.dataBindings
           .getDataBinding()
           .getLinkedAnalysis()
-          .setFilters(selection);
+          .setFilters(selections);
         // 상위 노드 처리
         let parent = tree.get_node(node.parent);
         while (parent && parent.id !== "#") {
