@@ -63,11 +63,11 @@ var parseMetadata = (metadata) => {
     setSeriesType(seriesType) {
       console.log("setSeriesType");
       this.seriesType = seriesType;
-      this.dispatchEvent(
-        new CustomEvent("propertiesChanged", {
-          detail: { properties: { seriesType } },
-        })
-      );
+      // this.dispatchEvent(
+      //   new CustomEvent("propertiesChanged", {
+      //     detail: { properties: { seriesType } },
+      //   })
+      // );
       this.render();
     }
 
@@ -78,6 +78,13 @@ var parseMetadata = (metadata) => {
     async render() {
       console.log("render");
       console.log(this.seriesType);
+
+      // this.dispatchEvent(
+      //   new CustomEvent("propertiesChanged", {
+      //     detail: { properties: { seriesType: "bar" } },
+      //   })
+      // );
+
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
