@@ -140,5 +140,5 @@ var parseMetadata = (metadata) => {
     }
   }
 
-  customElements.define("com-sap-sac-exercise-lsd8-main", Main);
+  customElements.define("com-sap-sac-exercise-lsd-method-dispatch", Main);
 })();
