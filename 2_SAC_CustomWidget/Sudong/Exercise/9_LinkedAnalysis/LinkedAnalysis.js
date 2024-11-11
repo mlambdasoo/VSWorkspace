@@ -272,5 +272,5 @@ var transformData = (inputData) => {
     }
   }
 
-  customElements.define("com-sap-sac-inputcontrol-sample1-main", Main);
+  customElements.define("com-sap-sac-exercise-lsd-linkedanalysis", Main);
 })();
