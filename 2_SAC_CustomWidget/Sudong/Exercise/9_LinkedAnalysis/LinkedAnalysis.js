@@ -175,19 +175,23 @@ var transformData = (inputData) => {
         const tree = $(this._list).jstree(true);
         const node = data.node;
 
-        const selected = this.getSelectedKey();
-        console.log(selected);
-        Í;
-        console.log(this._dimensionId);
-        const selections = selected.map((item) => ({
-          [this._dimensionId]: item,
-        }));
-        console.log(selections);
+        if (
+          this.dataBindings
+            .getDataBinding()
+            .getLinkedAnalysis()
+            .isDataPointSelectionEnabled()
+        ) {
+          const selected = this.getSelectedKey();
+          const selections = selected.map((item) => ({
+            [this._dimensionId]: item,
+          }));
 
-        this.dataBindings
-          .getDataBinding()
-          .getLinkedAnalysis()
-          .setFilters(selections);
+          this.dataBindings
+            .getDataBinding()
+            .getLinkedAnalysis()
+            .setFilters(selections);
+        }
+
         // 상위 노드 처리
         let parent = tree.get_node(node.parent);
         while (parent && parent.id !== "#") {
