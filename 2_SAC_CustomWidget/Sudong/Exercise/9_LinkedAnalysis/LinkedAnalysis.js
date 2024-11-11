@@ -135,7 +135,6 @@ var transformData = (inputData) => {
       const { dimensions, measures } = parseMetadata(metadata);
       this._dimensionId = dimensions[0].id;
       const treedata = transformData(data);
-      console.log(data);
       this._widgetTitle.textContent = dimensions[0].description;
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
