@@ -77,6 +77,7 @@ var parseMetadata = (metadata) => {
 
     async render() {
       console.log("render");
+      console.log(this.seriesType);
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;

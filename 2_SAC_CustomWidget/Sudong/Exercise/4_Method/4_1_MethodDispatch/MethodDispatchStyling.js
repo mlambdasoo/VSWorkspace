@@ -61,6 +61,7 @@
         }
         this._shadowRoot.getElementById("seriesType-dropdown").value =
           seriesType;
+        console.log(seriesType);
       }
     }
   }
