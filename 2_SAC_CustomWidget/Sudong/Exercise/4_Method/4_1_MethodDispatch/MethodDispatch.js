@@ -63,11 +63,11 @@ var parseMetadata = (metadata) => {
     setSeriesType(seriesType) {
       console.log("setSeriesType");
       this.seriesType = seriesType;
-      // this.dispatchEvent(
-      //   new CustomEvent("propertiesChanged", {
-      //     detail: { properties: { seriesType } },
-      //   })
-      // );
+      this.dispatchEvent(
+        new CustomEvent("propertiesChanged", {
+          detail: { properties: { seriesType } },
+        })
+      );
       this.render();
     }
 

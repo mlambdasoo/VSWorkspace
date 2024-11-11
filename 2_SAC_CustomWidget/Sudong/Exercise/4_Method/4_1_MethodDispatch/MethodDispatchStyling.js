@@ -44,11 +44,12 @@
         const seriesType = this._shadowRoot.getElementById(
           "seriesType-dropdown"
         ).value;
-        this.dispatchEvent(
-          new CustomEvent("propertiesChanged", {
-            detail: { properties: { seriesType } },
-          })
-        );
+        //Dispatch를 안한다면?
+        // this.dispatchEvent(
+        //   new CustomEvent("propertiesChanged", {
+        //     detail: { properties: { seriesType } },
+        //   })
+        // );
       });
     }
 
