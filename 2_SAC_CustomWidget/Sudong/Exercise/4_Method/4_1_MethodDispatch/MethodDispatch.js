@@ -31,7 +31,7 @@ var parseMetadata = (metadata) => {
   class Main extends HTMLElement {
     constructor() {
       super();
-
+      console.log("constructor");
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -61,6 +61,7 @@ var parseMetadata = (metadata) => {
     }
 
     setSeriesType(seriesType) {
+      console.log("setSeriesType");
       this.seriesType = seriesType;
       this.dispatchEvent(
         new CustomEvent("propertiesChanged", {
@@ -75,6 +76,7 @@ var parseMetadata = (metadata) => {
     }
 
     async render() {
+      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;

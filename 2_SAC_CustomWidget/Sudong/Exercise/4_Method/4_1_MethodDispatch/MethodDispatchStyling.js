@@ -34,7 +34,7 @@
   class Styling extends HTMLElement {
     constructor() {
       super();
-
+      console.log("constructor");
       this._shadowRoot = this.attachShadow({ mode: "open" });
       this._shadowRoot.appendChild(template.content.cloneNode(true));
       this._root = this._shadowRoot.getElementById("root");
@@ -53,6 +53,7 @@
     }
 
     async onCustomWidgetAfterUpdate(changedProps) {
+      console.log("onCustomWidgetAfterUpdate");
       if (changedProps.seriesType) {
         let seriesType = changedProps.seriesType;
         if (seriesType !== "line" && seriesType !== "bar") {
