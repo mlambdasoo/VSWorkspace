@@ -140,9 +140,6 @@ var transformData = (inputData) => {
       await getScriptPromisify(
         "https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.12/jstree.min.js"
       );
-      // 이벤트 디스패치
-
-      // 이벤트 리스너 등록
 
       // 컴포넌트 외부 클릭 시 트리 닫기
       document.addEventListener("click", (event) => {
