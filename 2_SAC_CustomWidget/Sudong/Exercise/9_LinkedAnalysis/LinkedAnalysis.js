@@ -177,6 +177,7 @@ var transformData = (inputData) => {
 
         const selected = this.getSelectedKey();
         console.log(selected);
+        Í;
         console.log(this._dimensionId);
         const selections = selected.map((item) => ({
           [this._dimensionId]: item,
