@@ -26,7 +26,7 @@ var parseMetadata = (metadata) => {
             .widget-container {
               position: relative;
               display: flex;
-              height: 100vh;
+              height: 100%;
             }
             .chart-container {
               min-width: 0;
