@@ -81,7 +81,7 @@ var parseMetadata = (metadata) => {
                 </div>
             `;
 
-  class HorizontalBarChart extends HTMLElement {
+  class ChartWithMetric extends HTMLElement {
     constructor() {
       super();
       this._shadowRoot = this.attachShadow({ mode: "open" });
