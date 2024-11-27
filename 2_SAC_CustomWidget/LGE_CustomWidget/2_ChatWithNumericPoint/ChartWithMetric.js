@@ -23,14 +23,6 @@ var parseMetadata = (metadata) => {
   const template = document.createElement("template");
   template.innerHTML = `
                 <style>
-                    :host {
-                        display: block;
-                        width: 100%;
-                        height: 100vh;
-                        --metric-container-width: 200px;
-                        --metric-containers-count: 1;
-                        --margin-right: 10px;
-                    }
                     .widget-container {
                         position: relative;
                         display: flex;
@@ -38,7 +30,7 @@ var parseMetadata = (metadata) => {
                         height: 100%;
                     }
                     .chart-container {
-                        flex: 1;
+                        flex: 0 1 auto;
                         min-width: 0;
                         margin-right: var(--margin-right);
                         height: 100%;
