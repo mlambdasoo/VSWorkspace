@@ -1,0 +1,48 @@
+{
+  "eula": "",
+  "vendor": "LEE.SUDONG",
+  "license": "",
+  "id": "com.sap.sac.sudong.chartwithmetric",
+  "version": "1.0.0",
+  "name": "Bar Chart With Metric",
+  "icon": "",
+  "newInstancePrefix": "ChartWithMetric",
+  "description": "Bar Chart With Metric",
+  "webcomponents": [
+    {
+      "kind": "ChartWithMetric",
+      "tag": "com-sap-sac-chart-with-metric",
+      "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/LGE_CustomWidget/2_ChatWithNumericPoint/ChartWithMetric.js",
+      "integrity": "",
+      "ignoreIntegrity": true
+    }
+  ],
+  "properties": {
+    "width": {
+      "type": "integer",
+      "default": 600
+    },
+    "height": {
+      "type": "integer",
+      "default": 420
+    }
+  },
+  "methods": {},
+  "events": {},
+  "dataBindings": {
+    "myDataBinding": {
+      "feeds": [
+        {
+          "id": "dimensions",
+          "description": "Dimensions",
+          "type": "dimension"
+        },
+        {
+          "id": "measures",
+          "description": "Measures",
+          "type": "mainStructureMember"
+        }
+      ]
+    }
+  }
+}

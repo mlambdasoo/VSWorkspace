@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chart.js Web Component</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      var getScriptPromisify = (src) => {
+        return new Promise((resolve) => {
+          $.getScript(src, resolve);
+        });
+      };
+
+      var parseMetadata = (metadata) => {
+        const { dimensions: dimensionsMap, mainStructureMembers: measuresMap } =
+          metadata;
+        const dimensions = [];
+        for (const key in dimensionsMap) {
+          const dimension = dimensionsMap[key];
+          dimensions.push({ key, ...dimension });
+        }
+        const measures = [];
+        for (const key in measuresMap) {
+          const measure = measuresMap[key];
+          measures.push({ key, ...measure });
+        }
+        return { dimensions, measures, dimensionsMap, measuresMap };
+      };
+
+      (function () {
+        const template = document.createElement("template");
+        template.innerHTML = `
+                <style>
+                    :host {
+                        display: block;
+                    }
+                    .chart-container {
+                        position: relative;
+                        display: flex;
+                        width: 100%;
+                    }
+                    .chart-wrapper {
+                        flex: 1;
+                        min-width: 0;
+                        margin-right: 10px;
+                    }
+                    .labels-containers {
+                        display: flex;
+                        flex-shrink: 0;
+                    }
+                    .labels-table {
+                        border-collapse: collapse;
+                        width: auto;
+                    }
+                    .labels-table tr {
+                        height: 33px;
+                    }
+                    .labels-table td {
+                        padding: 4px 15px;
+                        color: red;
+                        font-weight: bold;
+                        text-align: right;
+                        white-space: nowrap;
+                    }
+                    .table-header {
+                        font-size: 12px;
+                        color: #666;
+                        padding: 4px 15px;
+                        text-align: right;
+                    }
+                </style>
+                <div class="chart-container">
+                    <div class="chart-wrapper">
+                        <canvas></canvas>
+                    </div>
+                    <div class="labels-containers">
+                        <table class="labels-table">
+                            <thead>
+                                <tr>
+                                    <th class="table-header">Discount</th>
+                                    <th class="table-header">Original Sales Price</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+        class HorizontalBarChart extends HTMLElement {
+          constructor() {
+            super();
+            this._shadowRoot = this.attachShadow({ mode: "open" });
+            this._shadowRoot.appendChild(template.content.cloneNode(true));
+
+            this._chart = null;
+            this._chartContainer =
+              this._shadowRoot.querySelector(".chart-wrapper");
+            this.dataBinding = {
+              data: [
+                {
+                  dimensions_0: {
+                    id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC4]",
+                    label: "Alcohol",
+                    isNode: true,
+                    isCollapsed: true,
+                  },
+                  measures_0: {
+                    raw: 173692344,
+                    formatted: "173.69M",
+                  },
+                  measures_1: {
+                    raw: 52307013.5012798,
+                    formatted: "52.31 Million",
+                    unit: "USD",
+                  },
+                  measures_2: {
+                    raw: 211823871.6960524,
+                    formatted: "211.82 Million",
+                    unit: "USD",
+                  },
+                },
+                {
+                  dimensions_0: {
+                    id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC1]",
+                    label: "Carbonated Drinks",
+                    isNode: true,
+                    isCollapsed: true,
+                  },
+                  measures_0: {
+                    raw: 145806660,
+                    formatted: "145.81M",
+                  },
+                  measures_1: {
+                    raw: 26891842.3188064,
+                    formatted: "26.89 Million",
+                    unit: "USD",
+                  },
+                  measures_2: {
+                    raw: 172815437.9767048,
+                    formatted: "172.82 Million",
+                    unit: "USD",
+                  },
+                },
+                {
+                  dimensions_0: {
+                    id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC2]",
+                    label: "Juices",
+                    isNode: true,
+                    isCollapsed: true,
+                  },
+                  measures_0: {
+                    raw: 286772400,
+                    formatted: "286.77M",
+                  },
+                  measures_1: {
+                    raw: 222132972.8288017,
+                    formatted: "222.13 Million",
+                    unit: "USD",
+                  },
+                  measures_2: {
+                    raw: 737192044.1781244,
+                    formatted: "737.19 Million",
+                    unit: "USD",
+                  },
+                },
+                {
+                  dimensions_0: {
+                    id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC3]",
+                    label: "Others",
+                    isNode: true,
+                    isCollapsed: true,
+                  },
+                  measures_0: {
+                    raw: 6651432,
+                    formatted: "6.65M",
+                  },
+                  measures_1: {
+                    raw: 1799437.027378,
+                    formatted: "1.80 Million",
+                    unit: "USD",
+                  },
+                  measures_2: {
+                    raw: 7278405.2119812,
+                    formatted: "7.28 Million",
+                    unit: "USD",
+                  },
+                },
+              ],
+              metadata: {
+                feeds: {
+                  measures: {
+                    values: ["measures_0", "measures_1", "measures_2"],
+                    type: "mainStructureMember",
+                  },
+                  dimensions: {
+                    values: ["dimensions_0"],
+                    type: "dimension",
+                  },
+                },
+                dimensions: {
+                  dimensions_0: {
+                    id: "Product_3e315003an",
+                    description: "Product",
+                  },
+                },
+                mainStructureMembers: {
+                  measures_0: {
+                    id: "[Account_BestRunJ_sold].[parentId].&[Gross_Margin]",
+                    label: "Gross Margin",
+                  },
+                  measures_1: {
+                    id: "[Account_BestRunJ_sold].[parentId].&[Discount]",
+                    label: "Discount",
+                  },
+                  measures_2: {
+                    id: "[Account_BestRunJ_sold].[parentId].&[Original_Sales_Price]",
+                    label: "Original Sales Price",
+                  },
+                },
+              },
+              state: "success",
+            };
+          }
+
+          connectedCallback() {
+            this.render();
+          }
+
+          disconnectedCallback() {
+            if (this._chart) {
+              this._chart.destroy();
+            }
+          }
+
+          async render() {
+            await getScriptPromisify("https://cdn.jsdelivr.net/npm/chart.js");
+
+            const { dimensions, measures } = parseMetadata(
+              this.dataBinding.metadata
+            );
+            const data = this.dataBinding.data;
+
+            const ctx = this._chartContainer
+              .querySelector("canvas")
+              .getContext("2d");
+
+            const chartData = {
+              labels: data.map((item) => item.dimensions_0.label),
+              datasets: [
+                {
+                  label: measures[0].label,
+                  data: data.map((item) => item.measures_0.raw),
+                  backgroundColor: "rgba(75, 192, 192, 0.2)",
+                  borderColor: "rgba(75, 192, 192, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            };
+
+            const config = {
+              type: "bar",
+              data: chartData,
+              options: {
+                indexAxis: "y",
+                scales: {
+                  x: {
+                    beginAtZero: true,
+                  },
+                },
+                animation: {
+                  onComplete: () => {
+                    const tableBody = this._shadowRoot.querySelector(
+                      ".labels-table tbody"
+                    );
+                    tableBody.innerHTML = "";
+
+                    data.forEach((item, index) => {
+                      const row = document.createElement("tr");
+
+                      // Discount 열
+                      const td1 = document.createElement("td");
+                      td1.textContent = item.measures_1.formatted;
+                      row.appendChild(td1);
+
+                      // Original Sales Price 열
+                      const td2 = document.createElement("td");
+                      td2.textContent = item.measures_2.formatted;
+                      row.appendChild(td2);
+
+                      tableBody.appendChild(row);
+                    });
+                  },
+                },
+              },
+            };
+
+            if (this._chart) {
+              this._chart.destroy();
+            }
+
+            this._chart = new Chart(ctx, config);
+          }
+        }
+
+        customElements.define("horizontal-bar-chart", HorizontalBarChart);
+      })();
+    </script>
+  </head>
+  <body>
+    <horizontal-bar-chart></horizontal-bar-chart>
+  </body>
+</html>

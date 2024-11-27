@@ -1,18 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>SAP UI5 Namespace Isolation</title>
-    <!-- SAP UI5 v1.108.0 로드 -->
-    <script
-      src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
-      id="sap-ui-bootstrap"
-      data-sap-ui-theme="sap_fiori_3"
-      data-sap-ui-libs="sap.m"
-    ></script>
-    <script src="main.js"></script>
+    <meta charset="UTF-8" />
+    <title>Chart.js Web Component</title>
+    <style>
+      /* 전체 HTML과 body의 높이 설정 */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      var getScriptPromisify = (src) => {
+        return new Promise((resolve) => {
+          $.getScript(src, resolve);
+        });
+      };
+
+      (function () {
+        const template = document.createElement("template");
+        template.innerHTML = `
+                <style>
+                    .chart-container {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                    }
+                </style>
+                <div class="chart-container">
+                    <canvas></canvas>
+                </div>
+            `;
+
+        class SampleChart extends HTMLElement {
+          constructor() {
+            super();
+            this._shadowRoot = this.attachShadow({ mode: "open" });
+            this._shadowRoot.appendChild(template.content.cloneNode(true));
+
+            this._chart = null;
+            this._chartContainer =
+              this._shadowRoot.querySelector(".chart-container");
+          }
+
+          connectedCallback() {
+            this.render();
+          }
+
+          disconnectedCallback() {
+            if (this._chart) {
+              this._chart.destroy();
+            }
+          }
+
+          async render() {
+            await getScriptPromisify("https://cdn.jsdelivr.net/npm/chart.js");
+
+            const ctx = this._chartContainer
+              .querySelector("canvas")
+              .getContext("2d");
+
+            // 샘플 데이터
+            const data = {
+              labels: ["January", "February", "March", "April", "May"],
+              datasets: [
+                {
+                  label: "Sample Data",
+                  data: [65, 59, 80, 81, 56],
+                  backgroundColor: "rgba(75, 192, 192, 0.2)",
+                  borderColor: "rgba(75, 192, 192, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            };
+
+            const config = {
+              type: "bar",
+              data: data,
+              options: {
+                maintainAspectRatio: false,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+              },
+            };
+
+            if (this._chart) {
+              this._chart.destroy();
+            }
+
+            this._chart = new Chart(ctx, config);
+          }
+        }
+
+        customElements.define("sample-chart", SampleChart);
+      })();
+    </script>
   </head>
   <body>
-    <!-- Web Component -->
-    <custom-ui5-element></custom-ui5-element>
+    <sample-chart></sample-chart>
   </body>
 </html>
