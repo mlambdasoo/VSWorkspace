@@ -4,22 +4,22 @@ var getScriptPromisify = (src) => {
   });
 };
 
-var parseMetadata = (metadata) => {
-  const { dimensions: dimensionsMap, mainStructureMembers: measuresMap } =
-    metadata;
-  const dimensions = [];
-  for (const key in dimensionsMap) {
-    const dimension = dimensionsMap[key];
-    dimensions.push({ key, ...dimension });
-  }
-  const measures = [];
-  for (const key in measuresMap) {
-    const measure = measuresMap[key];
-    measures.push({ key, ...measure });
-  }
-  return { dimensions, measures, dimensionsMap, measuresMap };
-};
 (function () {
+  var parseMetadata = (metadata) => {
+    const { dimensions: dimensionsMap, mainStructureMembers: measuresMap } =
+      metadata;
+    const dimensions = [];
+    for (const key in dimensionsMap) {
+      const dimension = dimensionsMap[key];
+      dimensions.push({ key, ...dimension });
+    }
+    const measures = [];
+    for (const key in measuresMap) {
+      const measure = measuresMap[key];
+      measures.push({ key, ...measure });
+    }
+    return { dimensions, measures, dimensionsMap, measuresMap };
+  };
   const template = document.createElement("template");
   template.innerHTML = `
           <style>
