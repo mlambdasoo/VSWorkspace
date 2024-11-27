@@ -127,6 +127,7 @@ var getScriptPromisify = (src) => {
           }, ${Math.random() * 255}, 0.2)`,
         })),
       };
+      console.log("chartData", chartData);
 
       const config = {
         type: "bar",
