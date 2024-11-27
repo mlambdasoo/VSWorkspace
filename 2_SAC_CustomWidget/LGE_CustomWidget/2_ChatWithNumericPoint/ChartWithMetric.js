@@ -100,7 +100,7 @@ var getScriptPromisify = (src) => {
 
     async render() {
       console.log("render");
-      const dataBinding = this.dataBinding;
+      const dataBinding = this.myDataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
       }
