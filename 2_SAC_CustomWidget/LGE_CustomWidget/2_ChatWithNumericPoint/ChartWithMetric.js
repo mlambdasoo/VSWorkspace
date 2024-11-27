@@ -95,12 +95,14 @@ var getScriptPromisify = (src) => {
     }
 
     async render() {
+      const dataBinding = this.dataBinding;
+      if (!dataBinding || dataBinding.state !== "success") {
+        return;
+      }
       await getScriptPromisify("https://cdn.jsdelivr.net/npm/chart.js");
 
-      const { dimensions, measures } = parseMetadata(
-        this.myDataBinding.metadata
-      );
-      const data = this.myDataBinding.data;
+      const { data, metadata } = dataBinding;
+      const { dimensions, measures } = parseMetadata(metadata);
 
       const ctx = this._chartContainer.querySelector("canvas").getContext("2d");
 
