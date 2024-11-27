@@ -345,5 +345,5 @@ var parseMetadata = (metadata) => {
     }
   }
 
-  customElements.define("horizontal-bar-chart", HorizontalBarChart);
+  customElements.define("com-sap-sac-chart-with-metric", ChartWithMetric);
 })();
