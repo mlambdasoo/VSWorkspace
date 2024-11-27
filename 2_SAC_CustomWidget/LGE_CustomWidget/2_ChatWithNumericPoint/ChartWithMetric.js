@@ -84,14 +84,12 @@ var getScriptPromisify = (src) => {
       this._chartContainer = this._shadowRoot.querySelector(".chart-container");
     }
 
-    connectedCallback() {
+    onCustomWidgetResize(width, height) {
       this.render();
     }
 
-    disconnectedCallback() {
-      if (this._chart) {
-        this._chart.destroy();
-      }
+    onCustomWidgetAfterUpdate(changedProps) {
+      this.render();
     }
 
     async render() {
