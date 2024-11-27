@@ -10,7 +10,7 @@
   "description": "Bar Chart With Metric",
   "webcomponents": [
     {
-      "kind": "ChartWithMetric",
+      "kind": "main",
       "tag": "com-sap-sac-chart-with-metric",
       "url": "https://mlambdasoo.github.io/VSWorkspace/2_SAC_CustomWidget/LGE_CustomWidget/2_ChatWithNumericPoint/ChartWithMetric.js",
       "integrity": "",
