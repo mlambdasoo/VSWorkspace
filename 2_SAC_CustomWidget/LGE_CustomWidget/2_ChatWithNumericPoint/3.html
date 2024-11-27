@@ -29,56 +29,50 @@
       (function () {
         const template = document.createElement("template");
         template.innerHTML = `
-                <style>
-                    .widget-container {
-                        position: relative;
-                        display: flex;
-                        width: 100%;
-                        height: 100%;
-                    }
-                    .chart-container {
-                        flex: 0 1 auto;
-                        min-width: 0;
-                        margin-right: var(--margin-right);
-                        height: 100%;
-                        position: relative;
-                    }
-                    canvas {
-                        width: 100% !important;
-                        height: 100% !important;
-                    }
-                    .metrics-containers {
-                        display: flex;
-                        flex-shrink: 0;
-                    }
-                    .metric-container {
-                        position: relative;
-                        width: var(--metric-container-width);
-                        flex-shrink: 0;
-                        text-align: center;
-                    }
-                    .metric-label {
-                        text-align: center;
-                        font-weight: bold;
-                        margin-top: 40px;
-                        margin-bottom: 10px;
-                    }
-                    .metric {
-                        position: absolute;
-                        color: black;
-                        transform: translateY(-50%);
-                        width: 100%;
-                        text-align: center;
-                        left: 0;
-                    }
-                </style>
-                <div class="widget-container">
-                    <div class="chart-container">
-                        <canvas></canvas>
-                    </div>
-                    <div class="metrics-containers"></div>
-                </div>
-            `;
+          <style>
+            .widget-container {
+              position: relative;
+              display: flex;
+              height: 100vh;
+            }
+            .chart-container {
+              min-width: 0;
+              margin-right: 10px;
+              position: relative;
+             
+            }
+            .metrics-containers {
+              display: flex;
+              flex-shrink: 0;
+            }
+            .metric-container {
+              position: relative;
+              width: 200px;
+              flex-shrink: 0;
+              text-align: center;
+            }
+            .metric-label {
+              text-align: center;
+              font-weight: bold;
+              margin-top: 40px;
+              margin-bottom: 10px;
+            }
+            .metric {
+              position: absolute;
+              color: black;
+              transform: translateY(-50%);
+              width: 100%;
+              text-align: center;
+              left: 0;
+            }
+          </style>
+          <div class="widget-container">
+            <div class="chart-container">
+              <canvas></canvas>
+            </div>
+            <div class="metrics-containers"></div>
+          </div>
+        `;
 
         class ChartWithMetric extends HTMLElement {
           constructor() {
@@ -86,19 +80,8 @@
             this._shadowRoot = this.attachShadow({ mode: "open" });
 
             // metric으로 표시할 measure indices를 속성으로 정의
-            this._metricIndices = [0]; // 기본값
+            this._metricIndices = [0, 1]; // 기본값
 
-            const style = document.createElement("style");
-            style.textContent = `
-              :host {
-                display: block;
-                --metric-container-width: 200px;
-                --metric-containers-count: ${this._metricIndices.length};
-                --margin-right: 10px;
-              }
-            `;
-
-            this._shadowRoot.appendChild(style);
             this._shadowRoot.appendChild(template.content.cloneNode(true));
 
             this._chart = null;
@@ -241,15 +224,6 @@
             }
           }
 
-          // metric indices를 설정하는 메서드
-          setMetricIndices(indices) {
-            this._metricIndices = indices;
-            // CSS 변수 업데이트
-            this.style.setProperty("--metric-containers-count", indices.length);
-            // 차트 다시 렌더링
-            this.render();
-          }
-
           async render() {
             await getScriptPromisify("https://cdn.jsdelivr.net/npm/chart.js");
 
@@ -286,6 +260,9 @@
                 indexAxis: "y",
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: {
+                  duration: 0,
+                },
                 scales: {
                   x: {
                     beginAtZero: true,
@@ -298,15 +275,18 @@
                     stacked: false,
                   },
                 },
-                layout: {
-                  padding: {
-                    top: 20,
-                  },
-                },
               },
               plugins: [
                 {
                   id: "customMetrics",
+                  beforeInit: (chart) => {
+                    const metricsCount = this._metricIndices.length;
+                    const chartContainer =
+                      this._shadowRoot.querySelector(".chart-container");
+                    chartContainer.style.width = `calc(100% - ${
+                      200 * metricsCount
+                    }px)`;
+                  },
                   afterRender: (chart) => {
                     const yAxis = chart.scales.y;
                     const metricsContainers = this._shadowRoot.querySelector(
