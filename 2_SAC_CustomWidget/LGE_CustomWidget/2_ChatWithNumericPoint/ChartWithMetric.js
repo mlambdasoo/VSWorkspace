@@ -27,12 +27,13 @@ var parseMetadata = (metadata) => {
               position: relative;
               display: flex;
               height: 100%;
+              font-size: clamp(12px, 1.5vw, 16px);
             }
             .chart-container {
               min-width: 0;
               margin-right: 10px;
               position: relative;
-             
+              flex: 1;
             }
             .metrics-containers {
               display: flex;
@@ -40,15 +41,16 @@ var parseMetadata = (metadata) => {
             }
             .metric-container {
               position: relative;
-              width: 200px;
+              width: clamp(100px, 15vw, 250px);
               flex-shrink: 0;
               text-align: center;
             }
             .metric-label {
               text-align: center;
               font-weight: bold;
-              margin-top: 40px;
+              margin-top: 20px;
               margin-bottom: 10px;
+              font-size: clamp(14px, 1.8vw, 20px);
             }
             .metric {
               position: absolute;
@@ -57,6 +59,7 @@ var parseMetadata = (metadata) => {
               width: 100%;
               text-align: center;
               left: 0;
+              font-size: clamp(12px, 1.5vw, 18px);
             }
           </style>
           <div class="widget-container">
@@ -73,137 +76,12 @@ var parseMetadata = (metadata) => {
       this._shadowRoot = this.attachShadow({ mode: "open" });
 
       // metric으로 표시할 measure indices를 속성으로 정의
-      this._metricIndices = [0, 1]; // 기본값
+      this._metricIndices = null; // 기본값
 
       this._shadowRoot.appendChild(template.content.cloneNode(true));
 
       this._chart = null;
       this._chartContainer = this._shadowRoot.querySelector(".chart-container");
-      this.dataBinding = {
-        data: [
-          {
-            dimensions_0: {
-              id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC4]",
-              label: "Alcohol",
-              isNode: true,
-              isCollapsed: true,
-            },
-            measures_0: {
-              raw: 173692344,
-              formatted: "173.69M",
-            },
-            measures_1: {
-              raw: 52307013.5012798,
-              formatted: "52.31 Million",
-              unit: "USD",
-            },
-            measures_2: {
-              raw: 211823871.6960524,
-              formatted: "211.82 Million",
-              unit: "USD",
-            },
-          },
-          {
-            dimensions_0: {
-              id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC1]",
-              label: "Carbonated Drinks",
-              isNode: true,
-              isCollapsed: true,
-            },
-            measures_0: {
-              raw: 145806660,
-              formatted: "145.81M",
-            },
-            measures_1: {
-              raw: 26891842.3188064,
-              formatted: "26.89 Million",
-              unit: "USD",
-            },
-            measures_2: {
-              raw: 172815437.9767048,
-              formatted: "172.82 Million",
-              unit: "USD",
-            },
-          },
-          {
-            dimensions_0: {
-              id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC2]",
-              label: "Juices",
-              isNode: true,
-              isCollapsed: true,
-            },
-            measures_0: {
-              raw: 286772400,
-              formatted: "286.77M",
-            },
-            measures_1: {
-              raw: 222132972.8288017,
-              formatted: "222.13 Million",
-              unit: "USD",
-            },
-            measures_2: {
-              raw: 737192044.1781244,
-              formatted: "737.19 Million",
-              unit: "USD",
-            },
-          },
-          {
-            dimensions_0: {
-              id: "[Product_3e315003an].[Product_Catego_3o3x5e06y2].&[PC3]",
-              label: "Others",
-              isNode: true,
-              isCollapsed: true,
-            },
-            measures_0: {
-              raw: 6651432,
-              formatted: "6.65M",
-            },
-            measures_1: {
-              raw: 1799437.027378,
-              formatted: "1.80 Million",
-              unit: "USD",
-            },
-            measures_2: {
-              raw: 7278405.2119812,
-              formatted: "7.28 Million",
-              unit: "USD",
-            },
-          },
-        ],
-        metadata: {
-          feeds: {
-            measures: {
-              values: ["measures_0", "measures_1", "measures_2"],
-              type: "mainStructureMember",
-            },
-            dimensions: {
-              values: ["dimensions_0"],
-              type: "dimension",
-            },
-          },
-          dimensions: {
-            dimensions_0: {
-              id: "Product_3e315003an",
-              description: "Product",
-            },
-          },
-          mainStructureMembers: {
-            measures_0: {
-              id: "[Account_BestRunJ_sold].[parentId].&[Gross_Margin]",
-              label: "Gross Margin",
-            },
-            measures_1: {
-              id: "[Account_BestRunJ_sold].[parentId].&[Discount]",
-              label: "Discount",
-            },
-            measures_2: {
-              id: "[Account_BestRunJ_sold].[parentId].&[Original_Sales_Price]",
-              label: "Original Sales Price",
-            },
-          },
-        },
-        state: "success",
-      };
     }
 
     connectedCallback() {
@@ -219,15 +97,17 @@ var parseMetadata = (metadata) => {
     async render() {
       await getScriptPromisify("https://cdn.jsdelivr.net/npm/chart.js");
 
-      const { dimensions, measures } = parseMetadata(this.dataBinding.metadata);
-      const data = this.dataBinding.data;
+      const { dimensions, measures } = parseMetadata(
+        this.myDataBinding.metadata
+      );
+      const data = this.myDataBinding.data;
 
       const ctx = this._chartContainer.querySelector("canvas").getContext("2d");
 
       // 차트에 표시할 measure indices 계산
       const chartIndices = measures
         .map((_, index) => index)
-        .filter((index) => !this._metricIndices.includes(index));
+        .filter((index) => !(this._metricIndices || []).includes(index));
 
       // 차트 데이터 동적 생성
       const chartData = {
@@ -268,11 +148,18 @@ var parseMetadata = (metadata) => {
           {
             id: "customMetrics",
             beforeInit: (chart) => {
-              const metricsCount = this._metricIndices.length;
+              const metricsCount = (this._metricIndices || []).length;
               const chartContainer =
                 this._shadowRoot.querySelector(".chart-container");
+
+              // viewport width를 기준으로 metric container 너비 계산
+              const metricWidth = Math.min(
+                Math.max(150, window.innerWidth * 0.15),
+                250
+              );
+
               chartContainer.style.width = `calc(100% - ${
-                200 * metricsCount
+                metricWidth * metricsCount
               }px)`;
             },
             afterRender: (chart) => {
@@ -283,7 +170,7 @@ var parseMetadata = (metadata) => {
 
               metricsContainers.innerHTML = "";
 
-              this._metricIndices.forEach((measureIndex) => {
+              (this._metricIndices || []).forEach((measureIndex) => {
                 const container = document.createElement("div");
                 container.className = "metric-container";
 
