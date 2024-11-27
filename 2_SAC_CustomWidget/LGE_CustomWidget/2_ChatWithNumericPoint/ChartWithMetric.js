@@ -88,11 +88,18 @@ var getScriptPromisify = (src) => {
       this.render();
     }
 
+    onCustomWidgetBeforeUpdate(changedProps) {
+      console.log("onCustomWidgetBeforeUpdate", changedProps);
+      this.render();
+    }
+
     onCustomWidgetAfterUpdate(changedProps) {
+      console.log("onCustomWidgetAfterUpdate", changedProps);
       this.render();
     }
 
     async render() {
+      console.log("render");
       const dataBinding = this.dataBinding;
       if (!dataBinding || dataBinding.state !== "success") {
         return;
