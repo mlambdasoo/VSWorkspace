@@ -23,6 +23,14 @@ var parseMetadata = (metadata) => {
   const template = document.createElement("template");
   template.innerHTML = `
                 <style>
+                    :host {
+                        display: block;
+                        width: 100%;
+                        height: 100vh;
+                        --metric-container-width: 200px;
+                        --metric-containers-count: 1;
+                        --margin-right: 10px;
+                    }
                     .widget-container {
                         position: relative;
                         display: flex;
@@ -30,11 +38,15 @@ var parseMetadata = (metadata) => {
                         height: 100%;
                     }
                     .chart-container {
-                        flex: 0 1 auto;
+                        flex: 1;
                         min-width: 0;
                         margin-right: var(--margin-right);
                         height: 100%;
-                        width: calc(100% - (var(--metric-container-width) * var(--metric-containers-count) + var(--margin-right)));
+                        position: relative;
+                    }
+                    canvas {
+                        width: 100% !important;
+                        height: 100% !important;
                     }
                     .metrics-containers {
                         display: flex;
@@ -269,7 +281,7 @@ var parseMetadata = (metadata) => {
         options: {
           indexAxis: "y",
           responsive: true,
-          maintainAspectRatio: true,
+          maintainAspectRatio: false,
           scales: {
             x: {
               beginAtZero: true,
@@ -333,5 +345,5 @@ var parseMetadata = (metadata) => {
     }
   }
 
-  customElements.define("com-sap-sac-chart-with-metric", HorizontalBarChart);
+  customElements.define("horizontal-bar-chart", HorizontalBarChart);
 })();
