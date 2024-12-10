@@ -212,11 +212,18 @@ var getScriptPromisify = (src) => {
     }
 
     serializeCustomWidgetToImage = async () => {
-      return new Promise((resolve) => {
-        const imageStr = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQA";
-        setTimeout(() => {
-          resolve(imageStr);
-        }, 500);
+      return new Promise((resolve, reject) => {
+        if (this._chart) {
+          try {
+            // Chart.js에서 제공하는 메서드로 Base64 이미지 생성
+            const imageStr = this._chart.toBase64Image();
+            resolve(imageStr);
+          } catch (error) {
+            reject(`Error generating chart image: ${error}`);
+          }
+        } else {
+          reject("Chart not initialized.");
+        }
       });
     };
   }
