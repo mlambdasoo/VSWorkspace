@@ -210,6 +210,15 @@ var getScriptPromisify = (src) => {
 
       this._chart = new Chart(ctx, config);
     }
+
+    serializeCustomWidgetToImage = async () => {
+      return new Promise((resolve) => {
+        const imageStr = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQA";
+        setTimeout(() => {
+          resolve(imageStr);
+        }, 500);
+      });
+    };
   }
 
   customElements.define("com-sap-sac-chart-with-metric", ChartWithMetric);
