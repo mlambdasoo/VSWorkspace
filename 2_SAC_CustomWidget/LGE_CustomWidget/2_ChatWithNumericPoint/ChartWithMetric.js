@@ -212,17 +212,33 @@ var getScriptPromisify = (src) => {
     }
 
     serializeCustomWidgetToImage = async () => {
-      return new Promise((resolve, reject) => {
-        if (this._chart) {
-          try {
-            // Chart.js에서 제공하는 메서드로 Base64 이미지 생성
-            const imageStr = this._chart.toBase64Image();
-            resolve(imageStr);
-          } catch (error) {
-            reject(`Error generating chart image: ${error}`);
+      return new Promise(async (resolve, reject) => {
+        try {
+          // html2canvas 라이브러리 로드
+          await getScriptPromisify(
+            "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"
+          );
+
+          // Web Component의 Shadow DOM에서 루트 요소 가져오기
+          const element = this._shadowRoot.host;
+
+          if (!element) {
+            reject("Element not found for rendering.");
+            return;
           }
-        } else {
-          reject("Chart not initialized.");
+
+          // html2canvas로 Web Component를 캔버스로 렌더링
+          const canvas = await html2canvas(element, {
+            logging: false,
+            useCORS: true, // CORS 문제 방지
+          });
+
+          // 캔버스를 Base64 이미지로 변환
+          const imageStr = canvas.toDataURL("image/png");
+          console.log(imageStr);
+          resolve(imageStr);
+        } catch (error) {
+          reject(`Error rendering component to image: ${error}`);
         }
       });
     };
