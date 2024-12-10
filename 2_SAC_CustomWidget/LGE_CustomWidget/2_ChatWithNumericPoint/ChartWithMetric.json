@@ -29,6 +29,7 @@
   },
   "methods": {},
   "events": {},
+  "supportsExport": true,
   "dataBindings": {
     "myDataBinding": {
       "feeds": [
